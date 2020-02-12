@@ -49,4 +49,15 @@ public Domanda (String domanda, String rispostaEsatta,String rispostaErrata1,Str
     // public static ArrayList<String> getRisposteErrate() {
      ///   return risposteErrate;
    //}
+
+    public boolean checkRisposta(String risposta){
+    boolean esito = false;
+        if (risposta.equalsIgnoreCase(rispostaEsatta)){
+            esito = true ;
+        }
+        else {
+            esito =  false;
+        }
+        return esito;
+    }
 }

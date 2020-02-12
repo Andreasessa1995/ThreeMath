@@ -1,18 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:background="@drawable/sfondo2"
+    >
+    <!--
+        linear layout della scritta threemat come titolo dell app
+        -->
+    <LinearLayout
+        android:id="@+id/titolo"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="#EB8C15"
+        >
+        <TextView
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ThreeMath!"
+            android:textColor="#C42519"
+            android:textSize="35dp"
+            />
+    </LinearLayout>
+    <!--
+    linear layout della scritta "domanda"
+    -->
+    <LinearLayout
+        android:layout_below="@+id/titolo"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:id="@+id/llcategoriaDomanda"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F0D80B"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:id="@+id/categoriaDomanda"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Addizione"
+            android:textColor="#070606"
+            android:textSize="35dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </TextView>
+    </LinearLayout>
+
+    <!--
+      linear layout del corpo della domanda
+      -->
+    <LinearLayout
+        android:layout_below="@+id/llcategoriaDomanda"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:id="@+id/corpoDomanda"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F0D80B"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:id="@+id/corpoDomandaTesto"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="50 + 4 "
+            android:textColor="#070606"
+            android:textSize="35dp">
+
+        </TextView>
+    </LinearLayout>
+
+    <!--
+      linear layout dei bottoni che corrispondono allla risposta
+      -->
+    <LinearLayout
+        android:layout_below="@+id/corpoDomanda"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:id="@+id/risposte"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F0D80B"
+        android:orientation="vertical"
+        >
+        <Button
+            android:id="@+id/A"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="50"
+            android:onClick="onClickRisposta"
+            >
+        </Button>
+        <Button
+            android:id="@+id/B"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="60"
+            android:onClick="onClickRisposta"
+
+            >
+        </Button>
+        <Button
+            android:id="@+id/C"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="54"
+            android:onClick="onClickRisposta"
+
+            >
+
+        </Button>
+        <Button
+            android:id="@+id/D"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="70"
+            android:onClick="onClickRisposta"
+
+            >
+
+        </Button>
+    </LinearLayout>
+
+
+</RelativeLayout>
