@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@drawable/sfondo2"
+
+
+    >
+    <LinearLayout
+        android:id="@+id/titolo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#EB8C15"
+        >
+        <TextView
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ThreeMath!"
+            android:textColor="#C42519"
+            android:textSize="35dp"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_below="@+id/titolo"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:id="@+id/llrisultati"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F0D80B"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:id="@+id/categoriaDomanda"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Risultati"
+            android:textColor="#070606"
+            android:textSize="35dp">
+
+        </TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_below="@+id/llrisultati"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:id="@+id/corpoRisultatiCorretti"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#2EAF37"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:id="@+id/testoRisultatiCorretti"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="50 esatte"
+            android:textColor="#070606"
+            android:textSize="35dp">
+
+        </TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_below="@+id/corpoRisultatiCorretti"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:id="@+id/corpoRisultatiErrati"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#CC1626"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:id="@+id/testoRisultatiErrati"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="5 errate"
+            android:textColor="#070606"
+            android:textSize="35dp">
+
+        </TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_below="@+id/corpoRisultatiErrati"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:id="@+id/risposte"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F0D80B"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+
+        >
+        <Button
+            android:id="@+id/A"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="home"
+            android:onClick="onClickRisposta"
+            >
+        </Button>
+
+    </LinearLayout>
+
+</RelativeLayout>

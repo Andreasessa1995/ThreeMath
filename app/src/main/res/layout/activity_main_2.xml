@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:text="ThreeMath!"
             android:textColor="#C42519"
-            android:textSize="35dp"
+            android:textSize="45dp"
             />
     </LinearLayout>
     <!--
@@ -28,9 +28,9 @@
     -->
     <LinearLayout
         android:layout_below="@+id/titolo"
-        android:layout_marginTop="100dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="162px"
+        android:layout_marginRight="162px"
         android:id="@+id/llcategoriaDomanda"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Addizione"
-            android:textColor="#070606"
+            android:textColor="#EC4C1A"
             android:textSize="35dp">
 
         </TextView>
@@ -54,8 +54,8 @@
       -->
     <LinearLayout
         android:layout_below="@+id/llcategoriaDomanda"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginLeft="162px"
+        android:layout_marginRight="162px"
         android:id="@+id/corpoDomanda"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -70,86 +70,90 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="50 + 4 "
-            android:textColor="#070606"
+            android:textColor="#03A9F4"
             android:textSize="35dp">
 
         </TextView>
-    </LinearLayout>
 
-    <!--
-      linear layout dei bottoni che corrispondono allla risposta
-      -->
+    </LinearLayout>
+    <!-- 15% di 1080 pixel -->
     <LinearLayout
-        android:layout_below="@+id/corpoDomanda"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:id="@+id/risposte"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/corpoDomanda"
+        android:layout_marginLeft="162px"
+        android:layout_marginRight="162px"
+        android:layout_marginTop="0dp"
         android:background="#F0D80B"
-        android:orientation="vertical"
+        android:orientation="horizontal"
+        android:id="@+id/corpoRisposta"
+        android:gravity="center"
+
         >
+
         <Button
             android:id="@+id/A"
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="50"
-            android:onClick="onClickRisposta"
-            >
-        </Button>
-        <Button
-            android:id="@+id/B"
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="60"
-            android:onClick="onClickRisposta"
-
-            >
-        </Button>
-        <Button
-            android:id="@+id/C"
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="54"
-            android:onClick="onClickRisposta"
-
-            >
-
-        </Button>
-        <Button
-            android:id="@+id/D"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="35dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="70"
-            android:onClick="onClickRisposta"
-
-            >
-
-        </Button>
-    </LinearLayout>
-    <LinearLayout
-        android:visibility="invisible"
-        android:background="#F0D80B"
-        android:layout_below="@+id/risposte"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:id="@+id/llbottoneRisultati"
-        android:gravity="center"
-        >
-        <Button
-            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/bottoneRisultati"
-            android:text="Risultati"
-            android:onClick="onClickRisultati">
+            android:layout_marginTop="5dp"
+            android:textSize="54px"
+            android:text="150"
+            android:textColor="#020202"
+            android:onClick="onClickRisposta"
+
+            >
+
+        </Button>
+
+        <Button
+            android:id="@+id/B"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="54px"
+            android:text="160"
+            android:onClick="onClickRisposta"
+            >
+
+        </Button>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/corpoRisposta"
+
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="162px"
+        android:layout_marginRight="162px"
+        android:background="#F0D80B"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingBottom="15dp"
+        >
+
+        <Button
+            android:id="@+id/C"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="54px"
+            android:text="150"
+            android:onClick="onClickRisposta"
+            >
+
+        </Button>
+        <!-- 5% di 1080 pixel come dimensione scritta -->
+        <Button
+            android:id="@+id/D"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="54px"
+            android:text="160"
+            android:onClick="onClickRisposta"
+            >
 
         </Button>
 

@@ -2,23 +2,38 @@ package com.example.threemath;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Point;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Random;
+import android.view.Display;
 
 public class MainActivity extends AppCompatActivity {
 
     TextView testoDomanda;
     TextView testoCategoriaDomanda;
-    Button A, B, C, D;
+    Button A, B, C, D,bottoneRisultati;
+    LinearLayout llRisultati ;
+
+
     ArrayList<Domanda> quesito = new ArrayList<>();
-    int i = 0;
+    int indiceDomanda = 0;
     int sizeq = 0;
+    int numRispEsatte=0;
+    int numRispErrate=0;
+
     /**
      * String domanda = " ";
      * String rispostaCorretta = " ";
@@ -31,11 +46,13 @@ public class MainActivity extends AppCompatActivity {
     Random generatore = new Random();
     int numRand = 0;
 
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         /** categoria domanda ( addizione sottrazione ...)**/
         testoCategoriaDomanda = (TextView) findViewById(R.id.categoriaDomanda);
@@ -49,6 +66,13 @@ public class MainActivity extends AppCompatActivity {
         C = (Button) findViewById(R.id.C);
         D = (Button) findViewById(R.id.D);
 
+        /**bottone risultati non visibile)*/
+        bottoneRisultati = (Button) findViewById(R.id.bottoneRisultati);
+
+        llRisultati = (LinearLayout) findViewById(R.id.llbottoneRisultati);
+
+
+
 
         Domanda uno = new Domanda("Come ti chiami ", "andrea", "giacomo", "mario", "amedeo");
         quesito.add(0, uno);
@@ -56,6 +80,13 @@ public class MainActivity extends AppCompatActivity {
         quesito.add(1, due);
         Domanda tre = new Domanda("Il cognome di mamma  ", "sessa", "landi", "rossi", "brighi");
         quesito.add(2, tre);
+
+
+
+
+
+
+
 
 
         //String x = domanda1.getDomanda();
@@ -67,6 +98,10 @@ public class MainActivity extends AppCompatActivity {
         // String j = quesito.get(0).getRispostaEsatta();
 
         Log log = null;
+        //log.d("DEBUG","DIMENSIONI SCHERMO = "+ width);
+        //log.d("DEBUG","DIMENSIONI SCHERMO = "+ height);
+
+
         //   log.d("DEBUG","domanda in arrivo = "+ y);
         //  log.d("DEBUG","domanda in arrivo-risposta esatta= "+ j);
 
@@ -93,18 +128,31 @@ public class MainActivity extends AppCompatActivity {
 
         testoCategoriaDomanda.setText("Addizione");
 
-        testoDomanda.setText(quesito.get(i).getDomanda());
+        testoDomanda.setText(quesito.get(indiceDomanda).getDomanda());
 
-        A.setText(quesito.get(i).getRispostaEsatta());
-        B.setText(quesito.get(i).getRispostaErrata1());
-        C.setText(quesito.get(i).getRispostaErrata2());
-        D.setText(quesito.get(i).getRispostaErrata3());
+        A.setText(quesito.get(indiceDomanda).getRispostaEsatta());
+        B.setText(quesito.get(indiceDomanda).getRispostaErrata1());
+        C.setText(quesito.get(indiceDomanda).getRispostaErrata2());
+        D.setText(quesito.get(indiceDomanda).getRispostaErrata3());
 
         //  i = 1;
 
         // if (i < sizeq) {
         //    i++;
         //  }
+
+        /** Aggiunta bottone vai a risultati
+        LinearLayout llBottoneRisultati = (LinearLayout) findViewById(R.id.llVaiARisultati);
+
+        ImageView viewBottone = new ImageView(getApplicationContext());
+        Button vaiARisultati = new Button(viewBottone.getContext());
+        vaiARisultati.setText("risultati");
+        viewBottone.set**/
+
+
+
+
+
 
 
     }
@@ -118,56 +166,107 @@ public class MainActivity extends AppCompatActivity {
         //while(i<numDomande){
 
         /** CHECK RISPOSTA E SALVATAGGIO CHECK **/
-        if (i < sizeq) {
+        if (indiceDomanda < sizeq) {
 
             if (A.isPressed()) {
-                risposteQuesito.add(quesito.get(i).checkRisposta(A.getText().toString()));
+                risposteQuesito.add(quesito.get(indiceDomanda).checkRisposta(A.getText().toString()));
             } else if (B.isPressed()) {
-                risposteQuesito.add(quesito.get(i).checkRisposta(B.getText().toString()));
+                risposteQuesito.add(quesito.get(indiceDomanda).checkRisposta(B.getText().toString()));
             } else if (C.isPressed()) {
-                risposteQuesito.add(quesito.get(i).checkRisposta(C.getText().toString()));
+                risposteQuesito.add(quesito.get(indiceDomanda).checkRisposta(C.getText().toString()));
             } else if (D.isPressed()) {
-                risposteQuesito.add(quesito.get(i).checkRisposta(D.getText().toString()));
+                risposteQuesito.add(quesito.get(indiceDomanda).checkRisposta(D.getText().toString()));
             }
-            log.d("DEBUG", "wwww333333333  Wwwwwwwwwwwwww= presssedddd = " + risposteQuesito.get(i));
+
+            log.d("DEBUG", "wwww333333333  Wwwwwwwwwwwwww= presssedddd = " + risposteQuesito.get(indiceDomanda));
+
+            if(indiceDomanda==sizeq-1){ /** ultima domanda **/
+            indiceDomanda++;
+                for(int i = 0 ; i < risposteQuesito.size() ; i++){
+                   // log.d("DEBUG", "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqq = " );
+
+                    if(risposteQuesito.get(i)){
+                        numRispEsatte++;
+                    }else{
+                        numRispErrate++;
+                    }
+                }
+
+                log.d("DEBUG", "corrette = " +numRispEsatte);
+                log.d("DEBUG", "errate= " + numRispErrate);
+
+
+                /**visibile il bottone risultati e disbilitazione dei pulsanti delle risposte**/
+                bottoneRisultati.setVisibility(View.VISIBLE);
+                llRisultati.setVisibility(View.VISIBLE);
+                A.setClickable(false);
+                B.setClickable(false);
+                C.setClickable(false);
+                D.setClickable(false);
+            }
+
+
         }
+
 
         numRand = 1 + generatore.nextInt(4);
         //numRand = (int) (Math.random()*4);
 
-        if (i < sizeq - 1) {
-            i++;
-            testoDomanda.setText(quesito.get(i).getDomanda());
+        if (indiceDomanda < sizeq - 1) {
+            indiceDomanda++;
+            testoDomanda.setText(quesito.get(indiceDomanda).getDomanda());
             if ((A.isPressed()) || (B.isPressed()) || (C.isPressed()) || (D.isPressed())) {
 
                 switch (numRand) {
                     case (1):
-                        A.setText(quesito.get(i).getRispostaEsatta());
-                        B.setText(quesito.get(i).getRispostaErrata1());
-                        C.setText(quesito.get(i).getRispostaErrata2());
-                        D.setText(quesito.get(i).getRispostaErrata3());
+                        A.setText(quesito.get(indiceDomanda).getRispostaEsatta());
+                        B.setText(quesito.get(indiceDomanda).getRispostaErrata1());
+                        C.setText(quesito.get(indiceDomanda).getRispostaErrata2());
+                        D.setText(quesito.get(indiceDomanda).getRispostaErrata3());
                     case (2):
-                        B.setText(quesito.get(i).getRispostaEsatta());
-                        C.setText(quesito.get(i).getRispostaErrata1());
-                        D.setText(quesito.get(i).getRispostaErrata2());
-                        A.setText(quesito.get(i).getRispostaErrata3());
+                        B.setText(quesito.get(indiceDomanda).getRispostaEsatta());
+                        C.setText(quesito.get(indiceDomanda).getRispostaErrata1());
+                        D.setText(quesito.get(indiceDomanda).getRispostaErrata2());
+                        A.setText(quesito.get(indiceDomanda).getRispostaErrata3());
 
                     case (3):
-                        C.setText(quesito.get(i).getRispostaEsatta());
-                        D.setText(quesito.get(i).getRispostaErrata1());
-                        A.setText(quesito.get(i).getRispostaErrata2());
-                        B.setText(quesito.get(i).getRispostaErrata3());
+                        C.setText(quesito.get(indiceDomanda).getRispostaEsatta());
+                        D.setText(quesito.get(indiceDomanda).getRispostaErrata1());
+                        A.setText(quesito.get(indiceDomanda).getRispostaErrata2());
+                        B.setText(quesito.get(indiceDomanda).getRispostaErrata3());
                     case (4):
-                        D.setText(quesito.get(i).getRispostaEsatta());
-                        A.setText(quesito.get(i).getRispostaErrata1());
-                        B.setText(quesito.get(i).getRispostaErrata2());
-                        C.setText(quesito.get(i).getRispostaErrata3());
+                        D.setText(quesito.get(indiceDomanda).getRispostaEsatta());
+                        A.setText(quesito.get(indiceDomanda).getRispostaErrata1());
+                        B.setText(quesito.get(indiceDomanda).getRispostaErrata2());
+                        C.setText(quesito.get(indiceDomanda).getRispostaErrata3());
                 }
 
 
             }
         }
     }
+
+     public void onClickRisultati(View v){
+
+         /*Media player*/
+        // MediaPlayer mp = new MediaPlayer();
+         // mp = MediaPlayer.create(this, getResources().getIdentifier("cassa", "raw", getPackageName()));
+         //mp = MediaPlayer.create(this, R.raw.cassa);
+        // mp.start();
+
+
+         /*new intent*/
+         Intent intent = new Intent();
+         intent.setClass(getApplicationContext(), RisultatiActivity.class);
+         intent.putExtra("CORRETTE",numRispEsatte );
+         intent.putExtra("ERRATE",numRispErrate );
+
+
+
+
+         startActivityForResult(intent, 0);
+     }
+
 
 
 }
