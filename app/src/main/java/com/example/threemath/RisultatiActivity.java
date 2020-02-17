@@ -9,13 +9,16 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Locale;
+
 public class RisultatiActivity extends AppCompatActivity {
     int numRispEsatte =0;
     int numRispErrate = 0;
     int minutes = 0;
     int seconds = 0;
-    int tempoSecondiQuesito = 0;
-    int tempoMinutiQuesito = 0;
+    int tempoSecondiImpiegati = 0;
+    int tempoMinutiImpiegati = 0;
+    long tempoSecondiDisponibili=0;
 
     TextView textRisposteErrate ;
     TextView textRisposteCorrette ;
@@ -33,9 +36,12 @@ public class RisultatiActivity extends AppCompatActivity {
         numRispErrate=i.getIntExtra("ERRATE",numRispErrate);
         minutes =i.getIntExtra("TIMEMINUTI",minutes);
         seconds =i.getIntExtra("TIMESECONDI",seconds);
+        tempoSecondiDisponibili=i.getLongExtra("TIMEQUESITO",tempoSecondiDisponibili);
+        tempoSecondiDisponibili = (( tempoSecondiDisponibili/ 1000) % 60);
 
-        tempoSecondiQuesito = 60-seconds;
-        tempoMinutiQuesito = 0-minutes;
+
+        tempoSecondiImpiegati = (int) (tempoSecondiDisponibili-seconds);
+        tempoMinutiImpiegati = 0-minutes;
 
 
 
@@ -52,7 +58,9 @@ public class RisultatiActivity extends AppCompatActivity {
 
         textRisposteCorrette.setText(""+numRispEsatte);
         textRisposteErrate.setText(""+numRispErrate);
-        textTempo.setText("Tempo = "+ " minuti: "+minutes+" secondi : "+tempoSecondiQuesito);
+        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", tempoMinutiImpiegati,  tempoSecondiImpiegati);
+
+        textTempo.setText(timeLeftFormatted);
 
 
     }

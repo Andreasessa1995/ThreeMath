@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="wrap_content"
-    android:layout_width="wrap_content"
-    android:background="@drawable/sfondo2">
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="#4E4C4C"
+
+    >
     <!--
         linear layout della scritta threemat come titolo dell app
         -->
@@ -27,8 +29,8 @@
         android:orientation="vertical"
         android:layout_below="@+id/titolo"
         android:layout_marginTop="50dp"
-        android:layout_marginLeft="162px"
-        android:layout_marginRight="162px"
+        android:layout_marginLeft="@dimen/left_right"
+        android:layout_marginRight="@dimen/left_right"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
@@ -36,9 +38,9 @@
             android:layout_height="wrap_content"
             android:text="Addizioni"
             android:textSize="100px"
-            android:textColor="#CE710E"
+            android:textColor="#EEECE8"
+            android:background="@drawable/categoria"
             android:id="@+id/bottoneCategoriaDomanda1"
-            android:background="#FFC107"
             android:onClick="onClickCategoria"
 
             >
@@ -49,9 +51,9 @@
             android:layout_height="wrap_content"
             android:text="Sottrazioni"
             android:textSize="100px"
-            android:textColor="#CE710E"
+            android:textColor="#F7EBEB"
+            android:background="@drawable/categoria"
             android:id="@+id/bottoneCategoriaDomanda2"
-            android:background="#FFC107"
             android:onClick="onClickCategoria"
             >
         </Button>
@@ -60,10 +62,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Moltiplicazioni"
-            android:textSize="90px"
-            android:textColor="#CE710E"
+            android:textSize="80px"
+            android:textColor="#F7F4F1"
+            android:background="@drawable/categoria"
             android:id="@+id/bottoneCategoriaDomanda3"
-            android:background="#FFC107"
             android:onClick="onClickCategoria"
             >
         </Button>
@@ -73,11 +75,10 @@
             android:layout_height="wrap_content"
             android:text="Divisioni"
             android:textSize="100px"
-            android:textColor="#CE710E"
+            android:textColor="#F3F0EC"
+            android:background="@drawable/categoria"
             android:id="@+id/bottoneCategoriaDomanda4"
-            android:background="@drawable/botton"
             android:onClick="onClickCategoria"
-
             >
         </Button>
 

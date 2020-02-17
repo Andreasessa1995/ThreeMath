@@ -65,7 +65,8 @@ public class AddizioniActivity extends AppCompatActivity {
 
     /**TIME **/
 
-    private static final long START_TIME_IN_MILLIS = 60000;
+    private static final long START_TIME_IN_MILLIS = 25000;
+    long tempoQuesito = START_TIME_IN_MILLIS;
     private CountDownTimer mCountDownTimer;
     private boolean mTimerRunning;/*indica se sta scendendo il tempo*/
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
@@ -77,6 +78,9 @@ public class AddizioniActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_addizione);
+
+
 
         /** dimensioni schermo telefono **/
         DisplayMetrics metrics = getResources().getDisplayMetrics();
@@ -87,7 +91,7 @@ public class AddizioniActivity extends AppCompatActivity {
         log.d("DEBUG","DIMENSIONI SCHERMO = "+ deviceHeight);
         log.d("DEBUG","DIMENSIONI SCHERMO = "+ deviceWidth);
 
-        setContentView(R.layout.activity_main);
+
 
         timeText = (TextView) findViewById(R.id.timeText);
 
@@ -300,6 +304,7 @@ public class AddizioniActivity extends AppCompatActivity {
         intent.putExtra("ERRATE",numRispErrate );
         intent.putExtra("TIMEMINUTI",minutes);
         intent.putExtra("TIMESECONDI",seconds);
+        intent.putExtra("TIMEQUESITO",tempoQuesito);
 
         startActivityForResult(intent, 0);
     }
@@ -375,7 +380,7 @@ public class AddizioniActivity extends AppCompatActivity {
 
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
 
-        timeText.setText(timeLeftFormatted); 
+        timeText.setText(timeLeftFormatted);
     }
 
 
