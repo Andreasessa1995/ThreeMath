@@ -23,12 +23,34 @@
             android:textSize="35dp"
             />
     </LinearLayout>
+    <LinearLayout
+        android:background="@drawable/count_down"
+        android:id="@+id/timezone"
+        android:layout_marginLeft="162px"
+        android:layout_marginRight="162px"
+        android:layout_below="@+id/titolo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/timeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            android:textColor="@android:color/black"
+            android:textSize="30sp" />
+
+    </LinearLayout>
     <!--
     linear layout della scritta "domanda"
     -->
     <LinearLayout
-        android:layout_below="@+id/titolo"
-        android:layout_marginTop="100dp"
+        android:layout_below="@+id/timezone"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:id="@+id/llcategoriaDomanda"
@@ -99,6 +121,7 @@
             >
         </Button>
         <Button
+
             android:id="@+id/B"
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"

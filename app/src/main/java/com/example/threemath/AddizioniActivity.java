@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -21,7 +22,10 @@ import java.util.ArrayList;
 import java.util.Random;
 import android.view.Display;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.Locale;
+
+
+public class AddizioniActivity extends AppCompatActivity {
 
     TextView testoDomanda;
     TextView testoCategoriaDomanda;
@@ -42,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     int sizeq = 0;
     int numRispEsatte=0;
     int numRispErrate=0;
+    boolean ultimaDomanda =false;
 
     /**
      * String domanda = " ";
@@ -58,6 +63,13 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    /**TIME **/
+
+    private static final long START_TIME_IN_MILLIS = 60000;
+    private CountDownTimer mCountDownTimer;
+    private boolean mTimerRunning;/*indica se sta scendendo il tempo*/
+    private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
+    TextView timeText ;
 
 
     @Override
@@ -74,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
         log.d("DEBUG","DIMENSIONI SCHERMO = "+ deviceWidth);
 
         setContentView(R.layout.activity_main);
+
+        timeText = (TextView) findViewById(R.id.timeText);
 
 
 
@@ -121,58 +135,17 @@ public class MainActivity extends AppCompatActivity {
         llRisultati = (LinearLayout) findViewById(R.id.llbottoneRisultati);
 
 
-
-
-        Domanda uno = new Domanda("Come ti chiami ", "andrea", "giacomo", "mario", "amedeo");
-        quesito.add(0, uno);
-        Domanda due = new Domanda("Il tuo cognome  ", "sessa", "landi", "de paoli", "brighi");
-        quesito.add(1, due);
-        Domanda tre = new Domanda("Il cognome di mamma  ", "sessa", "landi", "rossi", "brighi");
-        quesito.add(2, tre);
-
-        insertDomande();
+        insertDomandeLV1();
 
 
 
 
-
-
-
-
-
-        //String x = domanda1.getDomanda();
 
 
         sizeq = quesito.size();
 
-        // String y = quesito.get(0).getDomanda();
-        // String j = quesito.get(0).getRispostaEsatta();
 
 
-
-
-        //   log.d("DEBUG","domanda in arrivo = "+ y);
-        //  log.d("DEBUG","domanda in arrivo-risposta esatta= "+ j);
-
-        //   String risposta = "sessa";
-
-        //  boolean esito = quesito.get(1).checkRisposta(risposta);
-
-        //   log.d("DEBUG","domanda  esito  Wwwwwwwwwwwwww= = "+ esito);
-        //  log.d("DEBUG", "size quesito rrrrrrrrrrrrrrrrrr= = " + sizeq);
-       /* domanda = quesito.get(i).getDomanda();
-        rispostaCorretta = quesito.get(i).getRispostaEsatta();
-        rispostaErrata1 = quesito.get(i).getRispostaErrata1();
-        rispostaErrata2 = quesito.get(i).getRispostaErrata2();
-        rispostaErrata3 = quesito.get(i).getRispostaErrata3();
-        log.d("DEBUG", "domanda    Wwwwwwwwwwwwww= = " + domanda + " indice " + i);
-
-        log.d("DEBUG", "domanda  risposta corr  Wwwwwwwwwwwwww= = " + rispostaCorretta + " indice " + i);
-        log.d("DEBUG", "domanda  risposta err Wwwwwwwwwwwwww= = " + rispostaErrata1 + " indice " + i);
-        log.d("DEBUG", "domanda  risposta err  Wwwwwwwwwwwwww= = " + rispostaErrata2 + " indice " + i);
-        log.d("DEBUG", "domanda  rispostae rr  Wwwwwwwwwwwwww= = " + rispostaErrata3 + " indice " + i);
-
-        */
         log.d("DEBUG", "dimensioni altezza =  " + deviceHeight + " dimensioni base" + deviceWidth);
 
 
@@ -186,6 +159,10 @@ public class MainActivity extends AppCompatActivity {
         C.setText(quesito.get(indiceDomanda).getRispostaErrata2());
         D.setText(quesito.get(indiceDomanda).getRispostaErrata3());
 
+        /**TIME TIME TIME */
+
+        startTimer();
+
         //  i = 1;
 
         // if (i < sizeq) {
@@ -193,12 +170,12 @@ public class MainActivity extends AppCompatActivity {
         //  }
 
         /** Aggiunta bottone vai a risultati
-        LinearLayout llBottoneRisultati = (LinearLayout) findViewById(R.id.llVaiARisultati);
+         LinearLayout llBottoneRisultati = (LinearLayout) findViewById(R.id.llVaiARisultati);
 
-        ImageView viewBottone = new ImageView(getApplicationContext());
-        Button vaiARisultati = new Button(viewBottone.getContext());
-        vaiARisultati.setText("risultati");
-        viewBottone.set**/
+         ImageView viewBottone = new ImageView(getApplicationContext());
+         Button vaiARisultati = new Button(viewBottone.getContext());
+         vaiARisultati.setText("risultati");
+         viewBottone.set**/
 
 
 
@@ -208,6 +185,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * gestisce le risposte, cambiando ad ogni risposta la domanda e le relative risposte. Nell'ultima
+     * risposta fa comparire un bottone con la scritta risultati.
+     * @param v
+     */
     public void onClickRisposta(View v) {
         //  boolean domandeTerminate=false;
         Log log = null;
@@ -232,9 +214,10 @@ public class MainActivity extends AppCompatActivity {
             log.d("DEBUG", "wwww333333333  Wwwwwwwwwwwwww= presssedddd = " + risposteQuesito.get(indiceDomanda));
 
             if(indiceDomanda==sizeq-1){ /** ultima domanda **/
-            indiceDomanda++;
+                ultimaDomanda=true;
+                indiceDomanda++;
                 for(int i = 0 ; i < risposteQuesito.size() ; i++){
-                   // log.d("DEBUG", "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqq = " );
+                    // log.d("DEBUG", "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqq = " );
 
                     if(risposteQuesito.get(i)){
                         numRispEsatte++;
@@ -291,54 +274,102 @@ public class MainActivity extends AppCompatActivity {
                         B.setText(quesito.get(indiceDomanda).getRispostaErrata2());
                         C.setText(quesito.get(indiceDomanda).getRispostaErrata3());
                 }
-
-
             }
         }
     }
-    /** Metodo void che al cliccare del bottone risultati chiama un activity che gestisce i risultati**/
-     public void onClickRisultati(View v){
 
-         /*Media player*/
+    /**
+     * apre l'activity dei risultati ottenuti
+     * @param v
+     */
+    public void onClickRisultati(View v){
+
+        /*Media player*/
         // MediaPlayer mp = new MediaPlayer();
-         // mp = MediaPlayer.create(this, getResources().getIdentifier("cassa", "raw", getPackageName()));
-         //mp = MediaPlayer.create(this, R.raw.cassa);
+        // mp = MediaPlayer.create(this, getResources().getIdentifier("cassa", "raw", getPackageName()));
+        //mp = MediaPlayer.create(this, R.raw.cassa);
         // mp.start();
 
 
-         /*new intent*/
-         Intent intent = new Intent();
-         intent.setClass(getApplicationContext(), RisultatiActivity.class);
-         intent.putExtra("CORRETTE",numRispEsatte );
-         intent.putExtra("ERRATE",numRispErrate );
+        /*new intent*/
+        Intent intent = new Intent();
+        intent.setClass(getApplicationContext(), RisultatiActivity.class);
+        intent.putExtra("CORRETTE",numRispEsatte );
+        intent.putExtra("ERRATE",numRispErrate );
 
 
 
 
-         startActivityForResult(intent, 0);
-     }
+        startActivityForResult(intent, 0);
+    }
 
-     public void onClickHome(View v){
-         /*new intent*/
-         Intent intent = new Intent();
-         intent.setClass(getApplicationContext(), HomeActivity.class);
-         startActivityForResult(intent, 0);
 
-     }
-
-    /***
-     * Inserisce le domande in un array list
+    /**
+     * inserisce le domande della categoria scelta
      */
-     public void insertDomande(){
+    public void insertDomandeLV1(){
 
-         Domanda quattro = new Domanda("Come si chiama mago ", "pasquale", "giacomo", "mario", "amedeo");
-         quesito.add( quattro);
-         Domanda cinque = new Domanda("Il suo cognome  ", "prisco", "landi", "de paoli", "brighi");
-         quesito.add( cinque);
-         Domanda sei = new Domanda("Il cognome di nonna  ", "non definito", "landi", "rossi", "brighi");
-         quesito.add( sei);
+        Domanda domanda1 = new Domanda("1 + 3", "4", "2", "3", "5");
+        quesito.add( domanda1);
+        Domanda domanda2 = new Domanda("5 + 4", "9", "8", "10", "6");
+        quesito.add( domanda2 );
+        Domanda domanda3 = new Domanda("10 + 9", "19", "18", "29", "15");
+        quesito.add( domanda3);
+        Domanda domanda4 = new Domanda("12+13", "25", "35", "26", "32");
+        quesito.add( domanda4);
+        Domanda domanda5 = new Domanda("18 + 22", "40", "30", "28", "50");
+        quesito.add( domanda5);
 
-     }
+    }
+    /**
+     * inserisce le domande della categoria scelta
+     */
+    public void insertDomandeLV2(){
+
+        Domanda domanda1 = new Domanda("25 + 12", "37", "2", "3", "5");
+        quesito.add( domanda1);
+        Domanda domanda2 = new Domanda("37 + 15", "52", "54", "42", "56");
+        quesito.add( domanda2 );
+        Domanda domanda3 = new Domanda("42 + 19", "61", "72", "51", "63");
+        quesito.add( domanda3);
+
+
+    }
+
+    /**
+     * metodo che gestisce il countdown
+     */
+    private void startTimer() {
+        mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                mTimeLeftInMillis = millisUntilFinished;
+                updateCountDownText();
+                if (ultimaDomanda){
+                    mTimerRunning=false;
+                    mCountDownTimer.cancel();
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                mTimerRunning = false;
+
+            }
+        }.start();
+        mTimerRunning = true;
+
+    }
+
+    private void updateCountDownText() {
+        int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
+        int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
+
+        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+
+        timeText.setText(timeLeftFormatted);
+    }
+
 
 
 

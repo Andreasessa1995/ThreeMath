@@ -3,6 +3,7 @@ package com.example.threemath;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -31,12 +32,19 @@ public class RisultatiActivity extends AppCompatActivity {
         textRisposteErrate = (TextView) findViewById(R.id.testoRisultatiErrati);
 
         Log log = null;
-        log.d("DEBUG", "corrette = " +numRispEsatte);
-        log.d("DEBUG", "errate= " + numRispErrate);
+        //log.d("DEBUG", "corrette = " +numRispEsatte);
+        //log.d("DEBUG", "errate= " + numRispErrate);
 
         textRisposteCorrette.setText(""+numRispEsatte);
         textRisposteErrate.setText(""+numRispErrate);
 
 
+    }
+
+    public void onClickHome(View v){
+        /*new intent*/
+        Intent intent = new Intent();
+        intent.setClass(getApplicationContext(), HomeActivity.class);
+        startActivityForResult(intent, 0);
     }
 }
