@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="#4E4C4C"
+
+    >
+    <!--
+        linear layout della scritta threemat come titolo dell app
+        -->
+    <LinearLayout
+        android:id="@+id/titolo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#EB8C15"
+        >
+        <TextView
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ThreeMath!"
+            android:textColor="#C42519"
+            android:textSize="35dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_below="@+id/titolo"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="@dimen/left_right"
+        android:layout_marginRight="@dimen/left_right"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Addizioni"
+            android:textSize="100px"
+            android:textColor="#EEECE8"
+            android:background="@drawable/categoria"
+            android:id="@+id/bottoneCategoriaDomanda1"
+            android:onClick="onClickCategoria"
+
+            >
+        </Button>
+        <Button
+            android:layout_marginTop="40px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sottrazioni"
+            android:textSize="100px"
+            android:textColor="#F7EBEB"
+            android:background="@drawable/categoria"
+            android:id="@+id/bottoneCategoriaDomanda2"
+            android:onClick="onClickCategoria"
+            >
+        </Button>
+        <Button
+            android:layout_marginTop="40px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Moltiplicazioni"
+            android:textSize="80px"
+            android:textColor="#F7F4F1"
+            android:background="@drawable/categoria"
+            android:id="@+id/bottoneCategoriaDomanda3"
+            android:onClick="onClickCategoria"
+            >
+        </Button>
+        <Button
+            android:layout_marginTop="40px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Divisioni"
+            android:textSize="100px"
+            android:textColor="#F3F0EC"
+            android:background="@drawable/categoria"
+            android:id="@+id/bottoneCategoriaDomanda4"
+            android:onClick="onClickCategoria"
+            >
+        </Button>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
