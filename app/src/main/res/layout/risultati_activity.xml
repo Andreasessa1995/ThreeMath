@@ -95,6 +95,29 @@
         android:layout_below="@+id/corpoRisultatiErrati"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
+        android:id="@+id/corpoTempo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#2A4FD8"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tempo:"
+            android:textColor="#070606"
+            android:textSize="35dp"
+            android:id="@+id/textTempo">
+
+        </TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_below="@+id/corpoTempo"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:id="@+id/risposte"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -108,7 +131,7 @@
             android:id="@+id/home"
             android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:text="home"
             android:onClick="onClickHome"
             android:background="@drawable/botton"

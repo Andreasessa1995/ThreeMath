@@ -70,6 +70,8 @@ public class AddizioniActivity extends AppCompatActivity {
     private boolean mTimerRunning;/*indica se sta scendendo il tempo*/
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
     TextView timeText ;
+    int minutes = 0;
+    int seconds = 0;
 
 
     @Override
@@ -296,9 +298,8 @@ public class AddizioniActivity extends AppCompatActivity {
         intent.setClass(getApplicationContext(), RisultatiActivity.class);
         intent.putExtra("CORRETTE",numRispEsatte );
         intent.putExtra("ERRATE",numRispErrate );
-
-
-
+        intent.putExtra("TIMEMINUTI",minutes);
+        intent.putExtra("TIMESECONDI",seconds);
 
         startActivityForResult(intent, 0);
     }
@@ -345,9 +346,9 @@ public class AddizioniActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 mTimeLeftInMillis = millisUntilFinished;
                 updateCountDownText();
+
                 if (ultimaDomanda){
-                    mTimerRunning=false;
-                    mCountDownTimer.cancel();
+                    onStop();
                 }
             }
 
@@ -356,18 +357,25 @@ public class AddizioniActivity extends AppCompatActivity {
                 mTimerRunning = false;
 
             }
+
+
+            public void onStop(){
+                mTimerRunning=false;
+                mCountDownTimer.cancel();
+            }
         }.start();
         mTimerRunning = true;
 
     }
 
-    private void updateCountDownText() {
-        int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
-        int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
+    public void updateCountDownText() {
+         minutes = (int) (mTimeLeftInMillis / 1000) / 60;
+         seconds = (int) (mTimeLeftInMillis / 1000) % 60;
+        //int milliseconds = (int) (mTimeLeftInMillis);
 
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
 
-        timeText.setText(timeLeftFormatted);
+        timeText.setText(timeLeftFormatted); 
     }
 
 

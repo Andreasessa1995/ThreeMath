@@ -12,9 +12,14 @@ import androidx.appcompat.app.AppCompatActivity;
 public class RisultatiActivity extends AppCompatActivity {
     int numRispEsatte =0;
     int numRispErrate = 0;
+    int minutes = 0;
+    int seconds = 0;
+    int tempoSecondiQuesito = 0;
+    int tempoMinutiQuesito = 0;
 
     TextView textRisposteErrate ;
     TextView textRisposteCorrette ;
+    TextView textTempo ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,17 +31,28 @@ public class RisultatiActivity extends AppCompatActivity {
         Intent i = getIntent();
         numRispEsatte=i.getIntExtra("CORRETTE",numRispEsatte);
         numRispErrate=i.getIntExtra("ERRATE",numRispErrate);
+        minutes =i.getIntExtra("TIMEMINUTI",minutes);
+        seconds =i.getIntExtra("TIMESECONDI",seconds);
+
+        tempoSecondiQuesito = 60-seconds;
+        tempoMinutiQuesito = 0-minutes;
+
 
 
         textRisposteCorrette = (TextView) findViewById(R.id.testoRisultatiCorretti);
         textRisposteErrate = (TextView) findViewById(R.id.testoRisultatiErrati);
+        textTempo = (TextView) findViewById(R.id.textTempo);
 
         Log log = null;
         //log.d("DEBUG", "corrette = " +numRispEsatte);
         //log.d("DEBUG", "errate= " + numRispErrate);
+        log.d("DEBUG", "corrette minuti minuti = " +minutes);
+        log.d("DEBUG", "errate secondi secondi= " + seconds);
+
 
         textRisposteCorrette.setText(""+numRispEsatte);
         textRisposteErrate.setText(""+numRispErrate);
+        textTempo.setText("Tempo = "+ " minuti: "+minutes+" secondi : "+tempoSecondiQuesito);
 
 
     }
