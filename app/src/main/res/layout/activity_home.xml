@@ -6,11 +6,26 @@
     android:background="#4E4C4C"
 
     >
+<LinearLayout
+    android:id="@+id/logo"
+    android:layout_marginTop="10px"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+    <ImageView
+        android:layout_width="200px"
+        android:layout_height="200px"
+        android:src="@drawable/logo_senza_sfondo">
 
+    </ImageView>
+
+
+</LinearLayout>
 
     <LinearLayout
+        android:layout_below="@+id/logo"
         android:orientation="vertical"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="15px"
         android:layout_marginLeft="@dimen/left_right"
         android:layout_marginRight="@dimen/left_right"
         android:layout_width="match_parent"
@@ -37,6 +52,7 @@
             android:background="@drawable/categoria"
             android:id="@+id/bottoneCategoriaDomanda2"
             android:onClick="onClickCategoria"
+
             >
         </Button>
         <Button
@@ -60,6 +76,30 @@
             android:textColor="#F3F0EC"
             android:background="@drawable/categoria"
             android:id="@+id/bottoneCategoriaDomanda4"
+            android:onClick="onClickCategoria"
+            >
+        </Button>
+        <Button
+            android:layout_marginTop="40px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Indovinelli"
+            android:textSize="100px"
+            android:textColor="#F3F0EC"
+            android:background="@drawable/categoria"
+            android:id="@+id/bottoneCategoriaDomanda5"
+            android:onClick="onClickCategoria"
+            >
+        </Button>
+        <Button
+            android:layout_marginTop="40px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Statistiche"
+            android:textSize="100px"
+            android:textColor="#F3F0EC"
+            android:background="@drawable/categoria2"
+            android:id="@+id/bottoneCategoriaDomanda6"
             android:onClick="onClickCategoria"
             >
         </Button>

@@ -7,11 +7,18 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class HomeActivity extends AppCompatActivity {
+
+    private Animation anim=null;
+
+
+
     private Button bCategoria1;
     private Button bCategoria2;
     private Button bCategoria3;
@@ -28,10 +35,15 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+       // anim = AnimationUtils.loadAnimation(getApplicationContext(),R.transition.animazione);
+
+
 
 
 
     }
+
+
 
 
     public void onClickCategoria(View v) {
