@@ -47,8 +47,9 @@ public class HomeActivity extends AppCompatActivity {
             /*new intent*/
             // Intent intent = new Intent();
             // intent.setClass(getApplicationContext(), AddizioniActivity.class);
-            Intent intent = new Intent(getApplicationContext(), AddizioniActivity.class);
+            Intent intent = new Intent(getApplicationContext(), CountDownActivity.class);
             startActivityForResult(intent, 0);
+
            // releaseResourcesBattuta();
 
 

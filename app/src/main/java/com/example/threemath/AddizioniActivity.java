@@ -411,8 +411,6 @@ public class AddizioniActivity extends AppCompatActivity {
             public void onFinish() {
                 mTimerRunning = false;
                 startCampanella();
-
-
             }
 
 

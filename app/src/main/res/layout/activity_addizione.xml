@@ -17,6 +17,9 @@
         android:layout_marginLeft="@dimen/left_right"
         android:layout_marginRight="@dimen/left_right"
         >
+
+
+
     <!--
        linear layout del timer
        -->
