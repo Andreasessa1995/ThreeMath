@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="#4E4C4C"
+
+    >
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="@dimen/left_right"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:id="@+id/categoria"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Categorie"
+            android:textSize="120px"
+
+            >
+        </TextView>
+            <ListView
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/categoria"
+                android:id="@+id/mylist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </ListView>
+
+
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>

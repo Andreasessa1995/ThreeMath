@@ -7,34 +7,17 @@
     >
 
     <!--
-        linear layout della scritta threemat come titolo dell app
-        -->
-    <LinearLayout
-        android:id="@+id/titolo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#CE710E"
-        >
-        <TextView
-            android:textAlignment="textStart"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="ThreeMath "
-            android:textColor="#FFC107"
-            android:textSize="45dp"
-            />
-    </LinearLayout>
-    <!--
             contiene tutto
             -->
     <RelativeLayout
-        android:layout_marginTop="10px"
+        android:layout_marginTop="5px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/quesiti"
         android:layout_below="@+id/titolo"
         android:layout_marginLeft="@dimen/left_right"
         android:layout_marginRight="@dimen/left_right"
+
         >
         <!--
            linear layout del timer
@@ -42,11 +25,11 @@
         <LinearLayout
             android:background="@drawable/count_down"
             android:id="@+id/timezone"
-            android:layout_marginLeft="@dimen/left_right_inter"
-            android:layout_marginRight="@dimen/left_right_inter"
+            android:layout_marginLeft="300px"
+            android:layout_marginRight="300px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20px"
+            android:layout_marginTop="25px"
             android:orientation="horizontal"
             >
 
@@ -65,7 +48,7 @@
         linear layout della scritta "Addizione" cioè categoria
         -->
         <LinearLayout
-            android:layout_marginTop="160px"
+            android:layout_marginTop="140px"
             android:layout_marginLeft="@dimen/left_right_inter"
             android:layout_marginRight="@dimen/left_right_inter"
             android:id="@+id/llcategoriaDomanda"
@@ -100,7 +83,6 @@
             android:orientation="horizontal"
             >
             <TextView
-                android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
                 android:id="@+id/corpoDomandaTesto"
                 android:textAlignment="center"
@@ -171,7 +153,7 @@
             android:background="#CE710E"
             android:orientation="horizontal"
             android:gravity="center"
-            android:paddingBottom="20px"
+            android:paddingBottom="5px"
             >
 
             <Button
@@ -221,8 +203,7 @@
             android:layout_below="@+id/corpoRisposta2"
             android:background="#CE710E"
             android:gravity="center"
-            android:visibility="invisible"
-            android:layout_marginBottom="45px"
+            android:visibility="visible"
             >
 
             <Button
@@ -231,7 +212,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="onClickRisultati"
                 android:text="Risultati"
-                android:visibility="invisible">
+                android:visibility="visible">
 
             </Button>
 

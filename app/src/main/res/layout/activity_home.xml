@@ -6,28 +6,10 @@
     android:background="#4E4C4C"
 
     >
-    <!--
-        linear layout della scritta threemat come titolo dell app
-        -->
-    <LinearLayout
-        android:id="@+id/titolo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#EB8C15"
-        >
-        <TextView
-            android:textAlignment="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ThreeMath!"
-            android:textColor="#C42519"
-            android:textSize="35dp"
-            />
-    </LinearLayout>
+
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_below="@+id/titolo"
         android:layout_marginTop="50dp"
         android:layout_marginLeft="@dimen/left_right"
         android:layout_marginRight="@dimen/left_right"

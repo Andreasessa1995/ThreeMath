@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,10 @@ public class HomeActivity extends AppCompatActivity {
     private Button bCategoria4;
 
 
+    /**
+     * suoni
+     **/
+    MediaPlayer mpBat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,32 +30,38 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
+
     }
 
 
+    public void onClickCategoria(View v) {
 
-    public void onClickCategoria (View v ){
         bCategoria1 = (Button) findViewById(R.id.bottoneCategoriaDomanda1);
         bCategoria2 = (Button) findViewById(R.id.bottoneCategoriaDomanda2);
         bCategoria3 = (Button) findViewById(R.id.bottoneCategoriaDomanda3);
         bCategoria4 = (Button) findViewById(R.id.bottoneCategoriaDomanda4);
 
-        if (bCategoria1.isPressed()){
+        if (bCategoria1.isPressed()) {
+
+            startBattuta();
             /*new intent*/
-            Intent intent = new Intent();
-            intent.setClass(getApplicationContext(), AddizioniActivity.class);
+            // Intent intent = new Intent();
+            // intent.setClass(getApplicationContext(), AddizioniActivity.class);
+            Intent intent = new Intent(getApplicationContext(), AddizioniActivity.class);
             startActivityForResult(intent, 0);
+           // releaseResourcesBattuta();
+
 
         }
-        if (bCategoria2.isPressed()){
+        if (bCategoria2.isPressed()) {
             /*apri sott*/
 
         }
-        if (bCategoria3.isPressed()){
+        if (bCategoria3.isPressed()) {
             /*apri divis*/
 
         }
-        if (bCategoria4.isPressed()){
+        if (bCategoria4.isPressed()) {
             /*apri molti*/
 
         }
@@ -58,8 +69,19 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * player campanella e bat
+     */
+    public void startBattuta() {
+        mpBat = MediaPlayer.create(this, getResources().getIdentifier("bat", "raw", getPackageName()));
+        mpBat = MediaPlayer.create(this, R.raw.bat);
+        mpBat.start();
+    }
 
+    public void releaseResourcesBattuta() {
 
+        mpBat.release();
+    }
 
 
 }

@@ -1,6 +1,7 @@
 package com.example.threemath;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +24,12 @@ public class RisultatiActivity extends AppCompatActivity {
     TextView textRisposteErrate ;
     TextView textRisposteCorrette ;
     TextView textTempo ;
+
+
+    /**
+     * suoni
+     **/
+    MediaPlayer mpBat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +73,31 @@ public class RisultatiActivity extends AppCompatActivity {
     }
 
     public void onClickHome(View v){
+
+        startBattuta();
         /*new intent*/
         Intent intent = new Intent();
+        //Intent intent =getIntent();
+
         intent.setClass(getApplicationContext(), HomeActivity.class);
         startActivityForResult(intent, 0);
+       // releaseResourcesBattuta();
+
+        onBackPressed();
+    }
+
+    /**
+     * player campanella e bat
+     */
+
+
+    public void startBattuta() {
+        mpBat= MediaPlayer.create(this, getResources().getIdentifier("bat", "raw", getPackageName()));
+        mpBat = MediaPlayer.create(this, R.raw.bat);
+        mpBat.start();
+    }
+
+    public void releaseResourcesBattuta() {
+        mpBat.release();
     }
 }

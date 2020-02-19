@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="#4E4C4C"
+    android:orientation="horizontal"
+
+    >
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="@dimen/left_right"
+        android:layout_marginRight="@dimen/left_right"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Addizioni"
+            android:textSize="100px"
+            android:textColor="#EEECE8"
+            android:background="@drawable/categoria"
+            android:id="@+id/bottoneCategoria"
+
+            >
+        </Button>
+
+    </LinearLayout>
+
+</LinearLayout>
