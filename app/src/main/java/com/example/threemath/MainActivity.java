@@ -10,16 +10,15 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
+
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Random;
-import android.view.Display;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -296,7 +295,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-    /** Metodo void che al cliccare del bottone risultati chiama un activity che gestisce i risultati**/
+    /** Metodo void che al cliccare del bottone risultati chiama un activity che gestisce i risultati***/
      public void onClickRisultati(View v){
 
          /*Media player*/

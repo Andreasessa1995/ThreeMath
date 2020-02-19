@@ -281,7 +281,7 @@ public class AddizioniActivity extends AppCompatActivity {
     }
 
     public void startBattuta() {
-        /**suoni*/
+        /**suoni****/
 
         mpCampanella = MediaPlayer.create(this, getResources().getIdentifier("bat", "raw", getPackageName()));
 
@@ -454,7 +454,7 @@ public class AddizioniActivity extends AppCompatActivity {
         /*DISTINZIONE TRA I VARI RESUME*/
         if(countDownIniziato){
             resumeStartCountDown = true;
-            
+
             /*resume activity restart count down*/
             startTimer();
 
