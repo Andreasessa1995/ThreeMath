@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#4E4C4C"
+
+    >
+
+    <LinearLayout
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10px"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_gravity="start"
+            android:layout_width="200px"
+            android:layout_height="200px"
+            android:src="@drawable/logo_senza_sfondo">
+
+        </ImageView>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logo"
+        android:layout_marginLeft="@dimen/left_right"
+        android:layout_marginTop="40px"
+        android:layout_marginRight="@dimen/left_right"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/bottoneLivello1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/categoria"
+            android:onClick="onClickLivello"
+            android:text="Principiante"
+            android:textColor="#EEECE8"
+            android:textSize="100px"
+
+            >
+        </Button>
+        <Button
+
+            android:layout_marginTop="40px"
+            android:id="@+id/bottoneLivello2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/categoria"
+            android:onClick="onClickLivello"
+            android:text="normale"
+            android:textColor="#EEECE8"
+            android:textSize="100px"
+
+            >
+        </Button>
+        <Button
+            android:layout_marginTop="40px"
+            android:id="@+id/bottoneLivello3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/categoria"
+            android:onClick="onClickLivello"
+            android:text="Esperto"
+            android:textColor="#EEECE8"
+            android:textSize="100px"
+
+            >
+        </Button>
+        <Button
+            android:layout_marginTop="40px"
+            android:id="@+id/bottoneLivello4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/categoria2"
+            android:onClick="onClickLivello"
+            android:text="genio"
+            android:textColor="#EEECE8"
+            android:textSize="100px"
+
+            >
+        </Button>
+
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>

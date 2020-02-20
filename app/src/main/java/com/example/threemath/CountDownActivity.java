@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,12 @@ public class CountDownActivity extends AppCompatActivity {
 
 
 
+    String categoria = "";
+    int livello =1;
+
+
+
+
 
 
     @Override
@@ -44,7 +51,26 @@ public class CountDownActivity extends AppCompatActivity {
         count_down = (TextView) findViewById(R.id.coutDown);
         startCountDown();
         startTimer();
+
+        Intent intent  = getIntent();
+        categoria = intent.getStringExtra("CATEGORIA");
+        Log log =null;
+        log.d("DEBUG", "CATEGORIA CATEGORIA CATEGORIA CATEGORIA 3 3 3 3 3 = " +categoria );
+
+        livello = intent.getIntExtra("LIVELLO",livello);
+
+
+
+
     }
+
+
+
+
+
+
+
+
 
     /**
      * metodo che gestisce il countdown
@@ -67,8 +93,16 @@ public class CountDownActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 mTimerRunning = false;
-                Intent intent = new Intent(getApplicationContext(), AddizioniActivity.class);
-                startActivityForResult(intent, 0);
+                Intent i = new Intent();
+                if (categoria.equalsIgnoreCase("Addizioni")){
+                    i  = new Intent(getApplicationContext(), AddizioniActivity.class);
+                    i.putExtra("LIVELLO",livello);
+                    startActivityForResult(i, 0);
+                    onBackPressed();
+
+                }
+
+
                 onBackPressed();
 
 

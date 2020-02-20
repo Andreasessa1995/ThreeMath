@@ -47,6 +47,7 @@ public class AddizioniActivity extends AppCompatActivity {
     int numRispEsatte = 0;
     int numRispErrate = 0;
     boolean ultimaDomanda = false;
+    int livello = 1;
 
     /**
      * elementi suoni
@@ -131,6 +132,17 @@ public class AddizioniActivity extends AppCompatActivity {
         /**bottone risultati non visibile)*/
         bottoneRisultati = (Button) findViewById(R.id.bottoneRisultati);
         llRisultati = (LinearLayout) findViewById(R.id.llbottoneRisultati);
+
+
+
+        /*------------------GESTIONE DOMANDE------------------*/
+
+        Intent intent = getIntent();
+        intent = getIntent();
+        livello = intent.getIntExtra("LIVELLO",livello);
+
+        log.d("DEBUG", "LIVELLO LIVELLO LIVELLO LIVELLO = " +livello );
+
 
         /**sceglie le domande da inserire **/
         choseDomande();
@@ -285,7 +297,8 @@ public class AddizioniActivity extends AppCompatActivity {
         //releaseResourcesCampanella();
 
         /*new intent*/
-        Intent intent = new Intent();
+
+        Intent intent = getIntent();
         //Intent intent =getIntent();
         intent.setClass(getApplicationContext(), RisultatiActivity.class);
         intent.putExtra("CORRETTE", numRispEsatte);
@@ -338,17 +351,65 @@ public class AddizioniActivity extends AppCompatActivity {
     }
 
     /**
+     * inserisce le domande della categoria scelta
+     */
+    public void insertDomandeLV2_1() {
+        quesito.clear();
+        Domanda domanda1 = new Domanda("101 + 103", "204", "104", "203", "103");
+        quesito.add(domanda1);
+        Domanda domanda2 = new Domanda("105 + 104", "209", "109", "108", "205");
+        quesito.add(domanda2);
+        Domanda domanda3 = new Domanda("100 + 29", "129", "128", "229", "119");
+        quesito.add(domanda3);
+        Domanda domanda4 = new Domanda("112+113", "225", "235", "226", "232");
+        quesito.add(domanda4);
+        Domanda domanda5 = new Domanda("118 + 22", "140", "130", "128", "150");
+        quesito.add(domanda5);
+
+    }
+
+    /**
+     * inserisce le domande della categoria scelta
+     */
+    public void insertDomandeLV2_2() {
+
+        quesito.clear();
+        Domanda domanda1 = new Domanda("125 + 115", "240", "230", "235", "210");
+        quesito.add(domanda1);
+        Domanda domanda2 = new Domanda("137 + 107", "244", "234", "205", "200");
+        quesito.add(domanda2);
+        Domanda domanda3 = new Domanda("162 + 129", "291", "283", "281", "293");
+        quesito.add(domanda3);
+        Domanda domanda4 = new Domanda("148 + 149", "297", "287", "286", "296");
+        quesito.add(domanda4);
+        Domanda domanda5 = new Domanda("102 + 49", "151", "141", "153", "143");
+        quesito.add(domanda5);
+
+
+    }
+
+    /**
      * sceglie randomicamente le domande da caricare
      */
     private void choseDomande() {
 
         numRand = 1 + generatore.nextInt(2);
-        switch (numRand) {
-            case (1):
-                insertDomandeLV1_1();
-            case (2):
-                insertDomandeLV1_2();
+        if(livello == 1){
+            switch (numRand) {
+                case (1):
+                    insertDomandeLV1_1();
+                case (2):
+                    insertDomandeLV1_2();
+            }
+        }else if (livello==2){
+            switch (numRand) {
+                case (1):
+                    insertDomandeLV2_1();
+                case (2):
+                    insertDomandeLV2_2();
+           }
         }
+
 
 
     }

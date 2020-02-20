@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -23,6 +24,8 @@ public class HomeActivity extends AppCompatActivity {
     private Button bCategoria2;
     private Button bCategoria3;
     private Button bCategoria4;
+
+    String categoria ="";
 
 
     /**
@@ -53,30 +56,35 @@ public class HomeActivity extends AppCompatActivity {
         bCategoria3 = (Button) findViewById(R.id.bottoneCategoriaDomanda3);
         bCategoria4 = (Button) findViewById(R.id.bottoneCategoriaDomanda4);
 
+        Log log = null;
+
+
         if (bCategoria1.isPressed()) {
 
-           // bCategoria1.setClickable(false);
+            categoria = bCategoria1.getText().toString();
+            //log.d("DEBUG", "CATEGORIA CATEGORIA CATEGORIA CATEGORIA = " +categoria );
+
+
+            // bCategoria1.setClickable(false);
 
             startBattuta();
             /*new intent*/
             // Intent intent = new Intent();
             // intent.setClass(getApplicationContext(), AddizioniActivity.class);
-            Intent intent = new Intent(getApplicationContext(), CountDownActivity.class);
+            Intent intent = new Intent(getApplicationContext(), LivelloActivity.class);
+            intent.putExtra("CATEGORIA",categoria);
             startActivityForResult(intent, 0);
 
            // releaseResourcesBattuta();
 
 
-        }
-        if (bCategoria2.isPressed()) {
+        }else if (bCategoria2.isPressed()) {
             /*apri sott*/
 
-        }
-        if (bCategoria3.isPressed()) {
+        } else if (bCategoria3.isPressed()) {
             /*apri divis*/
 
-        }
-        if (bCategoria4.isPressed()) {
+        }else if (bCategoria4.isPressed()) {
             /*apri molti*/
 
         }
