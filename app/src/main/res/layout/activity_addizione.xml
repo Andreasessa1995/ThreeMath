@@ -43,6 +43,9 @@
             android:textColor="@android:color/black"
             android:textSize="30sp" />
 
+
+
+
     </LinearLayout>
 
     <!--
@@ -214,6 +217,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="onClickRisultati"
+                android:background="@drawable/categoria"
                 android:text="Risultati"
                 android:visibility="invisible">
 

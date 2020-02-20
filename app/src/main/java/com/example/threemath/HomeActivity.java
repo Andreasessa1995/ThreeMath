@@ -55,6 +55,8 @@ public class HomeActivity extends AppCompatActivity {
 
         if (bCategoria1.isPressed()) {
 
+           // bCategoria1.setClickable(false);
+
             startBattuta();
             /*new intent*/
             // Intent intent = new Intent();
@@ -80,6 +82,12 @@ public class HomeActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    @Override
+    protected void onResume() {
+
+        super.onResume();
     }
 
     /**

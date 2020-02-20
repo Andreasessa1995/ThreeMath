@@ -5,7 +5,7 @@
     <application
         android:allowBackup="true"
         android:label="@string/app_name"
-        android:icon="@drawable/logo"
+        android:icon="@drawable/logo_senza_sfondo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
 

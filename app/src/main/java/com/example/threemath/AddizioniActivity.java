@@ -32,6 +32,7 @@ public class AddizioniActivity extends AppCompatActivity {
     LinearLayout llCorpoDomanda;
     LinearLayout llRisposte;
     LinearLayout llRisultati;
+    LinearLayout lltimezone;
 
 
     int deviceWidth = 0;
@@ -52,6 +53,8 @@ public class AddizioniActivity extends AppCompatActivity {
      */
     MediaPlayer mpCampanella;
     MediaPlayer mpBat;
+    MediaPlayer mpTic;
+
 
 
     /**
@@ -84,6 +87,7 @@ public class AddizioniActivity extends AppCompatActivity {
     boolean stopCountDownPressedHome = false;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,8 +103,10 @@ public class AddizioniActivity extends AppCompatActivity {
         log.d("DEBUG", "DIMENSIONI SCHERMO = " + deviceHeight);
         log.d("DEBUG", "DIMENSIONI SCHERMO = " + deviceWidth);
 
-
+        /**time zone */
         timeText = (TextView) findViewById(R.id.timeText);
+        lltimezone = (LinearLayout) findViewById(R.id.timezone);
+
 
 
         //llcategoriaDomanda = ( LinearLayout)  findViewById(R.id.llcategoriaDomanda);
@@ -227,7 +233,6 @@ public class AddizioniActivity extends AppCompatActivity {
         }
 
 
-        numRand = 1 + generatore.nextInt(4);
         //numRand = (int) (Math.random()*4);
 
         if (indiceDomanda < sizeq - 1) {
@@ -236,6 +241,7 @@ public class AddizioniActivity extends AppCompatActivity {
             if ((A.isPressed()) || (B.isPressed()) || (C.isPressed()) || (D.isPressed())) {
                 startBattuta();
                 /**disposizione randomica risposte sui vari bottoni**/
+                numRand = 1 + generatore.nextInt(4);
 
                 switch (numRand) {
                     case (1):
@@ -263,36 +269,7 @@ public class AddizioniActivity extends AppCompatActivity {
             }
         }
     }
-
-    /**
-     * player campanella e bat
-     */
-    public void startCampanella() {
-        /*Media layer*/
-        mpCampanella = MediaPlayer.create(this, getResources().getIdentifier("campanella", "raw", getPackageName()));
-        mpCampanella = MediaPlayer.create(this, R.raw.campanella);
-        mpCampanella.start();
-
-
-    }
-
-    public void releaseResourcesCampanella() {
-        mpCampanella.release();
-    }
-
-    public void startBattuta() {
-        /**suoni****/
-
-        mpCampanella = MediaPlayer.create(this, getResources().getIdentifier("bat", "raw", getPackageName()));
-
-        mpBat = MediaPlayer.create(this, R.raw.bat);
-        mpBat.start();
-    }
-
-    public void releaseResourcesBattuta() {
-        mpBat.release();
-    }
-
+/*------------------------gestione risultati e domande ------------------*/
 
     /**
      * apre l'activity dei risultati ottenuti
@@ -326,7 +303,7 @@ public class AddizioniActivity extends AppCompatActivity {
      * inserisce le domande della categoria scelta
      */
     public void insertDomandeLV1_1() {
-
+        quesito.clear();
         Domanda domanda1 = new Domanda("1 + 3", "4", "2", "3", "5");
         quesito.add(domanda1);
         Domanda domanda2 = new Domanda("5 + 4", "9", "8", "10", "6");
@@ -345,6 +322,7 @@ public class AddizioniActivity extends AppCompatActivity {
      */
     public void insertDomandeLV1_2() {
 
+        quesito.clear();
         Domanda domanda1 = new Domanda("25 + 12", "37", "27", "47", "35");
         quesito.add(domanda1);
         Domanda domanda2 = new Domanda("37 + 15", "52", "54", "42", "56");
@@ -376,6 +354,47 @@ public class AddizioniActivity extends AppCompatActivity {
     }
 
 
+
+    /*---------------------gestione player --------------------*/
+    /**
+     * player campanella e bat
+     */
+    public void startCampanella() {
+        /*Media layer*/
+        mpCampanella = MediaPlayer.create(this, getResources().getIdentifier("campanella", "raw", getPackageName()));
+        mpCampanella = MediaPlayer.create(this, R.raw.campanella);
+        mpCampanella.start();
+
+
+    }
+
+    public void releaseResourcesCampanella() {
+        mpCampanella.release();
+    }
+
+    public void startBattuta() {
+        /**suoni****/
+
+        mpBat = MediaPlayer.create(this, getResources().getIdentifier("bat", "raw", getPackageName()));
+
+        mpBat = MediaPlayer.create(this, R.raw.bat);
+        mpBat.start();
+    }
+    public  void startTic(){
+        mpTic = MediaPlayer.create(this, getResources().getIdentifier("Ticchettio_orologio_digitale", "raw", getPackageName()));
+
+        //mpTic = MediaPlayer.create(this, R.raw.Ticchettio);
+        mpTic.start();
+    }
+
+    public void releaseResourcesBattuta() {
+        mpBat.release();
+    }
+
+
+
+
+
     /*---------------------------------------TIME TIME TIME *******************/
 
 
@@ -391,11 +410,12 @@ public class AddizioniActivity extends AppCompatActivity {
 
                 if (ultimaDomanda) {
                     stopTimer();
+                    lltimezone.setBackground(getDrawable(R.drawable.count_down_stop));
                 }
                 /**funziona*/
                 if (stopCountDownPressedHome){
                     pauseTimer();
-                    startBattuta();
+                   // startBattuta();
                     stopCountDownPressedHome=false;
                 }
 
@@ -409,6 +429,9 @@ public class AddizioniActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+
+                lltimezone = (LinearLayout) findViewById(R.id.timezone);
+                lltimezone.setBackground(getDrawable(R.drawable.count_down_finish));
                 mTimerRunning = false;
                 startCampanella();
             }
@@ -436,6 +459,16 @@ public class AddizioniActivity extends AppCompatActivity {
     public void stopTimer() {
         mTimerRunning = false;
         mCountDownTimer.cancel();
+    }
+
+    public void updateCountDownText() {
+        minutes = (int) (mTimeLeftInMillis / 1000) / 60;
+        seconds = (int) (mTimeLeftInMillis / 1000) % 60;
+        //int milliseconds = (int) (mTimeLeftInMillis);
+
+        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+
+        timeText.setText(timeLeftFormatted);
     }
 
 /*-----------------------------------------OVERRIDE METODI LIFECICLE ACTIVITY *******************/
@@ -484,15 +517,7 @@ public class AddizioniActivity extends AppCompatActivity {
     }
 
 
-    public void updateCountDownText() {
-        minutes = (int) (mTimeLeftInMillis / 1000) / 60;
-        seconds = (int) (mTimeLeftInMillis / 1000) % 60;
-        //int milliseconds = (int) (mTimeLeftInMillis);
 
-        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
-
-        timeText.setText(timeLeftFormatted);
-    }
 
 
 }

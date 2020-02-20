@@ -150,9 +150,9 @@ public class CountDownActivity extends AppCompatActivity {
         /**suoni****/
 
         mpCountDown = MediaPlayer.create(this, getResources().getIdentifier("count_down", "raw", getPackageName()));
-
         mpCountDown = MediaPlayer.create(this, R.raw.count_down);
         mpCountDown.start();
+        mpCountDown.setVolume(100.0f,100.0f);
     }
 
 }
