@@ -350,6 +350,8 @@ public class AddizioniActivity extends AppCompatActivity {
 
     }
 
+    /*-------------------------------------------LV2----------------------------------------------------------------------------------------------------*/
+
     /**
      * inserisce le domande della categoria scelta
      */

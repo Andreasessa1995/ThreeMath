@@ -50,9 +50,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/left_right_inter"
-            android:layout_marginTop="170px"
+            android:layout_marginTop="80dp"
             android:layout_marginRight="@dimen/left_right_inter"
-            android:background="#CE710E"
+            android:background="#CF8C46"
             android:orientation="horizontal">
 
             <TextView
@@ -77,7 +77,7 @@
             android:layout_below="@+id/llcategoriaDomanda"
             android:layout_marginLeft="@dimen/left_right_inter"
             android:layout_marginRight="@dimen/left_right_inter"
-            android:background="#CE710E"
+            android:background="#CF8C46"
             android:orientation="horizontal">
 
             <TextView
@@ -98,6 +98,7 @@
 
         <!-- 15% di 1080 pixel -->
         <LinearLayout
+            android:layout_marginTop="25dp"
             android:id="@+id/corpoRisposta1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
