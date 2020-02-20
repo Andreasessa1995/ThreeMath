@@ -381,9 +381,9 @@ public class AddizioniActivity extends AppCompatActivity {
         mpBat.start();
     }
     public  void startTic(){
-        mpTic = MediaPlayer.create(this, getResources().getIdentifier("Ticchettio_orologio_digitale", "raw", getPackageName()));
+        mpTic = MediaPlayer.create(this, getResources().getIdentifier("ticchettio", "raw", getPackageName()));
 
-        //mpTic = MediaPlayer.create(this, R.raw.Ticchettio);
+        mpTic = MediaPlayer.create(this, R.raw.ticchettio);
         mpTic.start();
     }
 
@@ -402,6 +402,7 @@ public class AddizioniActivity extends AppCompatActivity {
      * metodo che gestisce il countdown
      */
     private void startTimer() {
+        startTic();/*suono ticchettio orologio digitale*/
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -429,7 +430,7 @@ public class AddizioniActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-
+                mpTic.stop();;
                 lltimezone = (LinearLayout) findViewById(R.id.timezone);
                 lltimezone.setBackground(getDrawable(R.drawable.count_down_finish));
                 mTimerRunning = false;
@@ -448,6 +449,7 @@ public class AddizioniActivity extends AppCompatActivity {
      * metodi timer
      */
     public void pauseTimer() {
+        mpTic.pause();
         mCountDownTimer.cancel();
         mTimerRunning = false;
 
@@ -457,6 +459,7 @@ public class AddizioniActivity extends AppCompatActivity {
      * stoppa il countdown se hai risposto all'ultima domanda
      */
     public void stopTimer() {
+        mpTic.stop();;
         mTimerRunning = false;
         mCountDownTimer.cancel();
     }
@@ -474,7 +477,7 @@ public class AddizioniActivity extends AppCompatActivity {
 /*-----------------------------------------OVERRIDE METODI LIFECICLE ACTIVITY *******************/
     @Override
     protected void onPause() {
-        Toast.makeText(AddizioniActivity.this, "Pause", Toast.LENGTH_LONG).show();
+        //Toast.makeText(AddizioniActivity.this, "Pause", Toast.LENGTH_LONG).show();
         // pausePressed = true;
         super.onPause();
     }
@@ -511,7 +514,7 @@ public class AddizioniActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         stopCountDownPressedHome = true;
-        Toast.makeText(AddizioniActivity.this, "Stop", Toast.LENGTH_LONG).show();
+        //Toast.makeText(AddizioniActivity.this, "Stop", Toast.LENGTH_LONG).show();
         super.onStop();
 
     }
