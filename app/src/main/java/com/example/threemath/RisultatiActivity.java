@@ -82,6 +82,7 @@ public class RisultatiActivity extends AppCompatActivity {
         intent.setClass(getApplicationContext(), HomeActivity.class);
         startActivityForResult(intent, 0);
        // releaseResourcesBattuta();
+        mpBat.release();
 
         onBackPressed();
     }

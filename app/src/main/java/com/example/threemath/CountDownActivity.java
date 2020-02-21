@@ -98,6 +98,7 @@ public class CountDownActivity extends AppCompatActivity {
                     i  = new Intent(getApplicationContext(), AddizioniActivity.class);
                     i.putExtra("LIVELLO",livello);
                     startActivityForResult(i, 0);
+                    mpCountDown.release();
                     onBackPressed();
 
                 }
@@ -125,13 +126,7 @@ public class CountDownActivity extends AppCompatActivity {
 
     }
 
-    /**
-     * stoppa il countdown se hai risposto all'ultima domanda
-     */
-    public void stopTimer() {
-        mTimerRunning = false;
-        mCountDownTimer.cancel();
-    }
+
 
     public void updateCountDownText() {
         seconds = (int) (mTimeLeftInMillis / 1000) % 60;
@@ -174,7 +169,8 @@ public class CountDownActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         stopCountDownPressedHome = true;
-        mpCountDown.pause();
+        /*rilacia risors del player*/
+        mpCountDown.release();
        // Toast.makeText(CountDownActivity.this, "Stop", Toast.LENGTH_LONG).show();
         super.onStop();
 

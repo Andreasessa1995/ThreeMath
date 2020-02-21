@@ -11,15 +11,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:gravity="center">
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginLeft="@dimen/left_right_inter"
+        android:layout_marginRight="@dimen/left_right_inter"
+        android:background="@drawable/scores"
+        android:gravity="start">
+
 
         <ImageView
-            android:layout_gravity="start"
             android:layout_width="200px"
             android:layout_height="200px"
+            android:layout_gravity="start"
+            android:layout_marginLeft="@dimen/left_right_inter"
             android:src="@drawable/logo_senza_sfondo">
 
         </ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:text="Scores"
+            android:textColor="#F5F5F0"
+            android:textSize="35dp">
+
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:text="1500"
+            android:textColor="#F8DF03"
+            android:textSize="35dp">
+
+        </TextView>
 
 
     </LinearLayout>
@@ -29,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/logo"
         android:layout_marginLeft="@dimen/left_right"
-        android:layout_marginTop="40px"
+        android:layout_marginTop="60px"
         android:layout_marginRight="@dimen/left_right"
         android:orientation="vertical">
 
@@ -43,50 +72,50 @@
             android:textColor="#EEECE8"
             android:textSize="100px"
 
-            >
-        </Button>
+            ></Button>
+
+
         <Button
 
-            android:layout_marginTop="40px"
             android:id="@+id/bottoneLivello2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="40px"
             android:background="@drawable/categoria"
             android:onClick="onClickLivello"
             android:text="normale"
+
             android:textColor="#EEECE8"
             android:textSize="100px"
 
-            >
-        </Button>
+
+            ></Button>
+
         <Button
-            android:layout_marginTop="40px"
             android:id="@+id/bottoneLivello3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="40px"
             android:background="@drawable/categoria"
             android:onClick="onClickLivello"
             android:text="Esperto"
             android:textColor="#EEECE8"
             android:textSize="100px"
 
-            >
-        </Button>
+            ></Button>
+
         <Button
-            android:layout_marginTop="40px"
             android:id="@+id/bottoneLivello4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="40px"
             android:background="@drawable/categoria2"
             android:onClick="onClickLivello"
             android:text="genio"
             android:textColor="#EEECE8"
             android:textSize="100px"
 
-            >
-        </Button>
-
-
+            ></Button>
 
 
     </LinearLayout>

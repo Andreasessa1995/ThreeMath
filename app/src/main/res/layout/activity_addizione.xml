@@ -4,14 +4,52 @@
     android:layout_height="match_parent"
     android:background="#4E4C4C">
 
+    <LinearLayout
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginLeft="@dimen/left_right_inter"
+        android:layout_marginRight="@dimen/left_right_inter"
+        android:background="@drawable/scores"
+        android:gravity="start">
+
+
+        <ImageView
+            android:layout_width="200px"
+            android:layout_height="200px"
+            android:layout_gravity="start"
+            android:layout_marginLeft="@dimen/left_right_inter"
+            android:src="@drawable/logo_senza_sfondo">
+
+        </ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:text="Quiz time"
+            android:textColor="#F5F5F0"
+            android:textSize="30dp">
+
+        </TextView>
+
+
+
+    </LinearLayout>
+
     <!--
             contiene tutto
             -->
     <RelativeLayout
+        android:layout_below="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/left_right"
-        android:layout_marginTop="150px"
+        android:layout_marginTop="50px"
         android:layout_marginRight="@dimen/left_right"
         android:background="@drawable/quesiti">
 
@@ -88,7 +126,7 @@
                 android:layout_marginBottom="15dp"
                 android:text="50 + 4 "
                 android:textAlignment="center"
-                android:textColor="#EEECE5"
+                android:textColor="#141414"
                 android:textSize="35dp">
 
             </TextView>
@@ -112,6 +150,7 @@
             >
 
             <Button
+
                 android:id="@+id/A"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -202,7 +241,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/categoria"
                 android:onClick="onClickRisultati"
-                android:text="Risultati"
+                android:text="Scores"
+                android:textColor="#F7F4F4"
                 android:visibility="invisible">
 
             </Button>

@@ -57,7 +57,6 @@ public class AddizioniActivity extends AppCompatActivity {
     MediaPlayer mpTic;
 
 
-
     /**
      * String domanda = " ";
      * String rispostaCorretta = " ";
@@ -88,7 +87,6 @@ public class AddizioniActivity extends AppCompatActivity {
     boolean stopCountDownPressedHome = false;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,7 +105,6 @@ public class AddizioniActivity extends AppCompatActivity {
         /**time zone */
         timeText = (TextView) findViewById(R.id.timeText);
         lltimezone = (LinearLayout) findViewById(R.id.timezone);
-
 
 
         //llcategoriaDomanda = ( LinearLayout)  findViewById(R.id.llcategoriaDomanda);
@@ -139,9 +136,9 @@ public class AddizioniActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         intent = getIntent();
-        livello = intent.getIntExtra("LIVELLO",livello);
+        livello = intent.getIntExtra("LIVELLO", livello);
 
-        log.d("DEBUG", "LIVELLO LIVELLO LIVELLO LIVELLO = " +livello );
+        log.d("DEBUG", "LIVELLO LIVELLO LIVELLO LIVELLO = " + livello);
 
 
         /**sceglie le domande da inserire **/
@@ -153,7 +150,7 @@ public class AddizioniActivity extends AppCompatActivity {
         //log.d("DEBUG", "dimensioni altezza =  " + deviceHeight + " dimensioni base" + deviceWidth);
 
 
-        testoCategoriaDomanda.setText("Addizione");
+        testoCategoriaDomanda.setText("ADDIZIONI    ");
 
         testoDomanda.setText(quesito.get(indiceDomanda).getDomanda());
 
@@ -201,6 +198,7 @@ public class AddizioniActivity extends AppCompatActivity {
         /** CHECK RISPOSTA E SALVATAGGIO CHECK **/
         if (indiceDomanda < sizeq) {
             if (A.isPressed()) {
+
                 risposteQuesito.add(quesito.get(indiceDomanda).checkRisposta(A.getText().toString()));
             } else if (B.isPressed()) {
                 risposteQuesito.add(quesito.get(indiceDomanda).checkRisposta(B.getText().toString()));
@@ -233,12 +231,7 @@ public class AddizioniActivity extends AppCompatActivity {
 
 
                 /**visibile il bottone risultati e disbilitazione dei pulsanti delle risposte**/
-                bottoneRisultati.setVisibility(View.VISIBLE);
-                llRisultati.setVisibility(View.VISIBLE);
-                A.setClickable(false);
-                B.setClickable(false);
-                C.setClickable(false);
-                D.setClickable(false);
+                disabilitaRisposte();
             }
 
 
@@ -281,7 +274,7 @@ public class AddizioniActivity extends AppCompatActivity {
             }
         }
     }
-/*------------------------gestione risultati e domande ------------------*/
+    /*------------------------gestione risultati e domande ------------------*/
 
     /**
      * apre l'activity dei risultati ottenuti
@@ -293,8 +286,7 @@ public class AddizioniActivity extends AppCompatActivity {
         startBattuta();
         mTimerRunning = false;
         mCountDownTimer.cancel();
-        //releaseResourcesBattuta();
-        //releaseResourcesCampanella();
+
 
         /*new intent*/
 
@@ -307,6 +299,11 @@ public class AddizioniActivity extends AppCompatActivity {
         intent.putExtra("TIMESECONDI", seconds);
         intent.putExtra("TIMEQUESITO", tempoQuesito);
         startActivityForResult(intent, 0);
+
+        /**rilascio risorse player*/
+        releaseResourcesCampanella();
+        releaseResourcesBattuta();
+        releaseResourcesTic();
         onBackPressed();
 
     }
@@ -396,29 +393,39 @@ public class AddizioniActivity extends AppCompatActivity {
     private void choseDomande() {
 
         numRand = 1 + generatore.nextInt(2);
-        if(livello == 1){
+        if (livello == 1) {
             switch (numRand) {
                 case (1):
                     insertDomandeLV1_1();
                 case (2):
                     insertDomandeLV1_2();
             }
-        }else if (livello==2){
+        } else if (livello == 2) {
             switch (numRand) {
                 case (1):
                     insertDomandeLV2_1();
                 case (2):
                     insertDomandeLV2_2();
-           }
+            }
         }
 
 
+    }
 
+    private void disabilitaRisposte() {
+        /**visibile il bottone risultati e disbilitazione dei pulsanti delle risposte**/
+        bottoneRisultati.setVisibility(View.VISIBLE);
+        llRisultati.setVisibility(View.VISIBLE);
+        A.setClickable(false);
+        B.setClickable(false);
+        C.setClickable(false);
+        D.setClickable(false);
     }
 
 
 
     /*---------------------gestione player --------------------*/
+
     /**
      * player campanella e bat
      */
@@ -431,10 +438,17 @@ public class AddizioniActivity extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     *player campanella rilascio risorsa
+     */
     public void releaseResourcesCampanella() {
         mpCampanella.release();
     }
 
+    /**
+     * player battuta
+     */
     public void startBattuta() {
         /**suoni****/
 
@@ -443,16 +457,22 @@ public class AddizioniActivity extends AppCompatActivity {
         mpBat = MediaPlayer.create(this, R.raw.bat);
         mpBat.start();
     }
-    public  void startTic(){
+    public void releaseResourcesBattuta() {
+        mpBat.release();
+    }
+
+
+    public void startTic() {
         mpTic = MediaPlayer.create(this, getResources().getIdentifier("ticchettio", "raw", getPackageName()));
 
         mpTic = MediaPlayer.create(this, R.raw.ticchettio);
         mpTic.start();
     }
-
-    public void releaseResourcesBattuta() {
-        mpBat.release();
+    public void releaseResourcesTic() {
+        mpTic.release();
     }
+
+
 
 
 
@@ -477,10 +497,10 @@ public class AddizioniActivity extends AppCompatActivity {
                     lltimezone.setBackground(getDrawable(R.drawable.count_down_stop));
                 }
                 /**funziona*/
-                if (stopCountDownPressedHome){
+                if (stopCountDownPressedHome) {
                     pauseTimer();
-                   // startBattuta();
-                    stopCountDownPressedHome=false;
+                    // startBattuta();
+                    stopCountDownPressedHome = false;
                 }
 
                 /** if(pausePressed){
@@ -493,13 +513,14 @@ public class AddizioniActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                mpTic.stop();;
+                startCampanella();
+                mpTic.stop();
+                ;
                 lltimezone = (LinearLayout) findViewById(R.id.timezone);
                 lltimezone.setBackground(getDrawable(R.drawable.count_down_finish));
                 mTimerRunning = false;
-                startCampanella();
+                disabilitaRisposte();
             }
-
 
 
         }.start();
@@ -522,11 +543,15 @@ public class AddizioniActivity extends AppCompatActivity {
      * stoppa il countdown se hai risposto all'ultima domanda
      */
     public void stopTimer() {
-        mpTic.stop();;
+        mpTic.stop();
+        ;
         mTimerRunning = false;
         mCountDownTimer.cancel();
     }
 
+    /**
+     * disabilita i bottoni e mostra il  bottone risultati
+     */
     public void updateCountDownText() {
         minutes = (int) (mTimeLeftInMillis / 1000) / 60;
         seconds = (int) (mTimeLeftInMillis / 1000) % 60;
@@ -537,7 +562,7 @@ public class AddizioniActivity extends AppCompatActivity {
         timeText.setText(timeLeftFormatted);
     }
 
-/*-----------------------------------------OVERRIDE METODI LIFECICLE ACTIVITY *******************/
+    /*-----------------------------------------OVERRIDE METODI LIFECICLE ACTIVITY *******************/
     @Override
     protected void onPause() {
         //Toast.makeText(AddizioniActivity.this, "Pause", Toast.LENGTH_LONG).show();
@@ -549,7 +574,7 @@ public class AddizioniActivity extends AppCompatActivity {
     protected void onResume() {
 
         /*DISTINZIONE TRA I VARI RESUME*/
-        if(countDownIniziato){
+        if (countDownIniziato) {
             resumeStartCountDown = true;
 
             /*resume activity restart count down*/
@@ -557,11 +582,11 @@ public class AddizioniActivity extends AppCompatActivity {
 
             //Toast.makeText(AddizioniActivity.this, "Resume countDown", Toast.LENGTH_LONG).show();
 
-        }else {
+        } else {
             countDownIniziato = true;
         }
 
-       // Toast.makeText(AddizioniActivity.this, "Resume", Toast.LENGTH_LONG).show();
+        // Toast.makeText(AddizioniActivity.this, "Resume", Toast.LENGTH_LONG).show();
         super.onResume();
     }
 
@@ -581,9 +606,6 @@ public class AddizioniActivity extends AppCompatActivity {
         super.onStop();
 
     }
-
-
-
 
 
 }

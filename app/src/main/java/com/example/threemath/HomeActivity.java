@@ -73,6 +73,9 @@ public class HomeActivity extends AppCompatActivity {
             // intent.setClass(getApplicationContext(), AddizioniActivity.class);
             Intent intent = new Intent(getApplicationContext(), LivelloActivity.class);
             intent.putExtra("CATEGORIA",categoria);
+
+            mpBat.release();
+
             startActivityForResult(intent, 0);
 
            // releaseResourcesBattuta();
