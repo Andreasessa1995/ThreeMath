@@ -72,7 +72,9 @@
             android:textColor="#EEECE8"
             android:textSize="100px"
 
-            ></Button>
+            >
+
+        </Button>
 
 
         <Button
@@ -81,7 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40px"
-            android:background="@drawable/categoria"
+            android:background="@drawable/categoria_bloccata"
             android:onClick="onClickLivello"
             android:text="normale"
 
@@ -89,33 +91,39 @@
             android:textSize="100px"
 
 
-            ></Button>
+            >
+
+        </Button>
 
         <Button
             android:id="@+id/bottoneLivello3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40px"
-            android:background="@drawable/categoria"
+            android:background="@drawable/categoria_bloccata"
             android:onClick="onClickLivello"
             android:text="Esperto"
             android:textColor="#EEECE8"
             android:textSize="100px"
 
-            ></Button>
+            >
+
+        </Button>
 
         <Button
             android:id="@+id/bottoneLivello4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40px"
-            android:background="@drawable/categoria2"
+            android:background="@drawable/categoria_bloccata"
             android:onClick="onClickLivello"
             android:text="genio"
             android:textColor="#EEECE8"
             android:textSize="100px"
 
-            ></Button>
+            >
+
+        </Button>
 
 
     </LinearLayout>

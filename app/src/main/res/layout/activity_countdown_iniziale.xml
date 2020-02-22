@@ -8,16 +8,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/left_right"
+        android:layout_marginRight="@dimen/left_right"
         android:orientation="horizontal"
         android:gravity="center"
+
         >
 
         <TextView
             android:id="@+id/coutDown"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="3"
-            android:textSize="900px"
+            android:textSize="500dp"
             >
 
 

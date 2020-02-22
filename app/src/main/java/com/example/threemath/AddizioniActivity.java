@@ -74,14 +74,17 @@ public class AddizioniActivity extends AppCompatActivity {
      * TIME
      **/
 
-    private static final long START_TIME_IN_MILLIS = 25000;
+    private static final long START_TIME_IN_MILLIS = 65000;
     long tempoQuesito = START_TIME_IN_MILLIS;
+
     private CountDownTimer mCountDownTimer;
     private boolean mTimerRunning;/*indica se sta scendendo il tempo*/
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
+
     TextView timeText;
     int minutes = 0;
     int seconds = 0;
+
     boolean countDownIniziato = false;
     boolean resumeStartCountDown = false;
     boolean stopCountDownPressedHome = false;
@@ -295,9 +298,8 @@ public class AddizioniActivity extends AppCompatActivity {
         intent.setClass(getApplicationContext(), RisultatiActivity.class);
         intent.putExtra("CORRETTE", numRispEsatte);
         intent.putExtra("ERRATE", numRispErrate);
-        intent.putExtra("TIMEMINUTI", minutes);
-        intent.putExtra("TIMESECONDI", seconds);
         intent.putExtra("TIMEQUESITO", tempoQuesito);
+        intent.putExtra("TIMERESTANTEQUESITO",mTimeLeftInMillis);
         startActivityForResult(intent, 0);
 
         /**rilascio risorse player*/
@@ -515,7 +517,6 @@ public class AddizioniActivity extends AppCompatActivity {
             public void onFinish() {
                 startCampanella();
                 mpTic.stop();
-                ;
                 lltimezone = (LinearLayout) findViewById(R.id.timezone);
                 lltimezone.setBackground(getDrawable(R.drawable.count_down_finish));
                 mTimerRunning = false;

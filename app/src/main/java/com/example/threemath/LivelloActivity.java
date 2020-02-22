@@ -36,8 +36,24 @@ public class LivelloActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_livelli);
 
+        int scoreAddizioni = 20;
+
+
+
+
         Intent intent = getIntent();
         categoria = intent.getStringExtra("CATEGORIA");
+
+
+
+        bLivello1 = (Button) findViewById(R.id.bottoneLivello1);
+        bLivello2 = (Button) findViewById(R.id.bottoneLivello2);
+        bLivello3 = (Button) findViewById(R.id.bottoneLivello3);
+        bLivello4 = (Button) findViewById(R.id.bottoneLivello4);
+
+        checkLV(scoreAddizioni);
+
+
         // Log log = null;
         //log.d("DEBUG", "CATEGORIA CATEGORIA CATEGORIA CATEGORIA 2 2 2 2 = " +categoria );
 
@@ -50,10 +66,7 @@ public class LivelloActivity extends AppCompatActivity {
 
     public void onClickLivello(View v) {
 
-        bLivello1 = (Button) findViewById(R.id.bottoneLivello1);
-        bLivello2 = (Button) findViewById(R.id.bottoneLivello2);
-        bLivello3 = (Button) findViewById(R.id.bottoneLivello3);
-        bLivello4 = (Button) findViewById(R.id.bottoneLivello4);
+
 
         if (bLivello1.isPressed()) {
 
@@ -96,13 +109,22 @@ public class LivelloActivity extends AppCompatActivity {
 
 
     }
+    private void checkLV(int scoreAddizioni){
+        if (scoreAddizioni>10){
+            bLivello2.setClickable(false);
+            bLivello3.setClickable(false);
+            bLivello4.setClickable(false);
+        }
+    }
+
+    /*---------------------------gestione activity state lifecycle------------------*/
 
     @Override
     protected void onResume() {
 
         super.onResume();
     }
-
+    /*---------------------------gestione player-------------------*/
     /**
      * player campanella e bat
      */
