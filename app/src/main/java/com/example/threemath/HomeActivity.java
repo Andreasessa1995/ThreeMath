@@ -38,7 +38,10 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-       // anim = AnimationUtils.loadAnimation(getApplicationContext(),R.transition.animazione);
+        bCategoria1 = (Button) findViewById(R.id.bottoneCategoriaDomanda1);
+        bCategoria2 = (Button) findViewById(R.id.bottoneCategoriaDomanda2);
+        bCategoria3 = (Button) findViewById(R.id.bottoneCategoriaDomanda3);
+        bCategoria4 = (Button) findViewById(R.id.bottoneCategoriaDomanda4);
 
 
 
@@ -51,21 +54,19 @@ public class HomeActivity extends AppCompatActivity {
 
     public void onClickCategoria(View v) {
 
-        bCategoria1 = (Button) findViewById(R.id.bottoneCategoriaDomanda1);
-        bCategoria2 = (Button) findViewById(R.id.bottoneCategoriaDomanda2);
-        bCategoria3 = (Button) findViewById(R.id.bottoneCategoriaDomanda3);
-        bCategoria4 = (Button) findViewById(R.id.bottoneCategoriaDomanda4);
+
 
         Log log = null;
 
 
         if (bCategoria1.isPressed()) {
 
+
             categoria = bCategoria1.getText().toString();
             //log.d("DEBUG", "CATEGORIA CATEGORIA CATEGORIA CATEGORIA = " +categoria );
 
 
-            // bCategoria1.setClickable(false);
+             bCategoria1.setClickable(false);
 
             startBattuta();
             /*new intent*/
@@ -96,7 +97,7 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-
+        bCategoria1.setClickable(true);
         super.onResume();
     }
 

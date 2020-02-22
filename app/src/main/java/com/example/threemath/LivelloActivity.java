@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,9 +22,15 @@ public class LivelloActivity extends AppCompatActivity {
     private Button bLivello3;
     private Button bLivello4;
 
+    TextView textScore;
+
 
     String categoria = "";
     int livello = 1;
+
+    GestoreFile gf = new GestoreFile();
+
+    int scoreAddizioni = 0;
 
 
     /**
@@ -36,14 +43,11 @@ public class LivelloActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_livelli);
 
-        int scoreAddizioni = 20;
-
-
+       // gf.azzeraScoreAddizioni(getApplicationContext());
 
 
         Intent intent = getIntent();
         categoria = intent.getStringExtra("CATEGORIA");
-
 
 
         bLivello1 = (Button) findViewById(R.id.bottoneLivello1);
@@ -51,6 +55,11 @@ public class LivelloActivity extends AppCompatActivity {
         bLivello3 = (Button) findViewById(R.id.bottoneLivello3);
         bLivello4 = (Button) findViewById(R.id.bottoneLivello4);
 
+        textScore = (TextView) findViewById(R.id.scores);
+
+
+        scoreAddizioni = gf.caricaScoresAddizioni(getApplicationContext());
+        textScore.setText("" + scoreAddizioni);
         checkLV(scoreAddizioni);
 
 
@@ -63,14 +72,15 @@ public class LivelloActivity extends AppCompatActivity {
 
     }
 
-
+    /**
+     * @param v
+     */
     public void onClickLivello(View v) {
 
 
-
         if (bLivello1.isPressed()) {
-
-            // bCategoria1.setClickable(false);
+            /*evitare di premere due volte sul bottone*/
+            bLivello1.setClickable(false);
 
             startBattuta();
 
@@ -84,6 +94,7 @@ public class LivelloActivity extends AppCompatActivity {
 
 
         } else if (bLivello2.isPressed()) {
+            bLivello2.setClickable(false);
 
             Intent i = new Intent(getApplicationContext(), CountDownActivity.class);
             i.putExtra("CATEGORIA", categoria);
@@ -92,6 +103,8 @@ public class LivelloActivity extends AppCompatActivity {
             /*apri sott*/
 
         } else if (bLivello3.isPressed()) {
+            bLivello3.setClickable(false);
+
             Intent i = new Intent(getApplicationContext(), CountDownActivity.class);
             i.putExtra("CATEGORIA", categoria);
             i.putExtra("LIVELLO", 3);
@@ -99,6 +112,7 @@ public class LivelloActivity extends AppCompatActivity {
             /*apri divis*/
 
         } else if (bLivello4.isPressed()) {
+            bLivello3.setClickable(false);
             Intent i = new Intent(getApplicationContext(), CountDownActivity.class);
             i.putExtra("CATEGORIA", categoria);
             i.putExtra("LIVELLO", 4);
@@ -109,9 +123,18 @@ public class LivelloActivity extends AppCompatActivity {
 
 
     }
-    private void checkLV(int scoreAddizioni){
-        if (scoreAddizioni>10){
+
+    /**
+     * @param scoreAddizioni
+     */
+    private void checkLV(int scoreAddizioni) {
+        if ((scoreAddizioni > 10) && (scoreAddizioni < 150)) {
             bLivello2.setClickable(false);
+            bLivello3.setClickable(false);
+            bLivello4.setClickable(false);
+        } else if (scoreAddizioni > 250) {
+
+            bLivello2.setBackground(getDrawable(R.drawable.categoria));
             bLivello3.setClickable(false);
             bLivello4.setClickable(false);
         }
@@ -121,10 +144,17 @@ public class LivelloActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+        bLivello1.setClickable(true);
+        bLivello2.setClickable(true);
+        bLivello3.setClickable(true);
+        bLivello4.setClickable(true);
+        checkLV(scoreAddizioni);
+
 
         super.onResume();
     }
     /*---------------------------gestione player-------------------*/
+
     /**
      * player campanella e bat
      */

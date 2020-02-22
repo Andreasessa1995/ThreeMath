@@ -147,13 +147,14 @@ public class AddizioniActivity extends AppCompatActivity {
         /**sceglie le domande da inserire **/
         choseDomande();
 
+
         sizeq = quesito.size();
 
 
         //log.d("DEBUG", "dimensioni altezza =  " + deviceHeight + " dimensioni base" + deviceWidth);
 
 
-        testoCategoriaDomanda.setText("ADDIZIONI    ");
+        testoCategoriaDomanda.setText("ADDIZIONI");
 
         testoDomanda.setText(quesito.get(indiceDomanda).getDomanda());
 
@@ -201,7 +202,6 @@ public class AddizioniActivity extends AppCompatActivity {
         /** CHECK RISPOSTA E SALVATAGGIO CHECK **/
         if (indiceDomanda < sizeq) {
             if (A.isPressed()) {
-
                 risposteQuesito.add(quesito.get(indiceDomanda).checkRisposta(A.getText().toString()));
             } else if (B.isPressed()) {
                 risposteQuesito.add(quesito.get(indiceDomanda).checkRisposta(B.getText().toString()));
@@ -250,7 +250,6 @@ public class AddizioniActivity extends AppCompatActivity {
                 startBattuta();
                 /**disposizione randomica risposte sui vari bottoni**/
                 numRand = 1 + generatore.nextInt(4);
-
                 switch (numRand) {
                     case (1):
                         A.setText(quesito.get(indiceDomanda).getRispostaEsatta());
@@ -393,7 +392,6 @@ public class AddizioniActivity extends AppCompatActivity {
      * sceglie randomicamente le domande da caricare
      */
     private void choseDomande() {
-
         numRand = 1 + generatore.nextInt(2);
         if (livello == 1) {
             switch (numRand) {

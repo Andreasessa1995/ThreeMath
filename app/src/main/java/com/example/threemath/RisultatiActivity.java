@@ -1,5 +1,6 @@
 package com.example.threemath;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -62,7 +63,11 @@ public class RisultatiActivity extends AppCompatActivity {
 
         //calcolaTempoImpiegatoV1();
         calcolaTempoImpiegatoV2();
-        int punteggio = calcolaPunteggio(numRispEsatte,numRispErrate);
+        int punteggio = 0;
+
+        punteggio= calcolaPunteggio(numRispEsatte,numRispErrate);
+
+        aggiornaPunteggio(getApplicationContext(),punteggio);
 
 
 
@@ -99,12 +104,11 @@ public class RisultatiActivity extends AppCompatActivity {
         startActivityForResult(intent, 0);
        // releaseResourcesBattuta();
         mpBat.release();
-
         onBackPressed();
     }
 
     /**
-     * calcola il tempo impiegato per il quiz o quesito
+     * calcola il tempo impiegato per il quiz o quesito r
      */
     private  void calcolaTempoImpiegatoV2(){
 
@@ -114,16 +118,54 @@ public class RisultatiActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * calcola il punteggio in base alle risposte corrette
+     * e in base al tempo impiegato e il restante.
+     * più il tempo restante è alto più il punteggio è alto (  più veloce nelle risposte )
+     * @param numRispEsatte
+     * @param numRispErrate
+     * @return
+     */
     private int calcolaPunteggio(int numRispEsatte,int numRispErrate){
 
         int numeroRisposte = numRispErrate+numRispEsatte;
 
-        int punti = (int) (numRispEsatte*(tempoRestanteMillis/1000));
+        int punti = 0;
+        punti = (int) (numRispEsatte*(tempoRestanteMillis/1000));
 
 
         return punti;
 
     }
+
+    /**
+     * salva il punteggio dello score aggiornandolo, sommandolo
+     * al precedente score
+     * @param context
+     * @param punteggio
+     */
+    public void aggiornaPunteggio(Context context, int punteggio){
+        GestoreFile gf = new GestoreFile();
+        Log log =null;
+        //log.d("DEBUG", "Salvo questo nuovo punteggio il vecchio era= = " + gf.caricaScoresAddizioni(context));
+        int punteggioTemp = 0;
+        punteggioTemp = punteggio + gf.caricaScoresAddizioni(context);
+
+       // log.d("DEBUG", "Salvo questo nuovo punteggio= = " + punteggioTemp);
+
+        gf.salvaScoresAddizioni(context,punteggioTemp);
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * player campanella e bat
