@@ -94,6 +94,7 @@
             android:text="Sottrazioni"
             android:textColor="#F7EBEB"
             android:textSize="100px"
+            android:clickable="false"
 
             >
 
@@ -108,7 +109,10 @@
             android:onClick="onClickCategoria"
             android:text="Moltiplicazioni"
             android:textColor="#F7F4F1"
-            android:textSize="80px">
+            android:textSize="80px"
+            android:clickable="false"
+
+            >
 
         </Button>
 
@@ -121,7 +125,9 @@
             android:onClick="onClickCategoria"
             android:text="Divisioni"
             android:textColor="#F3F0EC"
-            android:textSize="100px">
+            android:textSize="100px"
+            android:clickable="false"
+            >
 
         </Button>
 
@@ -134,7 +140,9 @@
             android:onClick="onClickCategoria"
             android:text="Indovinelli"
             android:textColor="#F3F0EC"
-            android:textSize="100px">
+            android:textSize="100px"
+            android:clickable="false"
+            >
 
         </Button>
 
@@ -143,11 +151,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40px"
-            android:background="@drawable/categoria2"
+            android:background="@drawable/categoria"
             android:onClick="onClickCategoria"
             android:text="Statistiche"
             android:textColor="#F3F0EC"
-            android:textSize="100px">
+            android:textSize="100px"
+            android:clickable="false"
+            >
 
         </Button>
 

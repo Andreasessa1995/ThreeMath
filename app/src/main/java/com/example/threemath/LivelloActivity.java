@@ -1,12 +1,15 @@
 package com.example.threemath;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -20,7 +23,6 @@ public class LivelloActivity extends AppCompatActivity {
     private Button bLivello1;
     private Button bLivello2;
     private Button bLivello3;
-    private Button bLivello4;
 
     TextView textScore;
 
@@ -43,7 +45,7 @@ public class LivelloActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_livelli);
 
-       // gf.azzeraScoreAddizioni(getApplicationContext());
+        // gf.azzeraScoreAddizioni(getApplicationContext());
 
 
         Intent intent = getIntent();
@@ -53,14 +55,14 @@ public class LivelloActivity extends AppCompatActivity {
         bLivello1 = (Button) findViewById(R.id.bottoneLivello1);
         bLivello2 = (Button) findViewById(R.id.bottoneLivello2);
         bLivello3 = (Button) findViewById(R.id.bottoneLivello3);
-        bLivello4 = (Button) findViewById(R.id.bottoneLivello4);
-
         textScore = (TextView) findViewById(R.id.scores);
 
+        if(categoria.equalsIgnoreCase("addizioni")){
+            scoreAddizioni = gf.caricaScoresAddizioni(getApplicationContext());
+            textScore.setText("" + scoreAddizioni);
+            checkLV(scoreAddizioni);
+        }
 
-        scoreAddizioni = gf.caricaScoresAddizioni(getApplicationContext());
-        textScore.setText("" + scoreAddizioni);
-        checkLV(scoreAddizioni);
 
 
         // Log log = null;
@@ -88,6 +90,7 @@ public class LivelloActivity extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(), CountDownActivity.class);
             i.putExtra("CATEGORIA", categoria);
             i.putExtra("LIVELLO", livello);
+            i.putExtra("SCORE",scoreAddizioni);
             startActivityForResult(i, 0);
 
             // releaseResourcesBattuta();
@@ -99,6 +102,7 @@ public class LivelloActivity extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(), CountDownActivity.class);
             i.putExtra("CATEGORIA", categoria);
             i.putExtra("LIVELLO", 2);
+            i.putExtra("SCORE",scoreAddizioni);
             startActivityForResult(i, 0);
             /*apri sott*/
 
@@ -108,16 +112,9 @@ public class LivelloActivity extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(), CountDownActivity.class);
             i.putExtra("CATEGORIA", categoria);
             i.putExtra("LIVELLO", 3);
+            i.putExtra("SCORE",scoreAddizioni);
             startActivityForResult(i, 0);
             /*apri divis*/
-
-        } else if (bLivello4.isPressed()) {
-            bLivello3.setClickable(false);
-            Intent i = new Intent(getApplicationContext(), CountDownActivity.class);
-            i.putExtra("CATEGORIA", categoria);
-            i.putExtra("LIVELLO", 4);
-            startActivityForResult(i, 0);
-            /*apri molti*/
 
         }
 
@@ -128,26 +125,65 @@ public class LivelloActivity extends AppCompatActivity {
      * @param scoreAddizioni
      */
     private void checkLV(int scoreAddizioni) {
-        if ((scoreAddizioni > 10) && (scoreAddizioni < 150)) {
-            bLivello2.setClickable(false);
-            bLivello3.setClickable(false);
-            bLivello4.setClickable(false);
-        } else if (scoreAddizioni > 250) {
+
+        if ((scoreAddizioni >= 0) && (scoreAddizioni < 1000)) {
+            messageLV2();
+            messageLV3();
+        } else if (scoreAddizioni >= 1000) {
 
             bLivello2.setBackground(getDrawable(R.drawable.categoria));
-            bLivello3.setClickable(false);
-            bLivello4.setClickable(false);
+            messageLV3();
         }
+
+    }
+
+
+
+
+    /**
+     * mostra il messaggio se si preme sul livello normale quando è ancora bloccato
+     */
+    protected void messageLV2(){
+        bLivello2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder b = new AlertDialog.Builder(LivelloActivity.this);
+                b.setTitle("Categoria NORMALE bloccata");
+                b.setMessage("Non puoi scegliere questa categoria, per sbloccarla ti servono almeno 1000");
+                b.setIcon(getDrawable(R.drawable.lucchetto_chiuso));
+                b.setPositiveButton("Ho capito", null);
+                //b.setNegativeButton("", null);
+                AlertDialog al = b.create();
+                al.show();
+            }
+        });
+    }
+    /**
+     * mostra il messaggio se si preme sul livello normale quando è ancora bloccato
+     */
+    protected void messageLV3(){
+        bLivello3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder b = new AlertDialog.Builder(LivelloActivity.this);
+                b.setTitle("Categoria  ESPERTO bloccata");
+                b.setMessage("Non puoi scegliere questa categoria, per sbloccarla ti servono almeno 2500");
+                b.setIcon(getDrawable(R.drawable.lucchetto_chiuso));
+                b.setPositiveButton("Ho capito", null);
+                //b.setNegativeButton("", null);
+                AlertDialog al = b.create();
+                al.show();
+            }
+        });
     }
 
     /*---------------------------gestione activity state lifecycle------------------*/
 
     @Override
     protected void onResume() {
-        bLivello1.setClickable(true);
-        bLivello2.setClickable(true);
-        bLivello3.setClickable(true);
-        bLivello4.setClickable(true);
+       // bLivello1.setClickable(true);
+      //  bLivello2.setClickable(true);
+       // bLivello3.setClickable(true);
         checkLV(scoreAddizioni);
 
 

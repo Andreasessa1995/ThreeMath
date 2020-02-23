@@ -92,7 +92,7 @@ public class GestoreFile {
     }
 
     /**
-     * azzero lo score nel file 
+     * azzero lo score nel file
      * @param context
      */
     public void azzeraScoreAddizioni (Context context){

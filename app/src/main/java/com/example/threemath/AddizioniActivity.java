@@ -27,10 +27,6 @@ public class AddizioniActivity extends AppCompatActivity {
     TextView testoDomanda;
     TextView testoCategoriaDomanda;
     Button A, B, C, D, bottoneRisultati;
-    LinearLayout llcategoriaDomanda;
-    LinearLayout llDomanda;
-    LinearLayout llCorpoDomanda;
-    LinearLayout llRisposte;
     LinearLayout llRisultati;
     LinearLayout lltimezone;
 
@@ -48,6 +44,7 @@ public class AddizioniActivity extends AppCompatActivity {
     int numRispErrate = 0;
     boolean ultimaDomanda = false;
     int livello = 1;
+    int numRandScoreAddizioni=0;
 
     /**
      * elementi suoni
@@ -74,7 +71,7 @@ public class AddizioniActivity extends AppCompatActivity {
      * TIME
      **/
 
-    private static final long START_TIME_IN_MILLIS = 65000;
+    private static final long START_TIME_IN_MILLIS = 25000;
     long tempoQuesito = START_TIME_IN_MILLIS;
 
     private CountDownTimer mCountDownTimer;
@@ -135,13 +132,16 @@ public class AddizioniActivity extends AppCompatActivity {
 
 
 
-        /*------------------GESTIONE DOMANDE------------------*/
+        /*------------------GESTIONE DOMANDE- valori activuty precedente-----------------*/
 
         Intent intent = getIntent();
         intent = getIntent();
         livello = intent.getIntExtra("LIVELLO", livello);
+        numRandScoreAddizioni=intent.getIntExtra("SCORE",numRandScoreAddizioni);
 
-        log.d("DEBUG", "LIVELLO LIVELLO LIVELLO LIVELLO = " + livello);
+
+
+        //log.d("DEBUG", "LIVELLO LIVELLO LIVELLO LIVELLO = " + livello);
 
 
         /**sceglie le domande da inserire **/
@@ -248,30 +248,107 @@ public class AddizioniActivity extends AppCompatActivity {
             testoDomanda.setText(quesito.get(indiceDomanda).getDomanda());
             if ((A.isPressed()) || (B.isPressed()) || (C.isPressed()) || (D.isPressed())) {
                 startBattuta();
-                /**disposizione randomica risposte sui vari bottoni**/
-                numRand = 1 + generatore.nextInt(4);
-                switch (numRand) {
-                    case (1):
-                        A.setText(quesito.get(indiceDomanda).getRispostaEsatta());
-                        B.setText(quesito.get(indiceDomanda).getRispostaErrata1());
-                        C.setText(quesito.get(indiceDomanda).getRispostaErrata2());
-                        D.setText(quesito.get(indiceDomanda).getRispostaErrata3());
-                    case (2):
-                        B.setText(quesito.get(indiceDomanda).getRispostaEsatta());
-                        C.setText(quesito.get(indiceDomanda).getRispostaErrata1());
-                        D.setText(quesito.get(indiceDomanda).getRispostaErrata2());
-                        A.setText(quesito.get(indiceDomanda).getRispostaErrata3());
+                /**disposizione randomica risposte sui vari bottoni varie scelte per aumentare la casualità**/
+               // numRand = 1 + (int) (Math.random() * 3);
 
-                    case (3):
-                        C.setText(quesito.get(indiceDomanda).getRispostaEsatta());
-                        D.setText(quesito.get(indiceDomanda).getRispostaErrata1());
-                        A.setText(quesito.get(indiceDomanda).getRispostaErrata2());
-                        B.setText(quesito.get(indiceDomanda).getRispostaErrata3());
-                    case (4):
-                        D.setText(quesito.get(indiceDomanda).getRispostaEsatta());
-                        A.setText(quesito.get(indiceDomanda).getRispostaErrata1());
-                        B.setText(quesito.get(indiceDomanda).getRispostaErrata2());
-                        C.setText(quesito.get(indiceDomanda).getRispostaErrata3());
+                //numRand = numRandScoreAddizioni;
+
+                log.d("DEBUG", "Numero random dello score modulo 3 = " + numRandScoreAddizioni);
+
+
+                /*-----num random dello score cioè se lo score mod 3da come resto 0-1-2   */
+
+                if (numRandScoreAddizioni == 0) {
+
+                    numRand = 1 + (int) (Math.random() * 4);
+                    /*-------1-----------*/
+
+                    switch (numRand) {
+                        case (1):
+                            A.setText(quesito.get(indiceDomanda).getRispostaEsatta());
+                            B.setText(quesito.get(indiceDomanda).getRispostaErrata1());
+                            C.setText(quesito.get(indiceDomanda).getRispostaErrata2());
+                            D.setText(quesito.get(indiceDomanda).getRispostaErrata3());
+                            break;
+                        case (2):
+                            B.setText(quesito.get(indiceDomanda).getRispostaEsatta());
+                            C.setText(quesito.get(indiceDomanda).getRispostaErrata1());
+                            D.setText(quesito.get(indiceDomanda).getRispostaErrata2());
+                            A.setText(quesito.get(indiceDomanda).getRispostaErrata3());
+                            break;
+                        case (3):
+                            C.setText(quesito.get(indiceDomanda).getRispostaEsatta());
+                            D.setText(quesito.get(indiceDomanda).getRispostaErrata1());
+                            A.setText(quesito.get(indiceDomanda).getRispostaErrata2());
+                            B.setText(quesito.get(indiceDomanda).getRispostaErrata3());
+                            break;
+                        case (4):
+                            D.setText(quesito.get(indiceDomanda).getRispostaEsatta());
+                            A.setText(quesito.get(indiceDomanda).getRispostaErrata1());
+                            B.setText(quesito.get(indiceDomanda).getRispostaErrata2());
+                            C.setText(quesito.get(indiceDomanda).getRispostaErrata3());
+                            break;
+                    }
+
+                } else if (numRandScoreAddizioni == 1) {
+                    /*-------2-----------*/
+
+                    numRand = 1 + (int) (Math.random() * 4);
+                    switch (numRand) {
+                        case (1):
+                            A.setText(quesito.get(indiceDomanda).getRispostaEsatta());
+                            B.setText(quesito.get(indiceDomanda).getRispostaErrata1());
+                            C.setText(quesito.get(indiceDomanda).getRispostaErrata2());
+                            D.setText(quesito.get(indiceDomanda).getRispostaErrata3());
+                            break;
+                        case (2):
+                            B.setText(quesito.get(indiceDomanda).getRispostaEsatta());
+                            C.setText(quesito.get(indiceDomanda).getRispostaErrata1());
+                            D.setText(quesito.get(indiceDomanda).getRispostaErrata2());
+                            A.setText(quesito.get(indiceDomanda).getRispostaErrata3());
+                            break;
+                        case (3):
+                            C.setText(quesito.get(indiceDomanda).getRispostaEsatta());
+                            D.setText(quesito.get(indiceDomanda).getRispostaErrata1());
+                            A.setText(quesito.get(indiceDomanda).getRispostaErrata2());
+                            B.setText(quesito.get(indiceDomanda).getRispostaErrata3());
+                            break;
+                        case (4):
+                            D.setText(quesito.get(indiceDomanda).getRispostaEsatta());
+                            A.setText(quesito.get(indiceDomanda).getRispostaErrata1());
+                            B.setText(quesito.get(indiceDomanda).getRispostaErrata2());
+                            C.setText(quesito.get(indiceDomanda).getRispostaErrata3());
+                            break;
+                    }
+                } else if (numRandScoreAddizioni == 2) {          /*-----num random dello score cioè se lo score mod 3da come resto 0-1-2   */
+                    /*-------3-----------*/
+                    numRand = 1 + (int) (Math.random() * 4);
+                    switch (numRand) {
+                        case (4):
+                            A.setText(quesito.get(indiceDomanda).getRispostaEsatta());
+                            B.setText(quesito.get(indiceDomanda).getRispostaErrata1());
+                            C.setText(quesito.get(indiceDomanda).getRispostaErrata2());
+                            D.setText(quesito.get(indiceDomanda).getRispostaErrata3());
+                            break;
+                        case (3):
+                            B.setText(quesito.get(indiceDomanda).getRispostaEsatta());
+                            C.setText(quesito.get(indiceDomanda).getRispostaErrata1());
+                            D.setText(quesito.get(indiceDomanda).getRispostaErrata2());
+                            A.setText(quesito.get(indiceDomanda).getRispostaErrata3());
+                            break;
+                        case (2):
+                            C.setText(quesito.get(indiceDomanda).getRispostaEsatta());
+                            D.setText(quesito.get(indiceDomanda).getRispostaErrata1());
+                            A.setText(quesito.get(indiceDomanda).getRispostaErrata2());
+                            B.setText(quesito.get(indiceDomanda).getRispostaErrata3());
+                            break;
+                        case (1):
+                            D.setText(quesito.get(indiceDomanda).getRispostaEsatta());
+                            A.setText(quesito.get(indiceDomanda).getRispostaErrata1());
+                            B.setText(quesito.get(indiceDomanda).getRispostaErrata2());
+                            C.setText(quesito.get(indiceDomanda).getRispostaErrata3());
+                            break;
+                    }
                 }
             }
         }
@@ -298,7 +375,7 @@ public class AddizioniActivity extends AppCompatActivity {
         intent.putExtra("CORRETTE", numRispEsatte);
         intent.putExtra("ERRATE", numRispErrate);
         intent.putExtra("TIMEQUESITO", tempoQuesito);
-        intent.putExtra("TIMERESTANTEQUESITO",mTimeLeftInMillis);
+        intent.putExtra("TIMERESTANTEQUESITO", mTimeLeftInMillis);
         startActivityForResult(intent, 0);
 
         /**rilascio risorse player*/
@@ -311,7 +388,9 @@ public class AddizioniActivity extends AppCompatActivity {
 
 
     /**
-     * inserisce le domande della categoria scelta
+     * inserisce le domande della categoria scelta ogni verione ha qualcosa di differente
+     * quelle con _2_2 significa che sono sempre le stesse domande ma ruotate per aumentare ancora di
+     * più la casualità...
      */
     public void insertDomandeLV1_1() {
         quesito.clear();
@@ -329,9 +408,30 @@ public class AddizioniActivity extends AppCompatActivity {
     }
 
     /**
+     * inserisce le domande della categoria scelta ogni verione ha qualcosa di differente
+     * quelle con _2_2 significa che sono sempre le stesse domande ma ruotate per aumentare ancora di
+     * più la casualità...
+     */
+    public void insertDomandeLV1_1_2() {
+        quesito.clear();
+        Domanda domanda5 = new Domanda("18 + 22", "40", "30", "28", "50");
+        quesito.add(domanda5);
+        Domanda domanda3 = new Domanda("10 + 9", "19", "18", "29", "15");
+        quesito.add(domanda3);
+        Domanda domanda1 = new Domanda("1 + 3", "4", "2", "3", "5");
+        quesito.add(domanda1);
+        Domanda domanda4 = new Domanda("12+13", "25", "35", "26", "32");
+        quesito.add(domanda4);
+        Domanda domanda2 = new Domanda("5 + 4", "9", "8", "10", "6");
+        quesito.add(domanda2);
+
+
+    }
+
+    /**
      * inserisce le domande della categoria scelta
      */
-    public void insertDomandeLV1_2() {
+    public void insertDomandeLV1_2_1() {
 
         quesito.clear();
         Domanda domanda1 = new Domanda("25 + 12", "37", "27", "47", "35");
@@ -348,7 +448,90 @@ public class AddizioniActivity extends AppCompatActivity {
 
     }
 
-    /*-------------------------------------------LV2----------------------------------------------------------------------------------------------------*/
+    /**
+     * inserisce le domande della categoria scelta
+     */
+    public void insertDomandeLV1_2_2() {
+
+        quesito.clear();
+        Domanda domanda5 = new Domanda("64 + 17", "81", "72", "83", "85");
+        quesito.add(domanda5);
+        Domanda domanda3 = new Domanda("42 + 19", "61", "72", "51", "63");
+        quesito.add(domanda3);
+        Domanda domanda2 = new Domanda("37 + 15", "52", "54", "42", "56");
+        quesito.add(domanda2);
+        Domanda domanda4 = new Domanda("38 + 19", "57", "58", "56", "68");
+        quesito.add(domanda4);
+        Domanda domanda1 = new Domanda("25 + 12", "37", "27", "47", "35");
+        quesito.add(domanda1);
+
+
+    }
+
+    /**
+     * inserisce le domande della categoria scelta
+     */
+    public void insertDomandeLV1_3() {
+
+        quesito.clear();
+        Domanda domanda1 = new Domanda("13 + 19", "22", "32", "21", "23");
+        quesito.add(domanda1);
+        Domanda domanda5 = new Domanda("64 + 17", "81", "72", "83", "85");
+        quesito.add(domanda5);
+        Domanda domanda2 = new Domanda("37 + 15", "52", "54", "42", "56");
+        quesito.add(domanda2);
+        Domanda domanda3 = new Domanda("38 + 19", "57", "58", "56", "68");
+        quesito.add(domanda3);
+        Domanda domanda4 = new Domanda("42 + 19", "61", "72", "51", "63");
+        quesito.add(domanda4);
+
+
+    }
+
+    /**
+     * inserisce le domande della categoria scelta
+     */
+    public void insertDomandeLV1_4() {
+
+        quesito.clear();
+        Domanda domanda1 = new Domanda("72 + 29", "101", "102", "103", "99");
+        quesito.add(domanda1);
+        Domanda domanda5 = new Domanda("58 + 17", "75", "76", "85", "66");
+        quesito.add(domanda5);
+        Domanda domanda2 = new Domanda("18 + 46", "64", "54", "65", "75");
+        quesito.add(domanda2);
+        Domanda domanda3 = new Domanda("25 + 36", "61", "51", "51", "62");
+        quesito.add(domanda3);
+        Domanda domanda4 = new Domanda("49 + 14", "63", "62", "61", "53");
+        quesito.add(domanda4);
+
+    }
+
+    /**
+     * inserisce le domande della categoria scelta
+     */
+    public void insertDomandeLV1_4_2() {
+
+        quesito.clear();
+        Domanda domanda4 = new Domanda("49 + 14", "63", "62", "61", "53");
+        quesito.add(domanda4);
+        Domanda domanda3 = new Domanda("25 + 36", "61", "51", "51", "62");
+        quesito.add(domanda3);
+        Domanda domanda1 = new Domanda("72 + 29", "101", "102", "103", "99");
+        quesito.add(domanda1);
+        Domanda domanda5 = new Domanda("58 + 17", "75", "76", "85", "66");
+        quesito.add(domanda5);
+        Domanda domanda2 = new Domanda("18 + 46", "64", "54", "65", "75");
+        quesito.add(domanda2);
+
+
+    }
+
+
+
+
+
+    /*-------------------------------------------LV2--normale--------------------------------------------------------------------------------------------------*/
 
     /**
      * inserisce le domande della categoria scelta
@@ -391,26 +574,150 @@ public class AddizioniActivity extends AppCompatActivity {
     /**
      * sceglie randomicamente le domande da caricare
      */
-    private void choseDomande() {
-        numRand = 1 + generatore.nextInt(2);
-        if (livello == 1) {
-            switch (numRand) {
-                case (1):
-                    insertDomandeLV1_1();
-                case (2):
-                    insertDomandeLV1_2();
+    protected void choseDomande() {
+        //GestoreFile gf = new GestoreFile();
+        //int numPoint = gf.caricaScoresAddizioni(getApplicationContext());
+        //numPoint = numPoint %2;
+
+        //numRand = 1 + (int) (Math.random() * 3);
+
+        Log log = null;
+        log.d("DEBUG", "Numero random con math= " + numRand);
+
+        /*-----num random dello score cioè se lo score mod 3da come resto 0-1-2   */
+        if (numRandScoreAddizioni == 0) {
+
+            numRand = 1 + (int) (Math.random() * 7);
+
+            if (livello == 1) {
+                switch (numRand) {
+                    case (1):
+                        insertDomandeLV1_1();
+                        break;
+                    case (2):
+                        insertDomandeLV1_2_1();
+                        break;
+                    case (3):
+                        insertDomandeLV1_3();
+                        break;
+                    case (4):
+                        insertDomandeLV1_4();
+                        break;
+                    case (5):
+                        insertDomandeLV1_2_2();
+                        break;
+                    case (6):
+                        insertDomandeLV1_1_2();
+                        break;
+                    case (7):
+                        insertDomandeLV1_4_2();
+                        break;
+
+                }
+            } else if (livello == 2) {
+                switch (numRand) {
+                    case (1):
+                        insertDomandeLV2_1();
+                        break;
+
+                    case (2):
+                        insertDomandeLV2_2();
+                        break;
+                }
             }
-        } else if (livello == 2) {
-            switch (numRand) {
-                case (1):
-                    insertDomandeLV2_1();
-                case (2):
-                    insertDomandeLV2_2();
-            }
+
         }
+        /*-----num random dello score cioè se lo score mod 3da come resto 0-1-2   */
+        else if (numRandScoreAddizioni == 1) {
+
+            numRand = 1 + (int) (Math.random() * 7);
+
+            if (livello == 1) {
+                switch (numRand) {
+                    case (1):
+                        insertDomandeLV1_4();
+                        break;
+                    case (2):
+                        insertDomandeLV1_2_2();
+                        break;
+                    case (3):
+                        insertDomandeLV1_1_2();
+                        break;
+                    case (4):
+                        insertDomandeLV1_4_2();
+                        break;
+                    case (5):
+                        insertDomandeLV1_1();
+                        break;
+                    case (6):
+                        insertDomandeLV1_2_1();
+                        break;
+                    case (7):
+                        insertDomandeLV1_3();
+                        break;
+
+                }
+            } else if (livello == 2) {
+                switch (numRand) {
+                    case (1):
+                        insertDomandeLV2_2();
+                        break;
+
+                    case (2):
+                        insertDomandeLV2_1();
+                        break;
+                }
+            }
+
+        } else      /*-----num random dello score cioè se lo score mod 3da come resto 0-1-2   */
+
+
+            if (numRandScoreAddizioni == 2) {
+
+                numRand = 1 + (int) (Math.random() * 7);
+
+                if (livello == 1) {
+                    switch (numRand) {
+                        case (7):
+                            insertDomandeLV1_4();
+                            break;
+                        case (6):
+                            insertDomandeLV1_2_2();
+                            break;
+                        case (5):
+                            insertDomandeLV1_1_2();
+                            break;
+                        case (4):
+                            insertDomandeLV1_4_2();
+                            break;
+                        case (3):
+                            insertDomandeLV1_1();
+                            break;
+                        case (2):
+                            insertDomandeLV1_2_1();
+                            break;
+                        case (1):
+                            insertDomandeLV1_3();
+                            break;
+
+                    }
+                } else if (livello == 2) {
+                    switch (numRand) {
+                        case (1):
+                            insertDomandeLV2_2();
+                            break;
+
+                        case (2):
+                            insertDomandeLV2_1();
+                            break;
+                    }
+                }
+
+            }
 
 
     }
+
 
     private void disabilitaRisposte() {
         /**visibile il bottone risultati e disbilitazione dei pulsanti delle risposte**/
@@ -439,10 +746,9 @@ public class AddizioniActivity extends AppCompatActivity {
     }
 
     /**
-     *
-     *player campanella rilascio risorsa
+     * player campanella rilascio risorsa
      */
-    public void releaseResourcesCampanella() {
+    private void releaseResourcesCampanella() {
         mpCampanella.release();
     }
 
@@ -457,6 +763,7 @@ public class AddizioniActivity extends AppCompatActivity {
         mpBat = MediaPlayer.create(this, R.raw.bat);
         mpBat.start();
     }
+
     public void releaseResourcesBattuta() {
         mpBat.release();
     }
@@ -468,6 +775,7 @@ public class AddizioniActivity extends AppCompatActivity {
         mpTic = MediaPlayer.create(this, R.raw.ticchettio);
         mpTic.start();
     }
+
     public void releaseResourcesTic() {
         mpTic.release();
     }

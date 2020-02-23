@@ -37,6 +37,8 @@ public class CountDownActivity extends AppCompatActivity {
 
     String categoria = "";
     int livello =1;
+    int scoreAddizioni=0;
+    int numScoreRandom=0;
 
 
 
@@ -55,9 +57,20 @@ public class CountDownActivity extends AppCompatActivity {
         Intent intent  = getIntent();
         categoria = intent.getStringExtra("CATEGORIA");
         Log log =null;
-        log.d("DEBUG", "CATEGORIA CATEGORIA CATEGORIA CATEGORIA 3 3 3 3 3 = " +categoria );
+      //  log.d("DEBUG", "CATEGORIA CATEGORIA CATEGORIA CATEGORIA 3 3 3 3 3 = " +categoria );
 
         livello = intent.getIntExtra("LIVELLO",livello);
+        scoreAddizioni = intent.getIntExtra("SCORE",scoreAddizioni);
+        if(scoreAddizioni%3==0){
+            numScoreRandom = 0;
+        }else if(scoreAddizioni%3==1){
+            numScoreRandom = 1;
+        }else {
+            numScoreRandom= 2;
+              log.d("DEBUG", "222 random score random score score= " +numScoreRandom );
+
+        }
+
 
 
 
@@ -97,6 +110,7 @@ public class CountDownActivity extends AppCompatActivity {
                 if (categoria.equalsIgnoreCase("Addizioni")){
                     i  = new Intent(getApplicationContext(), AddizioniActivity.class);
                     i.putExtra("LIVELLO",livello);
+                    i.putExtra("SCORE",numScoreRandom);
                     startActivityForResult(i, 0);
                     mpCountDown.release();
                     onBackPressed();

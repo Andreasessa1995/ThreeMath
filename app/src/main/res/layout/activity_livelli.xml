@@ -10,13 +10,13 @@
         android:id="@+id/logo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
         android:layout_marginLeft="@dimen/left_right_inter"
+        android:layout_marginTop="15dp"
         android:layout_marginRight="@dimen/left_right_inter"
         android:background="@drawable/scores"
-        android:gravity="start">
+        android:gravity="start"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
 
 
         <ImageView
@@ -61,7 +61,8 @@
         android:layout_marginLeft="@dimen/left_right"
         android:layout_marginTop="60px"
         android:layout_marginRight="@dimen/left_right"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/llLivelli">
 
         <Button
             android:id="@+id/bottoneLivello1"
@@ -72,14 +73,10 @@
             android:text="Principiante"
             android:textColor="#EEECE8"
             android:textSize="100px"
-
             >
 
         </Button>
-
-
         <Button
-
             android:id="@+id/bottoneLivello2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -87,11 +84,8 @@
             android:background="@drawable/categoria_bloccata"
             android:onClick="onClickLivello"
             android:text="normale"
-
             android:textColor="#EEECE8"
             android:textSize="100px"
-
-
             >
 
         </Button>
@@ -110,22 +104,16 @@
             >
 
         </Button>
+    </LinearLayout>
+    <LinearLayout
 
-        <Button
-            android:id="@+id/bottoneLivello4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40px"
-            android:background="@drawable/categoria_bloccata"
-            android:onClick="onClickLivello"
-            android:text="genio"
-            android:textColor="#EEECE8"
-            android:textSize="100px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/llLivelli"
 
-            >
 
-        </Button>
 
+        >
 
     </LinearLayout>
 
