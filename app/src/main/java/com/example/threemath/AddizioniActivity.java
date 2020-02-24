@@ -2,10 +2,12 @@ package com.example.threemath;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +28,7 @@ public class AddizioniActivity extends AppCompatActivity {
      **/
     TextView testoDomanda;
     TextView testoCategoriaDomanda;
+    TextView categoriaQuiz;
     Button A, B, C, D, bottoneRisultati;
     LinearLayout llRisultati;
     LinearLayout lltimezone;
@@ -45,6 +48,7 @@ public class AddizioniActivity extends AppCompatActivity {
     boolean ultimaDomanda = false;
     int livello = 1;
     int numRandScoreAddizioni=0;
+    String categoria ="Addizioni";
 
     /**
      * elementi suoni
@@ -52,6 +56,12 @@ public class AddizioniActivity extends AppCompatActivity {
     MediaPlayer mpCampanella;
     MediaPlayer mpBat;
     MediaPlayer mpTic;
+
+
+    /**gestione vibrazione*/
+    Vibrator vibrator;
+    /*vib 100 millise riposo 1000 millsec, vir*/
+    long[] pattern = {0, 100, 1000 };
 
 
     /**
@@ -99,8 +109,8 @@ public class AddizioniActivity extends AppCompatActivity {
         deviceHeight = metrics.widthPixels;
 
         Log log = null;
-        log.d("DEBUG", "DIMENSIONI SCHERMO = " + deviceHeight);
-        log.d("DEBUG", "DIMENSIONI SCHERMO = " + deviceWidth);
+        //log.d("DEBUG", "DIMENSIONI SCHERMO = " + deviceHeight);
+        //log.d("DEBUG", "DIMENSIONI SCHERMO = " + deviceWidth);
 
         /**time zone */
         timeText = (TextView) findViewById(R.id.timeText);
@@ -116,6 +126,9 @@ public class AddizioniActivity extends AppCompatActivity {
 
         /** categoria domanda ( addizione sottrazione ...)**/
         testoCategoriaDomanda = (TextView) findViewById(R.id.categoriaDomanda);
+
+        /** categoria scelta quiz tier + - ...*/
+        categoriaQuiz = (TextView) findViewById(R.id.testoCategoria);
 
         /** testo domanda ( 50+4 ....)*/
         testoDomanda = (TextView) findViewById(R.id.corpoDomandaTesto);
@@ -144,7 +157,7 @@ public class AddizioniActivity extends AppCompatActivity {
         //log.d("DEBUG", "LIVELLO LIVELLO LIVELLO LIVELLO = " + livello);
 
 
-        /**sceglie le domande da inserire **/
+        /*sceglie le domande da inserire **/
         choseDomande();
 
 
@@ -153,18 +166,16 @@ public class AddizioniActivity extends AppCompatActivity {
 
         //log.d("DEBUG", "dimensioni altezza =  " + deviceHeight + " dimensioni base" + deviceWidth);
 
-
+        /*SETTAGGI TEXT VIEW BOTTONI*/
         testoCategoriaDomanda.setText("ADDIZIONI");
-
+        categoriaQuiz.setText("+");
         testoDomanda.setText(quesito.get(indiceDomanda).getDomanda());
-
         A.setText(quesito.get(indiceDomanda).getRispostaEsatta());
         B.setText(quesito.get(indiceDomanda).getRispostaErrata1());
         C.setText(quesito.get(indiceDomanda).getRispostaErrata2());
         D.setText(quesito.get(indiceDomanda).getRispostaErrata3());
 
-        /**TIME TIME TIME */
-
+        /*TIME TIME TIME */
         startTimer();
 
 
@@ -214,8 +225,14 @@ public class AddizioniActivity extends AppCompatActivity {
             // log.d("DEBUG", "wwww333333333  Wwwwwwwwwwwwww= presssedddd = " + risposteQuesito.get(indiceDomanda));
             /** ultima domanda **/
             if (indiceDomanda == sizeq - 1) {
-                startBattuta();
-                startCampanella();
+               // startBattuta();
+                //startCampanella();
+
+                /*vibrazione*/
+                if (isHaveVibrate( ) ){
+                    vibrator.vibrate(pattern, -1); // does not repeat
+                    //vibrator.vibrate(pattern,  0); // repeats forever
+                }
 
                 ultimaDomanda = true;
                 indiceDomanda++;
@@ -247,7 +264,14 @@ public class AddizioniActivity extends AppCompatActivity {
             indiceDomanda++;
             testoDomanda.setText(quesito.get(indiceDomanda).getDomanda());
             if ((A.isPressed()) || (B.isPressed()) || (C.isPressed()) || (D.isPressed())) {
-                startBattuta();
+                //startBattuta();
+
+                /*vibrazione*/
+                if (isHaveVibrate( ) ){
+                    vibrator.vibrate(pattern, -1); // does not repeat
+                    //vibrator.vibrate(pattern,  0); // repeats forever
+                }
+
                 /**disposizione randomica risposte sui vari bottoni varie scelte per aumentare la casualità**/
                // numRand = 1 + (int) (Math.random() * 3);
 
@@ -363,8 +387,17 @@ public class AddizioniActivity extends AppCompatActivity {
     public void onClickRisultati(View v) {
 
         startBattuta();
+
         mTimerRunning = false;
         mCountDownTimer.cancel();
+
+        /*vibrazione*/
+        if (isHaveVibrate( ) ){
+            vibrator.vibrate(pattern, -1); // does not repeat
+            //vibrator.vibrate(pattern,  0); // repeats forever
+        }
+
+        bottoneRisultati.setClickable(false);
 
 
         /*new intent*/
@@ -376,6 +409,7 @@ public class AddizioniActivity extends AppCompatActivity {
         intent.putExtra("ERRATE", numRispErrate);
         intent.putExtra("TIMEQUESITO", tempoQuesito);
         intent.putExtra("TIMERESTANTEQUESITO", mTimeLeftInMillis);
+        intent.putExtra("CATEGORIA",categoria);
         startActivityForResult(intent, 0);
 
         /**rilascio risorse player*/
@@ -554,6 +588,23 @@ public class AddizioniActivity extends AppCompatActivity {
     /**
      * inserisce le domande della categoria scelta
      */
+    public void insertDomandeLV2_1_2() {
+        quesito.clear();
+        Domanda domanda5 = new Domanda("118 + 22", "140", "130", "128", "150");
+        quesito.add(domanda5);
+        Domanda domanda1 = new Domanda("101 + 103", "204", "104", "203", "103");
+        quesito.add(domanda1);
+        Domanda domanda4 = new Domanda("112+113", "225", "235", "226", "232");
+        quesito.add(domanda4);
+        Domanda domanda3 = new Domanda("100 + 29", "129", "128", "229", "119");
+        quesito.add(domanda3);
+        Domanda domanda2 = new Domanda("105 + 104", "209", "109", "108", "205");
+        quesito.add(domanda2);
+    }
+
+    /**
+     * inserisce le domande della categoria scelta
+     */
     public void insertDomandeLV2_2() {
 
         quesito.clear();
@@ -569,6 +620,23 @@ public class AddizioniActivity extends AppCompatActivity {
         quesito.add(domanda5);
 
 
+    }
+    /**
+     * inserisce le domande della categoria scelta
+     */
+    public void insertDomandeLV2_2_2() {
+
+        quesito.clear();
+        Domanda domanda5 = new Domanda("102 + 49", "151", "141", "153", "143");
+        quesito.add(domanda5);
+        Domanda domanda1 = new Domanda("125 + 115", "240", "230", "235", "210");
+        quesito.add(domanda1);
+        Domanda domanda4 = new Domanda("148 + 149", "297", "287", "286", "296");
+        quesito.add(domanda4);
+        Domanda domanda3 = new Domanda("162 + 129", "291", "283", "281", "293");
+        quesito.add(domanda3);
+        Domanda domanda2 = new Domanda("137 + 107", "244", "234", "205", "200");
+        quesito.add(domanda2);
     }
 
     /**
@@ -589,7 +657,7 @@ public class AddizioniActivity extends AppCompatActivity {
 
             numRand = 1 + (int) (Math.random() * 7);
 
-            if (livello == 1) {
+            if (livello == 1) { /*PRINCIPIANTE*/
                 switch (numRand) {
                     case (1):
                         insertDomandeLV1_1();
@@ -614,14 +682,29 @@ public class AddizioniActivity extends AppCompatActivity {
                         break;
 
                 }
-            } else if (livello == 2) {
+            } else if (livello == 2) { /*NORMLE*/
                 switch (numRand) {
                     case (1):
-                        insertDomandeLV2_1();
+                        insertDomandeLV2_2();
                         break;
 
                     case (2):
+                        insertDomandeLV2_1();
+                        break;
+                    case (3):
+                        insertDomandeLV2_1_2();
+                        break;
+                    case (4):
+                        insertDomandeLV2_2_2();
+                        break;
+                    case (5):
+                        insertDomandeLV2_1();
+                        break;
+                    case (6):
                         insertDomandeLV2_2();
+                        break;
+                    case (7):
+                        insertDomandeLV2_1();
                         break;
                 }
             }
@@ -632,7 +715,7 @@ public class AddizioniActivity extends AppCompatActivity {
 
             numRand = 1 + (int) (Math.random() * 7);
 
-            if (livello == 1) {
+            if (livello == 1) { /*PRINCIPIANTE*/
                 switch (numRand) {
                     case (1):
                         insertDomandeLV1_4();
@@ -657,13 +740,28 @@ public class AddizioniActivity extends AppCompatActivity {
                         break;
 
                 }
-            } else if (livello == 2) {
+            } else if (livello == 2) { /*NORMLE*/
                 switch (numRand) {
                     case (1):
                         insertDomandeLV2_2();
                         break;
 
                     case (2):
+                        insertDomandeLV2_1();
+                        break;
+                    case (3):
+                        insertDomandeLV2_1_2();
+                        break;
+                    case (4):
+                        insertDomandeLV2_2_2();
+                        break;
+                    case (5):
+                        insertDomandeLV2_1();
+                        break;
+                    case (6):
+                        insertDomandeLV2_2();
+                        break;
+                    case (7):
                         insertDomandeLV2_1();
                         break;
                 }
@@ -676,7 +774,7 @@ public class AddizioniActivity extends AppCompatActivity {
 
                 numRand = 1 + (int) (Math.random() * 7);
 
-                if (livello == 1) {
+                if (livello == 1) { /*PRINCIPIANTE*/
                     switch (numRand) {
                         case (7):
                             insertDomandeLV1_4();
@@ -701,13 +799,28 @@ public class AddizioniActivity extends AppCompatActivity {
                             break;
 
                     }
-                } else if (livello == 2) {
+                } else if (livello == 2) {  /*NORMLE*/
                     switch (numRand) {
                         case (1):
                             insertDomandeLV2_2();
                             break;
 
                         case (2):
+                            insertDomandeLV2_1();
+                            break;
+                        case (3):
+                            insertDomandeLV2_1_2();
+                            break;
+                        case (4):
+                            insertDomandeLV2_2_2();
+                            break;
+                        case (5):
+                            insertDomandeLV2_1();
+                            break;
+                        case (6):
+                            insertDomandeLV2_2();
+                            break;
+                        case (7):
                             insertDomandeLV2_1();
                             break;
                     }
@@ -749,7 +862,7 @@ public class AddizioniActivity extends AppCompatActivity {
      * player campanella rilascio risorsa
      */
     private void releaseResourcesCampanella() {
-        mpCampanella.release();
+//        mpCampanella.release();
     }
 
     /**
@@ -794,6 +907,7 @@ public class AddizioniActivity extends AppCompatActivity {
      */
     private void startTimer() {
         startTic();/*suono ticchettio orologio digitale*/
+
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -851,7 +965,6 @@ public class AddizioniActivity extends AppCompatActivity {
      */
     public void stopTimer() {
         mpTic.stop();
-        ;
         mTimerRunning = false;
         mCountDownTimer.cancel();
     }
@@ -868,6 +981,24 @@ public class AddizioniActivity extends AppCompatActivity {
 
         timeText.setText(timeLeftFormatted);
     }
+
+
+    /*---------vibrazione--------------------*/
+    /**
+     *
+     * @return
+     */
+    public  boolean isHaveVibrate(){
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (vibrator.hasVibrator()) {
+
+            return true;
+        }else    { return false;}
+
+    }
+
+
+
 
     /*-----------------------------------------OVERRIDE METODI LIFECICLE ACTIVITY *******************/
     @Override

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.threemath">
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:allowBackup="true"
@@ -27,14 +28,18 @@
         <activity android:name=".RisultatiActivity">
 
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"></activity>
 
         <activity android:name=".AddizioniActivity">
         </activity>
+        <activity android:name=".HomeActivity2">
 
-        <activity android:name=".HomeActivity2"></activity>
+        </activity>
         <activity android:name=".CountDownActivity"></activity>
         <activity android:name=".LivelloActivity"></activity>
+        <activity android:name=".IndovinelliActivity"></activity>
+        <activity android:name=".ImpostazioniActivity"></activity>
+        <activity android:name=".StatisticheActivity"></activity>
 
         <meta-data
             android:name="preloaded_fonts"

@@ -43,7 +43,7 @@
             android:id="@+id/scores"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             android:gravity="center"
             android:text="1500"
             android:textColor="#F8DF03"

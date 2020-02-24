@@ -2,14 +2,13 @@ package com.example.threemath;
 
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Vibrator;
 import android.view.View;
 import android.view.animation.Animation;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -40,6 +39,15 @@ public class LivelloActivity extends AppCompatActivity {
      **/
     MediaPlayer mpBat;
 
+    /**
+     * gestione vibrazione
+     */
+    Vibrator vibrator;
+    /*vib 100 millise riposo 1000 millsec, vir*/
+    long[] pattern = {0, 100, 1000};
+    long[] pattern2 = {0, 100, 100, 100, 100};
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,12 +65,11 @@ public class LivelloActivity extends AppCompatActivity {
         bLivello3 = (Button) findViewById(R.id.bottoneLivello3);
         textScore = (TextView) findViewById(R.id.scores);
 
-        if(categoria.equalsIgnoreCase("addizioni")){
-            scoreAddizioni = gf.caricaScoresAddizioni(getApplicationContext());
+        if (categoria.equalsIgnoreCase("addizioni")) {
+            scoreAddizioni = gf.caricaScores(getApplicationContext(),"Addizioni");
             textScore.setText("" + scoreAddizioni);
             checkLV(scoreAddizioni);
         }
-
 
 
         // Log log = null;
@@ -84,35 +91,47 @@ public class LivelloActivity extends AppCompatActivity {
             /*evitare di premere due volte sul bottone*/
             bLivello1.setClickable(false);
 
+            if (isHaveVibrate()) {
+                vibrator.vibrate(pattern, -1); // does not repeat
+                //vibrator.vibrate(pattern,  0); // repeats forever
+            }
+
             startBattuta();
 
 
             Intent i = new Intent(getApplicationContext(), CountDownActivity.class);
             i.putExtra("CATEGORIA", categoria);
             i.putExtra("LIVELLO", livello);
-            i.putExtra("SCORE",scoreAddizioni);
+            i.putExtra("SCORE", scoreAddizioni);
             startActivityForResult(i, 0);
 
             // releaseResourcesBattuta();
 
 
         } else if (bLivello2.isPressed()) {
+            /*evitare di premere due volte sul bottone*/
             bLivello2.setClickable(false);
+            if (isHaveVibrate()) {
+                vibrator.vibrate(pattern, -1); // does not repeat
+                //vibrator.vibrate(pattern,  0); // repeats forever
+            }
 
             Intent i = new Intent(getApplicationContext(), CountDownActivity.class);
             i.putExtra("CATEGORIA", categoria);
             i.putExtra("LIVELLO", 2);
-            i.putExtra("SCORE",scoreAddizioni);
+            i.putExtra("SCORE", scoreAddizioni);
             startActivityForResult(i, 0);
             /*apri sott*/
 
         } else if (bLivello3.isPressed()) {
+            /*evitare di premere due volte sul bottone*/
             bLivello3.setClickable(false);
+
 
             Intent i = new Intent(getApplicationContext(), CountDownActivity.class);
             i.putExtra("CATEGORIA", categoria);
             i.putExtra("LIVELLO", 3);
-            i.putExtra("SCORE",scoreAddizioni);
+            i.putExtra("SCORE", scoreAddizioni);
             startActivityForResult(i, 0);
             /*apri divis*/
 
@@ -138,12 +157,10 @@ public class LivelloActivity extends AppCompatActivity {
     }
 
 
-
-
     /**
      * mostra il messaggio se si preme sul livello normale quando è ancora bloccato
      */
-    protected void messageLV2(){
+    protected void messageLV2() {
         bLivello2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,13 +172,19 @@ public class LivelloActivity extends AppCompatActivity {
                 //b.setNegativeButton("", null);
                 AlertDialog al = b.create();
                 al.show();
+                /*qui altrimenti nn va*/
+                if (isHaveVibrate()) {
+                    vibrator.vibrate(pattern2, -1); // does not repeat
+                    //vibrator.vibrate(pattern,  0); // repeats forever
+                }
             }
         });
     }
+
     /**
      * mostra il messaggio se si preme sul livello normale quando è ancora bloccato
      */
-    protected void messageLV3(){
+    protected void messageLV3() {
         bLivello3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -173,6 +196,11 @@ public class LivelloActivity extends AppCompatActivity {
                 //b.setNegativeButton("", null);
                 AlertDialog al = b.create();
                 al.show();
+                /*qui altrimenti nn va*/
+                if (isHaveVibrate()) {
+                    vibrator.vibrate(pattern2, -1); // does not repeat
+                    //vibrator.vibrate(pattern,  0); // repeats forever
+                }
             }
         });
     }
@@ -181,9 +209,10 @@ public class LivelloActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-       // bLivello1.setClickable(true);
-      //  bLivello2.setClickable(true);
-       // bLivello3.setClickable(true);
+        /*perchevengono disabilitati quando si apre la nuova activity*/
+        bLivello1.setClickable(true);
+        bLivello2.setClickable(true);
+        bLivello3.setClickable(true);
         checkLV(scoreAddizioni);
 
 
@@ -203,6 +232,20 @@ public class LivelloActivity extends AppCompatActivity {
     public void releaseResourcesBattuta() {
 
         mpBat.release();
+    }
+
+    /**
+     * @return
+     */
+    public boolean isHaveVibrate() {
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (vibrator.hasVibrator()) {
+
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
 

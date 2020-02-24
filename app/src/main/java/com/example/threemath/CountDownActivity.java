@@ -61,13 +61,14 @@ public class CountDownActivity extends AppCompatActivity {
 
         livello = intent.getIntExtra("LIVELLO",livello);
         scoreAddizioni = intent.getIntExtra("SCORE",scoreAddizioni);
+
         if(scoreAddizioni%3==0){
             numScoreRandom = 0;
         }else if(scoreAddizioni%3==1){
             numScoreRandom = 1;
         }else {
             numScoreRandom= 2;
-              log.d("DEBUG", "222 random score random score score= " +numScoreRandom );
+              //log.d("DEBUG", "222 random score random score score= " +numScoreRandom );
 
         }
 

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#4E4C4C"
+
+    >
+    <!--
+        <LinearLayout
+            android:id="@+id/logo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+            <ImageView
+
+                android:layout_width="200px"
+                android:layout_height="200px"
+                android:src="@drawable/logo_senza_sfondo"
+                >
+
+            </ImageView>
+        </LinearLayout>
+    -->
+
+    <LinearLayout
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginLeft="@dimen/left_right_inter"
+        android:layout_marginRight="@dimen/left_right_inter"
+        android:background="@drawable/scores"
+        android:gravity="start">
+
+
+        <ImageView
+            android:layout_width="200px"
+            android:layout_height="200px"
+            android:layout_gravity="start"
+            android:layout_marginLeft="@dimen/left_right_inter"
+            android:src="@drawable/logo_senza_sfondo">
+
+        </ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:text="Statistiche"
+            android:textColor="#F5F5F0"
+            android:textSize="30dp">
+
+        </TextView>
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

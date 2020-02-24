@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -35,11 +36,18 @@ public class RisultatiActivity extends AppCompatActivity {
     TextView textTempo ;
     TextView textScores;
 
+    String categoria = "" ;
+
 
     /**
      * suoni
      **/
     MediaPlayer mpBat;
+
+    /**gestione vibrazione*/
+    Vibrator vibrator;
+    /*vib 100 millise riposo 1000 millsec, vir*/
+    long[] pattern = {0, 100, 1000 };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +59,8 @@ public class RisultatiActivity extends AppCompatActivity {
         Intent i = getIntent();
         numRispEsatte=i.getIntExtra("CORRETTE",numRispEsatte);
         numRispErrate=i.getIntExtra("ERRATE",numRispErrate);
+        categoria = i.getStringExtra("CATEGORIA");
+
 
 
         tempoQuesitoMillis =i.getLongExtra("TIMEQUESITO",tempoQuesitoMillis);
@@ -63,11 +73,10 @@ public class RisultatiActivity extends AppCompatActivity {
 
         //calcolaTempoImpiegatoV1();
         calcolaTempoImpiegatoV2();
+        /*calcola punteggio e salvatggio del punteggio*/
         int punteggio = 0;
-
         punteggio= calcolaPunteggio(numRispEsatte,numRispErrate);
-
-        aggiornaPunteggio(getApplicationContext(),punteggio);
+        aggiornaPunteggio(getApplicationContext(),punteggio,categoria);
 
 
 
@@ -78,12 +87,11 @@ public class RisultatiActivity extends AppCompatActivity {
         textTempo = (TextView) findViewById(R.id.textTempo);
 
 
-
+        /*visualizzazione delle statistiche*/
         textScores.setText(""+punteggio);
         textRisposteCorrette.setText(""+numRispEsatte);
         textRisposteErrate.setText(""+numRispErrate);
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", tempoMinutiImpiegati,  tempoSecondiImpiegati);
-
         textTempo.setText(timeLeftFormatted);
 
 
@@ -96,6 +104,10 @@ public class RisultatiActivity extends AppCompatActivity {
     public void onClickHome(View v){
 
         startBattuta();
+        if (isHaveVibrate( ) ){
+            vibrator.vibrate(pattern, -1); // does not repeat
+            //vibrator.vibrate(pattern,  0); // repeats forever
+        }
         /*new intent*/
         Intent intent = new Intent();
         //Intent intent =getIntent();
@@ -144,16 +156,16 @@ public class RisultatiActivity extends AppCompatActivity {
      * @param context
      * @param punteggio
      */
-    public void aggiornaPunteggio(Context context, int punteggio){
+    public void aggiornaPunteggio(Context context, int punteggio,String categoria){
         GestoreFile gf = new GestoreFile();
         Log log =null;
         //log.d("DEBUG", "Salvo questo nuovo punteggio il vecchio era= = " + gf.caricaScoresAddizioni(context));
         int punteggioTemp = 0;
-        punteggioTemp = punteggio + gf.caricaScoresAddizioni(context);
+        punteggioTemp = punteggio + gf.caricaScores(context,categoria);
 
        // log.d("DEBUG", "Salvo questo nuovo punteggio= = " + punteggioTemp);
 
-        gf.salvaScoresAddizioni(context,punteggioTemp);
+        gf.salvaScores(context,punteggioTemp,categoria);
     }
 
 
@@ -176,6 +188,15 @@ public class RisultatiActivity extends AppCompatActivity {
         mpBat= MediaPlayer.create(this, getResources().getIdentifier("bat", "raw", getPackageName()));
         mpBat = MediaPlayer.create(this, R.raw.bat);
         mpBat.start();
+    }
+
+    public  boolean isHaveVibrate(){
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (vibrator.hasVibrator()) {
+
+            return true;
+        }else    { return false;}
+
     }
 
     public void releaseResourcesBattuta() {
