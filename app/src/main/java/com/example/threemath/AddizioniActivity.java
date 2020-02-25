@@ -17,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Locale;
 
 
@@ -29,6 +28,7 @@ public class AddizioniActivity extends AppCompatActivity {
     TextView testoDomanda;
     TextView testoCategoriaDomanda;
     TextView categoriaQuiz;
+    TextView numeroDomandaCorrente;
     Button A, B, C, D, bottoneRisultati;
     LinearLayout llRisultati;
     LinearLayout lltimezone;
@@ -64,16 +64,8 @@ public class AddizioniActivity extends AppCompatActivity {
     long[] pattern = {0, 100, 1000 };
 
 
-    /**
-     * String domanda = " ";
-     * String rispostaCorretta = " ";
-     * String rispostaErrata1 = " ";
-     * String rispostaErrata2 = " ";
-     * String rispostaErrata3 = " ";
-     **/
 
-    ArrayList<Boolean> risposteQuesito = new ArrayList<>();
-    Random generatore = new Random();
+    /**random*/
     int numRand = 0;
 
 
@@ -81,7 +73,7 @@ public class AddizioniActivity extends AppCompatActivity {
      * TIME
      **/
 
-    private static final long START_TIME_IN_MILLIS = 25000;
+    long START_TIME_IN_MILLIS = 25000;
     long tempoQuesito = START_TIME_IN_MILLIS;
 
     private CountDownTimer mCountDownTimer;
@@ -100,7 +92,7 @@ public class AddizioniActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_addizione);
+        setContentView(R.layout.activity_quiz);
 
 
         /** dimensioni schermo telefono **/
@@ -133,6 +125,9 @@ public class AddizioniActivity extends AppCompatActivity {
         /** testo domanda ( 50+4 ....)*/
         testoDomanda = (TextView) findViewById(R.id.corpoDomandaTesto);
 
+        /**numero progressivo della domanda*/
+        numeroDomandaCorrente=(TextView) findViewById(R.id.categoriaNumeroDomanda);
+
         /**bottoni 50-45-54-60 ....)*/
         A = (Button) findViewById(R.id.A);
         B = (Button) findViewById(R.id.B);
@@ -154,14 +149,19 @@ public class AddizioniActivity extends AppCompatActivity {
 
 
 
+
         //log.d("DEBUG", "LIVELLO LIVELLO LIVELLO LIVELLO = " + livello);
 
-
+        /*setta il valore del countdown in base al livello scelto*/
+        setCountDownLevel();
         /*sceglie le domande da inserire **/
         choseDomande();
 
 
         sizeq = quesito.size();
+
+        numeroDomandaCorrente.setText(""+(indiceDomanda+1)+"/"+sizeq);
+
 
 
         //log.d("DEBUG", "dimensioni altezza =  " + deviceHeight + " dimensioni base" + deviceWidth);
@@ -169,6 +169,7 @@ public class AddizioniActivity extends AppCompatActivity {
         /*SETTAGGI TEXT VIEW BOTTONI*/
         testoCategoriaDomanda.setText("ADDIZIONI");
         categoriaQuiz.setText("+");
+        /*bottoni*/
         testoDomanda.setText(quesito.get(indiceDomanda).getDomanda());
         A.setText(quesito.get(indiceDomanda).getRispostaEsatta());
         B.setText(quesito.get(indiceDomanda).getRispostaErrata1());
@@ -209,42 +210,39 @@ public class AddizioniActivity extends AppCompatActivity {
         //log.d("DEBUG", "wwww333333333qw  Wwwwwwwwwwwwww= = " + sizeq);
 
         //while(i<numDomande){
-
+        boolean risposta =false;
         /** CHECK RISPOSTA E SALVATAGGIO CHECK **/
         if (indiceDomanda < sizeq) {
+
             if (A.isPressed()) {
-                risposteQuesito.add(quesito.get(indiceDomanda).checkRisposta(A.getText().toString()));
+                risposta = quesito.get(indiceDomanda).checkRisposta(A.getText().toString());
             } else if (B.isPressed()) {
-                risposteQuesito.add(quesito.get(indiceDomanda).checkRisposta(B.getText().toString()));
+                risposta = quesito.get(indiceDomanda).checkRisposta(B.getText().toString());
+
             } else if (C.isPressed()) {
-                risposteQuesito.add(quesito.get(indiceDomanda).checkRisposta(C.getText().toString()));
+                risposta = quesito.get(indiceDomanda).checkRisposta(C.getText().toString());
+
             } else if (D.isPressed()) {
-                risposteQuesito.add(quesito.get(indiceDomanda).checkRisposta(D.getText().toString()));
+                risposta = quesito.get(indiceDomanda).checkRisposta(D.getText().toString());
+
             }
+            /*check risposta ogni volta che rispondo */
+            checkRisposteV2(risposta);
+
 
             // log.d("DEBUG", "wwww333333333  Wwwwwwwwwwwwww= presssedddd = " + risposteQuesito.get(indiceDomanda));
             /** ultima domanda **/
             if (indiceDomanda == sizeq - 1) {
                // startBattuta();
-                //startCampanella();
+                startCampanella();
 
                 /*vibrazione*/
                 if (isHaveVibrate( ) ){
                     vibrator.vibrate(pattern, -1); // does not repeat
                     //vibrator.vibrate(pattern,  0); // repeats forever
                 }
-
                 ultimaDomanda = true;
                 indiceDomanda++;
-                for (int i = 0; i < risposteQuesito.size(); i++) {
-                    // log.d("DEBUG", "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqq = " );
-
-                    if (risposteQuesito.get(i)) {
-                        numRispEsatte++;
-                    } else {
-                        numRispErrate++;
-                    }
-                }
 
                 //log.d("DEBUG", "corrette = " +numRispEsatte);
                 //log.d("DEBUG", "errate= " + numRispErrate);
@@ -261,7 +259,12 @@ public class AddizioniActivity extends AppCompatActivity {
         //numRand = (int) (Math.random()*4);
 
         if (indiceDomanda < sizeq - 1) {
+
             indiceDomanda++;
+
+            /*setta il testo ovvero il numero della domanda corrente*/
+            numeroDomandaCorrente.setText(""+(indiceDomanda+1)+"/"+sizeq);
+
             testoDomanda.setText(quesito.get(indiceDomanda).getDomanda());
             if ((A.isPressed()) || (B.isPressed()) || (C.isPressed()) || (D.isPressed())) {
                 //startBattuta();
@@ -422,6 +425,20 @@ public class AddizioniActivity extends AppCompatActivity {
 
 
     /**
+     * controlla la risposta data
+     * @param risposta
+     */
+    public void checkRisposteV2(boolean risposta){
+
+            if (risposta) {
+                numRispEsatte++;
+            } else {
+                numRispErrate++;
+            }
+
+    }
+
+    /**
      * inserisce le domande della categoria scelta ogni verione ha qualcosa di differente
      * quelle con _2_2 significa che sono sempre le stesse domande ma ruotate per aumentare ancora di
      * più la casualità...
@@ -568,25 +585,33 @@ public class AddizioniActivity extends AppCompatActivity {
     /*-------------------------------------------LV2--normale--------------------------------------------------------------------------------------------------*/
 
     /**
-     * inserisce le domande della categoria scelta
+     * inserisce le domande della categoria scelta, versione 1 (v1)
      */
     public void insertDomandeLV2_1() {
         quesito.clear();
+
         Domanda domanda1 = new Domanda("101 + 103", "204", "104", "203", "103");
         quesito.add(domanda1);
         Domanda domanda2 = new Domanda("105 + 104", "209", "109", "108", "205");
         quesito.add(domanda2);
+
         Domanda domanda3 = new Domanda("100 + 29", "129", "128", "229", "119");
         quesito.add(domanda3);
         Domanda domanda4 = new Domanda("112+113", "225", "235", "226", "232");
         quesito.add(domanda4);
+
         Domanda domanda5 = new Domanda("118 + 22", "140", "130", "128", "150");
         quesito.add(domanda5);
+        Domanda domanda6 = new Domanda("125 + 122", "147", "137", "146", "150");
+        quesito.add(domanda6);
+
+        Domanda domanda7 = new Domanda("128 + 34", "162", "152", "163", "142");
+        quesito.add(domanda7);
 
     }
 
     /**
-     * inserisce le domande della categoria scelta
+     * inserisce le domande della categoria scelta questa è la versione normale, v1 , mischiata della numero 1
      */
     public void insertDomandeLV2_1_2() {
         quesito.clear();
@@ -594,8 +619,12 @@ public class AddizioniActivity extends AppCompatActivity {
         quesito.add(domanda5);
         Domanda domanda1 = new Domanda("101 + 103", "204", "104", "203", "103");
         quesito.add(domanda1);
+        Domanda domanda6 = new Domanda("125 + 122", "147", "137", "146", "150");
+        quesito.add(domanda6);
         Domanda domanda4 = new Domanda("112+113", "225", "235", "226", "232");
         quesito.add(domanda4);
+        Domanda domanda7 = new Domanda("128 + 34", "162", "152", "163", "142");
+        quesito.add(domanda7);
         Domanda domanda3 = new Domanda("100 + 29", "129", "128", "229", "119");
         quesito.add(domanda3);
         Domanda domanda2 = new Domanda("105 + 104", "209", "109", "108", "205");
@@ -612,17 +641,24 @@ public class AddizioniActivity extends AppCompatActivity {
         quesito.add(domanda1);
         Domanda domanda2 = new Domanda("137 + 107", "244", "234", "205", "200");
         quesito.add(domanda2);
+
         Domanda domanda3 = new Domanda("162 + 129", "291", "283", "281", "293");
         quesito.add(domanda3);
         Domanda domanda4 = new Domanda("148 + 149", "297", "287", "286", "296");
         quesito.add(domanda4);
+
         Domanda domanda5 = new Domanda("102 + 49", "151", "141", "153", "143");
         quesito.add(domanda5);
+        Domanda domanda6 = new Domanda("152 + 49", "201", "191", "202", "193");
+        quesito.add(domanda6);
+
+        Domanda domanda7 = new Domanda("137+ 109", "246", "236", "247", "245");
+        quesito.add(domanda7);
 
 
     }
     /**
-     * inserisce le domande della categoria scelta
+     * inserisce le domande della categoria scelta  versione mischiata della seconda scelta v2
      */
     public void insertDomandeLV2_2_2() {
 
@@ -631,14 +667,76 @@ public class AddizioniActivity extends AppCompatActivity {
         quesito.add(domanda5);
         Domanda domanda1 = new Domanda("125 + 115", "240", "230", "235", "210");
         quesito.add(domanda1);
+        Domanda domanda6 = new Domanda("152 + 49", "201", "191", "202", "193");
+        quesito.add(domanda6);
         Domanda domanda4 = new Domanda("148 + 149", "297", "287", "286", "296");
         quesito.add(domanda4);
+        Domanda domanda7 = new Domanda("137+ 109", "146", "136", "147", "145");
+        quesito.add(domanda7);
         Domanda domanda3 = new Domanda("162 + 129", "291", "283", "281", "293");
         quesito.add(domanda3);
         Domanda domanda2 = new Domanda("137 + 107", "244", "234", "205", "200");
         quesito.add(domanda2);
     }
+    /**
+     * inserisce le domande della categoria scelta
+     */
+    public void insertDomandeLV2_3() {
 
+        quesito.clear();
+        Domanda domanda1 = new Domanda("275 + 239", "514", "513", "516", "504");
+        quesito.add(domanda1);
+        Domanda domanda2 = new Domanda("235 + 215", "450", "440", "460", "460");
+        quesito.add(domanda2);
+
+        Domanda domanda3 = new Domanda("248 + 149", "397", "387", "386", "396");
+        quesito.add(domanda3);
+        Domanda domanda4 = new Domanda("252 + 139", "391", "383", "381", "393");
+        quesito.add(domanda4);
+
+        Domanda domanda5 = new Domanda("157 + 227", "384", "374", "375", "375");
+        quesito.add(domanda5);
+        Domanda domanda6 = new Domanda("177 + 247", "424", "414", "404", "444");
+        quesito.add(domanda6);
+
+        Domanda domanda7 = new Domanda("288 + 215", "503", "502", "504", "493");
+        quesito.add(domanda7);
+
+
+    }
+    /**
+     * inserisce le domande della categoria scelta
+     */
+    public void insertDomandeLV2_3_2() {
+
+        quesito.clear();
+        Domanda domanda5 = new Domanda("157 + 227", "384", "374", "375", "375");
+        quesito.add(domanda5);
+        Domanda domanda1 = new Domanda("275 + 239", "514", "513", "516", "504");
+        quesito.add(domanda1);
+        Domanda domanda6 = new Domanda("177 + 247", "424", "414", "404", "444");
+        quesito.add(domanda6);
+        Domanda domanda4 = new Domanda("252 + 139", "391", "383", "381", "393");
+        quesito.add(domanda4);
+        Domanda domanda2 = new Domanda("235 + 215", "450", "440", "460", "460");
+        quesito.add(domanda2);
+        Domanda domanda7 = new Domanda("288 + 215", "503", "502", "504", "493");
+        quesito.add(domanda7);
+        Domanda domanda3 = new Domanda("248 + 149", "397", "387", "386", "396");
+        quesito.add(domanda3);
+
+
+    }
+
+
+
+
+
+
+
+
+
+    /*-----------------------------SCELTA QUIZ ----------------------------------*/
     /**
      * sceglie randomicamente le domande da caricare
      */
@@ -701,10 +799,10 @@ public class AddizioniActivity extends AppCompatActivity {
                         insertDomandeLV2_1();
                         break;
                     case (6):
-                        insertDomandeLV2_2();
+                        insertDomandeLV2_3();
                         break;
                     case (7):
-                        insertDomandeLV2_1();
+                        insertDomandeLV2_3_2();
                         break;
                 }
             }
@@ -743,23 +841,22 @@ public class AddizioniActivity extends AppCompatActivity {
             } else if (livello == 2) { /*NORMLE*/
                 switch (numRand) {
                     case (1):
-                        insertDomandeLV2_2();
+                        insertDomandeLV2_2_2();
                         break;
-
                     case (2):
                         insertDomandeLV2_1();
                         break;
                     case (3):
-                        insertDomandeLV2_1_2();
+                        insertDomandeLV2_2();
                         break;
                     case (4):
-                        insertDomandeLV2_2_2();
+                        insertDomandeLV2_3_2();
                         break;
                     case (5):
-                        insertDomandeLV2_1();
+                        insertDomandeLV2_3();
                         break;
                     case (6):
-                        insertDomandeLV2_2();
+                        insertDomandeLV2_1_2();
                         break;
                     case (7):
                         insertDomandeLV2_1();
@@ -802,7 +899,7 @@ public class AddizioniActivity extends AppCompatActivity {
                 } else if (livello == 2) {  /*NORMLE*/
                     switch (numRand) {
                         case (1):
-                            insertDomandeLV2_2();
+                            insertDomandeLV2_3();
                             break;
 
                         case (2):
@@ -812,10 +909,10 @@ public class AddizioniActivity extends AppCompatActivity {
                             insertDomandeLV2_1_2();
                             break;
                         case (4):
-                            insertDomandeLV2_2_2();
+                            insertDomandeLV2_3_2();
                             break;
                         case (5):
-                            insertDomandeLV2_1();
+                            insertDomandeLV2_2_2();
                             break;
                         case (6):
                             insertDomandeLV2_2();
@@ -982,6 +1079,27 @@ public class AddizioniActivity extends AppCompatActivity {
         timeText.setText(timeLeftFormatted);
     }
 
+    /**
+     * setta il valore del countdown in base al livello scelto
+     */
+    protected void setCountDownLevel(){
+        if(livello==1){
+             tempoQuesito= 26000;
+             mTimeLeftInMillis=tempoQuesito;
+
+        }else if (livello==2){
+            tempoQuesito = 31000;
+            mTimeLeftInMillis=tempoQuesito;
+
+
+        }else if(livello==3){
+            tempoQuesito= 36000;
+            mTimeLeftInMillis=tempoQuesito;
+
+
+        }
+    }
+
 
     /*---------vibrazione--------------------*/
     /**
@@ -1010,6 +1128,8 @@ public class AddizioniActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+
+        //bottoneRisultati.setClickable(true);
 
         /*DISTINZIONE TRA I VARI RESUME*/
         if (countDownIniziato) {

@@ -11,13 +11,13 @@
         android:id="@+id/logo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
         android:layout_marginLeft="@dimen/left_right_inter"
+        android:layout_marginTop="15dp"
         android:layout_marginRight="@dimen/left_right_inter"
         android:background="@drawable/scores"
-        android:gravity="start">
+        android:gravity="start"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
 
 
         <ImageView
@@ -41,96 +41,126 @@
         </TextView>
 
 
-
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="50px"
         android:id="@+id/llImpostazioni"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/logo"
+        android:layout_marginLeft="@dimen/left_right"
+        android:layout_marginTop="50px"
+        android:layout_marginRight="@dimen/left_right"
         android:background="@drawable/quesiti"
         android:orientation="vertical"
-        android:layout_marginLeft="@dimen/left_right"
-        android:layout_marginRight="@dimen/left_right"
         android:paddingBottom="50px"
 
         >
+
         <LinearLayout
+            android:id="@+id/llSuoni"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/llSuoni"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
+
             <TextView
-                android:gravity="start"
-                android:layout_marginTop="25px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/left_right_inter"
                 android:layout_marginLeft="@dimen/left_right_inter"
-                android:textSize="70px"
+                android:layout_marginTop="25px"
+                android:layout_marginRight="@dimen/left_right_inter"
+                android:gravity="start"
                 android:text="Suoni"
                 android:textColor="#FFEB3B"
+                android:textSize="70px"
 
                 >
+
             </TextView>
-            <RadioButton
-                android:id="@+id/radioButtonSuoniSi"
-                android:text="SI"
-                android:checked="true"
-                android:layout_marginTop="25px"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
 
-            </RadioButton>
-            <RadioButton
-                android:id="@+id/radioButtonSuoniNo"
-                android:text="NO"
-                android:layout_marginTop="25px"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
 
-            </RadioButton>
+                <RadioButton
+                    android:id="@+id/radioButtonSuoniSi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25px"
+                    android:checked="true"
+                    android:onClick="onClickSuono"
+                    android:text="SI"
+
+
+                    >
+
+                </RadioButton>
+
+                <RadioButton
+                    android:id="@+id/radioButtonSuoniNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25px"
+                    android:onClick="onClickSuono"
+                    android:text="NO">
+
+                </RadioButton>
+
+
+            </RadioGroup>
+
         </LinearLayout>
+
         <LinearLayout
+            android:id="@+id/llVibrazione"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/llVibrazione"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
+
             <TextView
-                android:gravity="start"
-                android:layout_marginTop="25px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/left_right"
-                android:textSize="70px"
+                android:layout_marginTop="25px"
+                android:gravity="start"
                 android:text="Vibrazione"
                 android:textColor="#FFEB3B"
+                android:textSize="70px"
 
                 >
+
             </TextView>
-            <RadioButton
-                android:checked="true"
-                android:id="@+id/radioButtonVibSi"
-                android:text="SI"
-                android:layout_marginTop="25px"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
 
-            </RadioButton>
-            <RadioButton
-                android:id="@+id/radioButtonVibNo"
-                android:text="NO"
-                android:layout_marginTop="25px"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
 
-            </RadioButton>
+                <RadioButton
+                    android:id="@+id/radioButtonVibSi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25px"
+                    android:checked="true"
+                    android:onClick="onClickVibrazione"
+                    android:text="SI">
+
+                </RadioButton>
+
+                <RadioButton
+                    android:id="@+id/radioButtonVibNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25px"
+                    android:onClick="onClickVibrazione"
+                    android:text="NO">
+
+                </RadioButton>
+            </RadioGroup>
         </LinearLayout>
-
 
 
     </LinearLayout>

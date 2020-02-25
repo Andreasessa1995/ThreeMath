@@ -2,6 +2,7 @@ package com.example.threemath;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.RadioButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,7 +30,7 @@ public class ImpostazioniActivity extends AppCompatActivity {
         Log log = null;
 
 
-        if( rbSuoniSi.isActivated()){
+       /* if( rbSuoniSi.isActivated()){
             log.d("DEBUG", "STATO si isActivated----"  );
         }
         if (rbSuoniSi.isChecked()){
@@ -42,12 +43,42 @@ public class ImpostazioniActivity extends AppCompatActivity {
         if (rbSuoniNo.isChecked()){
             log.d("DEBUG", "STATO no checked--------"  );
 
+        }*/
+
+
+
+
+
+
+    }
+
+    public void onClickSuono(View v){
+        Log log = null;
+
+        if (rbSuoniSi.isChecked()){
+            log.d("DEBUG", "STATO si checked--------"  );
+
+
+        }
+        if (rbSuoniNo.isChecked()){
+            log.d("DEBUG", "STATO no checked--------"  );
+
+
         }
 
 
 
+    }
+
+    public void onClickVibrazione(View v){
+        if (rbSuoniSi.isChecked()){
 
 
 
+        }
+        if (rbSuoniNo.isChecked()){
+
+
+        }
     }
 }

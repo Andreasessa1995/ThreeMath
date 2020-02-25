@@ -145,13 +145,18 @@ public class LivelloActivity extends AppCompatActivity {
      */
     private void checkLV(int scoreAddizioni) {
 
-        if ((scoreAddizioni >= 0) && (scoreAddizioni < 1000)) {
+        if ((scoreAddizioni >= 0) && (scoreAddizioni < 100)) {
             messageLV2();
             messageLV3();
-        } else if (scoreAddizioni >= 1000) {
+        } else if ((scoreAddizioni >= 100)&&(scoreAddizioni<500)) {
 
             bLivello2.setBackground(getDrawable(R.drawable.categoria));
             messageLV3();
+        }else if (scoreAddizioni >= 500) {
+
+            bLivello2.setBackground(getDrawable(R.drawable.categoria));
+            bLivello3.setBackground(getDrawable(R.drawable.categoria));
+
         }
 
     }
@@ -166,7 +171,7 @@ public class LivelloActivity extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder b = new AlertDialog.Builder(LivelloActivity.this);
                 b.setTitle("Categoria NORMALE bloccata");
-                b.setMessage("Non puoi scegliere questa categoria, per sbloccarla ti servono almeno 1000");
+                b.setMessage("Non puoi scegliere questa categoria, per sbloccarla ti servono almeno 1000 punti");
                 b.setIcon(getDrawable(R.drawable.lucchetto_chiuso));
                 b.setPositiveButton("Ho capito", null);
                 //b.setNegativeButton("", null);
@@ -190,7 +195,7 @@ public class LivelloActivity extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder b = new AlertDialog.Builder(LivelloActivity.this);
                 b.setTitle("Categoria  ESPERTO bloccata");
-                b.setMessage("Non puoi scegliere questa categoria, per sbloccarla ti servono almeno 2500");
+                b.setMessage("Non puoi scegliere questa categoria, per sbloccarla ti servono almeno 2500 punti");
                 b.setIcon(getDrawable(R.drawable.lucchetto_chiuso));
                 b.setPositiveButton("Ho capito", null);
                 //b.setNegativeButton("", null);

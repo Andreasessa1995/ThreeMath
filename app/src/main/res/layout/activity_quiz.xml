@@ -125,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:text="1/2"
                 android:textAlignment="center"
-                android:textColor="#F3F5F2"
+                android:textColor="#EDF1F1"
                 android:textSize="25dp">
 
             </TextView>

@@ -65,7 +65,7 @@ public class RisultatiActivity extends AppCompatActivity {
 
         tempoQuesitoMillis =i.getLongExtra("TIMEQUESITO",tempoQuesitoMillis);
 
-        tempoRestanteMillis= i.getLongExtra("TIMERESTANTEQUESITO",tempoQuesitoMillis);
+        tempoRestanteMillis= i.getLongExtra("TIMERESTANTEQUESITO",tempoRestanteMillis);
 
 
         Log log = null;
@@ -140,10 +140,18 @@ public class RisultatiActivity extends AppCompatActivity {
      */
     private int calcolaPunteggio(int numRispEsatte,int numRispErrate){
 
-        int numeroRisposte = numRispErrate+numRispEsatte;
+        //int numeroRisposte = numRispErrate+numRispEsatte;
 
         int punti = 0;
-        punti = (int) (numRispEsatte*(tempoRestanteMillis/1000));
+        Log log = null;
+        log.d("DEBUG", "tempo che mi arriva restante  = " + tempoRestanteMillis);
+
+        if(tempoRestanteMillis>=1000){
+            punti = (int) (numRispEsatte*(tempoRestanteMillis/1000));
+
+        }else {
+            punti=numRispEsatte*1;/*evita di avere un punteggio 0 se finisce il tempo*/
+        }
 
 
         return punti;
