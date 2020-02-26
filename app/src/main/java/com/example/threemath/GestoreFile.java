@@ -118,6 +118,8 @@ public class GestoreFile {
      */
     public void salvaScores(Context context, int punteggio,String categoria) {
 
+
+
          String SCORE = "punteggioLivello"+categoria+".dat";
 
 

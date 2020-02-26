@@ -8,6 +8,7 @@ import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -55,16 +56,16 @@ public class RisultatiActivity extends AppCompatActivity {
 
         setContentView(R.layout.risultati_activity);
 
-        /**valori passati dall'activity precedente**/
+        /**valori passati dall'activity precedente quiz **/
         Intent i = getIntent();
         numRispEsatte=i.getIntExtra("CORRETTE",numRispEsatte);
         numRispErrate=i.getIntExtra("ERRATE",numRispErrate);
         categoria = i.getStringExtra("CATEGORIA");
 
 
+        /**valori passati dall'activity precedente time **/
 
         tempoQuesitoMillis =i.getLongExtra("TIMEQUESITO",tempoQuesitoMillis);
-
         tempoRestanteMillis= i.getLongExtra("TIMERESTANTEQUESITO",tempoRestanteMillis);
 
 
@@ -165,15 +166,30 @@ public class RisultatiActivity extends AppCompatActivity {
      * @param punteggio
      */
     public void aggiornaPunteggio(Context context, int punteggio,String categoria){
+
+
+
         GestoreFile gf = new GestoreFile();
         Log log =null;
         //log.d("DEBUG", "Salvo questo nuovo punteggio il vecchio era= = " + gf.caricaScoresAddizioni(context));
         int punteggioTemp = 0;
         punteggioTemp = punteggio + gf.caricaScores(context,categoria);
 
-       // log.d("DEBUG", "Salvo questo nuovo punteggio= = " + punteggioTemp);
+        //punteggioTemp = 515; test
 
-        gf.salvaScores(context,punteggioTemp,categoria);
+        if(punteggioTemp<=500){
+            // log.d("DEBUG", "Salvo questo nuovo punteggio= = " + punteggioTemp);
+
+            gf.salvaScores(context,punteggioTemp,categoria);
+        }else {
+
+            Toast.makeText(RisultatiActivity.this, "Attenzione hai rggiunto il punteggio massimo di score ( 5000 )"+ "ne hai totalizzato = "+
+                    punteggioTemp , Toast.LENGTH_LONG).show();
+
+
+        }
+
+
     }
 
 

@@ -31,7 +31,7 @@ public class LivelloActivity extends AppCompatActivity {
 
     GestoreFile gf = new GestoreFile();
 
-    int scoreAddizioni = 0;
+    int score = 0;
 
 
     /**
@@ -53,7 +53,7 @@ public class LivelloActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_livelli);
 
-        // gf.azzeraScoreAddizioni(getApplicationContext());
+        //   gf.azzeraScoreAddizioni(getApplicationContext());
 
 
         Intent intent = getIntent();
@@ -66,9 +66,13 @@ public class LivelloActivity extends AppCompatActivity {
         textScore = (TextView) findViewById(R.id.scores);
 
         if (categoria.equalsIgnoreCase("addizioni")) {
-            scoreAddizioni = gf.caricaScores(getApplicationContext(),"Addizioni");
-            textScore.setText("" + scoreAddizioni);
-            checkLV(scoreAddizioni);
+            score = gf.caricaScores(getApplicationContext(),"Addizioni");
+            textScore.setText("" + score);
+            checkLV(score);
+        }else if (categoria.equalsIgnoreCase("sottrazioni")) {
+            score = gf.caricaScores(getApplicationContext(),"Sottrazioni");
+            textScore.setText("" + score);
+            checkLV(score);
         }
 
 
@@ -102,7 +106,7 @@ public class LivelloActivity extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(), CountDownActivity.class);
             i.putExtra("CATEGORIA", categoria);
             i.putExtra("LIVELLO", livello);
-            i.putExtra("SCORE", scoreAddizioni);
+            i.putExtra("SCORE", score);
             startActivityForResult(i, 0);
 
             // releaseResourcesBattuta();
@@ -119,7 +123,7 @@ public class LivelloActivity extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(), CountDownActivity.class);
             i.putExtra("CATEGORIA", categoria);
             i.putExtra("LIVELLO", 2);
-            i.putExtra("SCORE", scoreAddizioni);
+            i.putExtra("SCORE", score);
             startActivityForResult(i, 0);
             /*apri sott*/
 
@@ -131,7 +135,7 @@ public class LivelloActivity extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(), CountDownActivity.class);
             i.putExtra("CATEGORIA", categoria);
             i.putExtra("LIVELLO", 3);
-            i.putExtra("SCORE", scoreAddizioni);
+            i.putExtra("SCORE", score);
             startActivityForResult(i, 0);
             /*apri divis*/
 
@@ -141,18 +145,20 @@ public class LivelloActivity extends AppCompatActivity {
     }
 
     /**
-     * @param scoreAddizioni
+     * @param scoreCat
      */
-    private void checkLV(int scoreAddizioni) {
+    private void checkLV(int scoreCat) {
 
-        if ((scoreAddizioni >= 0) && (scoreAddizioni < 100)) {
+
+
+        if ((scoreCat >= 0) && (scoreCat < 1000)) {
             messageLV2();
             messageLV3();
-        } else if ((scoreAddizioni >= 100)&&(scoreAddizioni<500)) {
+        } else if ((scoreCat >= 1000)&&(scoreCat<2500)) {
 
             bLivello2.setBackground(getDrawable(R.drawable.categoria));
             messageLV3();
-        }else if (scoreAddizioni >= 500) {
+        }else if (scoreCat >= 2500) {
 
             bLivello2.setBackground(getDrawable(R.drawable.categoria));
             bLivello3.setBackground(getDrawable(R.drawable.categoria));
@@ -218,7 +224,7 @@ public class LivelloActivity extends AppCompatActivity {
         bLivello1.setClickable(true);
         bLivello2.setClickable(true);
         bLivello3.setClickable(true);
-        checkLV(scoreAddizioni);
+        checkLV(score);
 
 
         super.onResume();

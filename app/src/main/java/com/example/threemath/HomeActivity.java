@@ -115,8 +115,14 @@ public class HomeActivity extends AppCompatActivity {
 
 
         }else if (bCategoriaDomanda2.isPressed()) {
+
+            categoria = bCategoriaDomanda2.getText().toString();
             bCategoriaDomanda2.setClickable(false);
 
+            Intent intent = new Intent(getApplicationContext(), LivelloActivity.class);
+            intent.putExtra("CATEGORIA",categoria);
+
+            startActivityForResult(intent, 0);
 
             /*apri sott*/
 

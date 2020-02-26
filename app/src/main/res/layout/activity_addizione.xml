@@ -4,6 +4,8 @@
     android:layout_height="match_parent"
     android:background="#4E4C4C">
 
+
+
     <LinearLayout
         android:id="@+id/logo"
         android:layout_width="match_parent"
@@ -277,4 +279,5 @@
         </LinearLayout>
 
     </RelativeLayout>
+
 </RelativeLayout>

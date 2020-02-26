@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 
-public class AddizioniActivity extends AppCompatActivity {
+public class SottrazioniActivity extends AppCompatActivity {
 
     /**
      * elementi della view
@@ -47,8 +47,8 @@ public class AddizioniActivity extends AppCompatActivity {
     int numRispErrate = 0;
     boolean ultimaDomanda = false;
     int livello = 1;
-    int numRandScoreAddizioni = 0;
-    String categoria = "Addizioni";
+    int numRandScoreSottrazioni = 0;
+    String categoria = "Sottrazioni";
 
     /**
      * elementi suoni
@@ -149,7 +149,7 @@ public class AddizioniActivity extends AppCompatActivity {
         Intent intent = getIntent();
         intent = getIntent();
         livello = intent.getIntExtra("LIVELLO", livello);
-        numRandScoreAddizioni = intent.getIntExtra("SCORE", numRandScoreAddizioni);
+        numRandScoreSottrazioni = intent.getIntExtra("SCORE", numRandScoreSottrazioni);
 
 
         //log.d("DEBUG", "LIVELLO LIVELLO LIVELLO LIVELLO = " + livello);
@@ -168,7 +168,7 @@ public class AddizioniActivity extends AppCompatActivity {
         //log.d("DEBUG", "dimensioni altezza =  " + deviceHeight + " dimensioni base" + deviceWidth);
 
         /*SETTAGGI TEXT VIEW BOTTONI*/
-        testoCategoriaDomanda.setText("ADDIZIONI");
+        testoCategoriaDomanda.setText("SOTTRAZIONI");
         categoriaQuiz.setText("+");
         /*bottoni*/
         testoDomanda.setText(quesito.get(indiceDomanda).getDomanda());
@@ -181,22 +181,8 @@ public class AddizioniActivity extends AppCompatActivity {
         startTimer();
 
 
-        //  i = 1;
-
-        // if (i < sizeq) {
-        //    i++;
-        //  }
-
-        /** Aggiunta bottone vai a risultati
-         LinearLayout llBottoneRisultati = (LinearLayout) findViewById(R.id.llVaiARisultati);
-
-         ImageView viewBottone = new ImageView(getApplicationContext());
-         Button vaiARisultati = new Button(viewBottone.getContext());
-         vaiARisultati.setText("risultati");
-         viewBottone.set**/
-
-
     }
+
 
     /**
      * gestisce le risposte, cambiando ad ogni risposta la domanda e le relative risposte. Nell'ultima
@@ -281,12 +267,12 @@ public class AddizioniActivity extends AppCompatActivity {
 
                 //numRand = numRandScoreAddizioni;
 
-                log.d("DEBUG", "Numero random dello score modulo 3 = " + numRandScoreAddizioni);
+                log.d("DEBUG", "Numero random dello score modulo 3 = " + numRandScoreSottrazioni);
 
 
                 /*-----num random dello score cioè se lo score mod 3da come resto 0-1-2   */
 
-                if (numRandScoreAddizioni == 0) {
+                if (numRandScoreSottrazioni == 0) {
 
                     numRand = 1 + (int) (Math.random() * 4);
                     /*-------1-----------*/
@@ -318,7 +304,7 @@ public class AddizioniActivity extends AppCompatActivity {
                             break;
                     }
 
-                } else if (numRandScoreAddizioni == 1) {
+                } else if (numRandScoreSottrazioni == 1) {
                     /*-------2-----------*/
 
                     numRand = 1 + (int) (Math.random() * 4);
@@ -348,7 +334,7 @@ public class AddizioniActivity extends AppCompatActivity {
                             C.setText(quesito.get(indiceDomanda).getRispostaErrata3());
                             break;
                     }
-                } else if (numRandScoreAddizioni == 2) {          /*-----num random dello score cioè se lo score mod 3da come resto 0-1-2   */
+                } else if (numRandScoreSottrazioni == 2) {          /*-----num random dello score cioè se lo score mod 3da come resto 0-1-2   */
                     /*-------3-----------*/
                     numRand = 1 + (int) (Math.random() * 4);
                     switch (numRand) {
@@ -447,15 +433,15 @@ public class AddizioniActivity extends AppCompatActivity {
      */
     public void insertDomandeLV1_1() {
         quesito.clear();
-        Domanda domanda1 = new Domanda("1 + 3", "4", "2", "3", "5");
+        Domanda domanda1 = new Domanda("7 - 3", "4", "2", "3", "5");
         quesito.add(domanda1);
-        Domanda domanda2 = new Domanda("5 + 4", "9", "8", "10", "6");
+        Domanda domanda2 = new Domanda("13 - 4", "9", "8", "10", "6");
         quesito.add(domanda2);
-        Domanda domanda3 = new Domanda("10 + 9", "19", "18", "29", "15");
+        Domanda domanda3 = new Domanda("20 - 1", "19", "18", "29", "15");
         quesito.add(domanda3);
-        Domanda domanda4 = new Domanda("12 + 13", "25", "35", "26", "32");
+        Domanda domanda4 = new Domanda("37 - 12", "25", "35", "26", "32");
         quesito.add(domanda4);
-        Domanda domanda5 = new Domanda("18 + 22", "40", "30", "28", "50");
+        Domanda domanda5 = new Domanda("62 - 22", "40", "30", "28", "50");
         quesito.add(domanda5);
 
     }
@@ -467,15 +453,15 @@ public class AddizioniActivity extends AppCompatActivity {
      */
     public void insertDomandeLV1_1_2() {
         quesito.clear();
-        Domanda domanda5 = new Domanda("18 + 22", "40", "30", "28", "50");
+        Domanda domanda5 = new Domanda("62 - 22", "40", "30", "28", "50");
         quesito.add(domanda5);
-        Domanda domanda3 = new Domanda("10 + 9", "19", "18", "29", "15");
+        Domanda domanda3 = new Domanda("20 - 1", "19", "18", "29", "15");
         quesito.add(domanda3);
-        Domanda domanda1 = new Domanda("1 + 3", "4", "2", "3", "5");
+        Domanda domanda1 = new Domanda("7 - 3", "4", "2", "3", "5");
         quesito.add(domanda1);
-        Domanda domanda4 = new Domanda("12 + 13", "25", "35", "26", "32");
+        Domanda domanda4 = new Domanda("37 - 12", "25", "35", "26", "32");
         quesito.add(domanda4);
-        Domanda domanda2 = new Domanda("5 + 4", "9", "8", "10", "6");
+        Domanda domanda2 = new Domanda("13 - 4", "9", "8", "10", "6");
         quesito.add(domanda2);
 
 
@@ -487,15 +473,15 @@ public class AddizioniActivity extends AppCompatActivity {
     public void insertDomandeLV1_2_1() {
 
         quesito.clear();
-        Domanda domanda1 = new Domanda("25 + 12", "37", "27", "47", "35");
+        Domanda domanda1 = new Domanda("70 - 33", "37", "27", "47", "35");
         quesito.add(domanda1);
-        Domanda domanda2 = new Domanda("37 + 15", "52", "54", "42", "56");
+        Domanda domanda2 = new Domanda("89 - 37", "52", "54", "42", "56");
         quesito.add(domanda2);
-        Domanda domanda3 = new Domanda("42 + 19", "61", "72", "51", "63");
+        Domanda domanda3 = new Domanda("80 - 19", "61", "72", "51", "63");
         quesito.add(domanda3);
-        Domanda domanda4 = new Domanda("38 + 19", "57", "58", "56", "68");
+        Domanda domanda4 = new Domanda("95 - 38", "57", "58", "56", "68");
         quesito.add(domanda4);
-        Domanda domanda5 = new Domanda("64 + 17", "81", "72", "83", "85");
+        Domanda domanda5 = new Domanda("98 - 17", "81", "72", "83", "85");
         quesito.add(domanda5);
 
 
@@ -507,15 +493,15 @@ public class AddizioniActivity extends AppCompatActivity {
     public void insertDomandeLV1_2_2() {
 
         quesito.clear();
-        Domanda domanda5 = new Domanda("64 + 17", "81", "72", "83", "85");
+        Domanda domanda5 = new Domanda("98 - 17", "81", "72", "83", "85");
         quesito.add(domanda5);
-        Domanda domanda3 = new Domanda("42 + 19", "61", "72", "51", "63");
+        Domanda domanda3 = new Domanda("80 - 19", "61", "72", "51", "63");
         quesito.add(domanda3);
-        Domanda domanda2 = new Domanda("37 + 15", "52", "54", "42", "56");
+        Domanda domanda2 = new Domanda("89 - 37", "52", "54", "42", "56");
         quesito.add(domanda2);
-        Domanda domanda4 = new Domanda("38 + 19", "57", "58", "56", "68");
+        Domanda domanda4 = new Domanda("95 - 38", "57", "58", "56", "68");
         quesito.add(domanda4);
-        Domanda domanda1 = new Domanda("25 + 12", "37", "27", "47", "35");
+        Domanda domanda1 = new Domanda("70 - 33", "37", "27", "47", "35");
         quesito.add(domanda1);
 
 
@@ -527,16 +513,16 @@ public class AddizioniActivity extends AppCompatActivity {
     public void insertDomandeLV1_3() {
 
         quesito.clear();
-        Domanda domanda1 = new Domanda("13 + 19", "22", "32", "21", "23");
+        Domanda domanda1 = new Domanda("41 - 19", "22", "32", "21", "23");
         quesito.add(domanda1);
-        Domanda domanda5 = new Domanda("64 + 17", "81", "72", "83", "85");
-        quesito.add(domanda5);
-        Domanda domanda2 = new Domanda("37 + 15", "52", "54", "42", "56");
+        Domanda domanda2 = new Domanda("77 - 15", "62", "52", "64", "56");
         quesito.add(domanda2);
-        Domanda domanda3 = new Domanda("38 + 19", "57", "58", "56", "68");
+        Domanda domanda3 = new Domanda("76 - 19", "57", "58", "56", "68");
         quesito.add(domanda3);
-        Domanda domanda4 = new Domanda("42 + 19", "61", "72", "51", "63");
+        Domanda domanda4 = new Domanda("42 - 19", "23", "22", "21", "33");
         quesito.add(domanda4);
+        Domanda domanda5 = new Domanda("64 - 17", "47", "37", "36", "46");
+        quesito.add(domanda5);
 
 
     }
@@ -547,15 +533,15 @@ public class AddizioniActivity extends AppCompatActivity {
     public void insertDomandeLV1_4() {
 
         quesito.clear();
-        Domanda domanda1 = new Domanda("72 + 29", "101", "102", "103", "99");
+        Domanda domanda1 = new Domanda("130 - 29", "101", "102", "103", "99");
         quesito.add(domanda1);
-        Domanda domanda5 = new Domanda("58 + 17", "75", "76", "85", "66");
+        Domanda domanda5 = new Domanda("158 - 17", "141", "131", "142", "132");
         quesito.add(domanda5);
-        Domanda domanda2 = new Domanda("18 + 46", "64", "54", "65", "75");
+        Domanda domanda2 = new Domanda("128 - 46", "82", "84", "72", "71");
         quesito.add(domanda2);
-        Domanda domanda3 = new Domanda("25 + 36", "61", "51", "51", "62");
+        Domanda domanda3 = new Domanda("125 - 36", "89", "79", "88", "78");
         quesito.add(domanda3);
-        Domanda domanda4 = new Domanda("49 + 14", "63", "62", "61", "53");
+        Domanda domanda4 = new Domanda("149 - 14", "135", "133", "125", "124");
         quesito.add(domanda4);
 
     }
@@ -566,15 +552,15 @@ public class AddizioniActivity extends AppCompatActivity {
     public void insertDomandeLV1_4_2() {
 
         quesito.clear();
-        Domanda domanda4 = new Domanda("49 + 14", "63", "62", "61", "53");
+        Domanda domanda4 = new Domanda("149 - 14", "135", "133", "125", "124");
         quesito.add(domanda4);
-        Domanda domanda3 = new Domanda("25 + 36", "61", "51", "51", "62");
+        Domanda domanda3 = new Domanda("125 - 36", "89", "79", "88", "78");
         quesito.add(domanda3);
-        Domanda domanda1 = new Domanda("72 + 29", "101", "102", "103", "99");
+        Domanda domanda1 = new Domanda("130 - 29", "101", "102", "103", "99");
         quesito.add(domanda1);
-        Domanda domanda5 = new Domanda("58 + 17", "75", "76", "85", "66");
+        Domanda domanda5 = new Domanda("158 - 17", "141", "131", "142", "132");
         quesito.add(domanda5);
-        Domanda domanda2 = new Domanda("18 + 46", "64", "54", "65", "75");
+        Domanda domanda2 = new Domanda("128 - 46", "82", "84", "72", "71");
         quesito.add(domanda2);
 
 
@@ -587,49 +573,49 @@ public class AddizioniActivity extends AppCompatActivity {
     /*-------------------------------------------LV2--normale--------------------------------------------------------------------------------------------------*/
 
     /**
-     * inserisce le domande della categoria scelta, versione 1 (v1) LV2
+     * inserisce le domande della categoria scelta, versione 1 (v1)
      */
     public void insertDomandeLV2_1() {
         quesito.clear();
 
-        Domanda domanda1 = new Domanda("101 + 103", "204", "104", "203", "103");
+        Domanda domanda1 = new Domanda("305 - 101", "204", "104", "203", "103");
         quesito.add(domanda1);
-        Domanda domanda2 = new Domanda("105 + 104", "209", "109", "108", "205");
+        Domanda domanda2 = new Domanda("312 - 103", "209", "109", "108", "205");
         quesito.add(domanda2);
 
-        Domanda domanda3 = new Domanda("100 + 29", "129", "128", "229", "119");
+        Domanda domanda3 = new Domanda("158 - 29", "129", "128", "229", "119");
         quesito.add(domanda3);
-        Domanda domanda4 = new Domanda("112 + 113", "225", "235", "226", "232");
+        Domanda domanda4 = new Domanda("338 - 113", "225", "235", "226", "232");
         quesito.add(domanda4);
 
-        Domanda domanda5 = new Domanda("118 + 22", "140", "130", "128", "150");
+        Domanda domanda5 = new Domanda("162 - 22", "140", "130", "128", "150");
         quesito.add(domanda5);
-        Domanda domanda6 = new Domanda("125 + 122", "147", "137", "146", "150");
+        Domanda domanda6 = new Domanda("269 - 122", "147", "137", "146", "150");
         quesito.add(domanda6);
 
-        Domanda domanda7 = new Domanda("128 + 34", "162", "152", "163", "142");
+        Domanda domanda7 = new Domanda("196 - 34", "162", "152", "163", "142");
         quesito.add(domanda7);
 
     }
 
     /**
-     * inserisce le domande della categoria scelta questa è la versione normale, v1 , mischiata sempre della numero 1
+     * inserisce le domande della categoria scelta questa è la versione normale, v1 , mischiata della numero 1
      */
     public void insertDomandeLV2_1_2() {
         quesito.clear();
-        Domanda domanda5 = new Domanda("118 + 22", "140", "130", "128", "150");
+        Domanda domanda5 = new Domanda("162 - 22", "140", "130", "128", "150");
         quesito.add(domanda5);
-        Domanda domanda1 = new Domanda("101 + 103", "204", "104", "203", "103");
+        Domanda domanda1 = new Domanda("305 - 101", "204", "104", "203", "103");
         quesito.add(domanda1);
-        Domanda domanda6 = new Domanda("125 + 122", "147", "137", "146", "150");
+        Domanda domanda6 = new Domanda("269 - 122", "147", "137", "146", "150");
         quesito.add(domanda6);
-        Domanda domanda4 = new Domanda("112 + 113", "225", "235", "226", "232");
+        Domanda domanda4 = new Domanda("338 - 113", "225", "235", "226", "232");
         quesito.add(domanda4);
-        Domanda domanda7 = new Domanda("128 + 34", "162", "152", "163", "142");
+        Domanda domanda7 = new Domanda("196 - 34", "162", "152", "163", "142");
         quesito.add(domanda7);
-        Domanda domanda3 = new Domanda("100 + 29", "129", "128", "229", "119");
+        Domanda domanda3 = new Domanda("158 - 29", "129", "128", "229", "119");
         quesito.add(domanda3);
-        Domanda domanda2 = new Domanda("105 + 104", "209", "109", "108", "205");
+        Domanda domanda2 = new Domanda("312 - 103", "209", "109", "108", "205");
         quesito.add(domanda2);
     }
 
@@ -639,22 +625,22 @@ public class AddizioniActivity extends AppCompatActivity {
     public void insertDomandeLV2_2() {
 
         quesito.clear();
-        Domanda domanda1 = new Domanda("125 + 115", "240", "230", "235", "210");
+        Domanda domanda1 = new Domanda("355 - 115", "240", "230", "235", "210");
         quesito.add(domanda1);
-        Domanda domanda2 = new Domanda("137 + 107", "244", "234", "205", "200");
+        Domanda domanda2 = new Domanda("351 - 107", "244", "234", "205", "200");
         quesito.add(domanda2);
 
-        Domanda domanda3 = new Domanda("162 + 129", "291", "283", "281", "293");
+        Domanda domanda3 = new Domanda("420 - 129", "291", "283", "281", "293");
         quesito.add(domanda3);
-        Domanda domanda4 = new Domanda("148 + 149", "297", "287", "286", "296");
+        Domanda domanda4 = new Domanda("445 - 149", "297", "287", "286", "296");
         quesito.add(domanda4);
 
-        Domanda domanda5 = new Domanda("102 + 49", "151", "141", "153", "143");
+        Domanda domanda5 = new Domanda("200 - 49", "151", "141", "153", "143");
         quesito.add(domanda5);
-        Domanda domanda6 = new Domanda("152 + 49", "201", "191", "202", "193");
+        Domanda domanda6 = new Domanda("250 - 49", "201", "191", "202", "193");
         quesito.add(domanda6);
 
-        Domanda domanda7 = new Domanda("137 + 109", "246", "236", "247", "245");
+        Domanda domanda7 = new Domanda("137 - 109", "28", "27", "24", "25");
         quesito.add(domanda7);
 
 
@@ -666,19 +652,19 @@ public class AddizioniActivity extends AppCompatActivity {
     public void insertDomandeLV2_2_2() {
 
         quesito.clear();
-        Domanda domanda5 = new Domanda("102 + 49", "151", "141", "153", "143");
+        Domanda domanda5 = new Domanda("200 - 49", "151", "141", "153", "143");
         quesito.add(domanda5);
-        Domanda domanda1 = new Domanda("125 + 115", "240", "230", "235", "210");
+        Domanda domanda1 = new Domanda("355 - 115", "240", "230", "235", "210");
         quesito.add(domanda1);
-        Domanda domanda6 = new Domanda("152 + 49", "201", "191", "202", "193");
+        Domanda domanda6 = new Domanda("250 - 49", "201", "191", "202", "193");
         quesito.add(domanda6);
-        Domanda domanda4 = new Domanda("148 + 149", "297", "287", "286", "296");
+        Domanda domanda4 = new Domanda("445 - 149", "297", "287", "286", "296");
         quesito.add(domanda4);
-        Domanda domanda7 = new Domanda("137+ 109", "146", "136", "147", "145");
+        Domanda domanda7 = new Domanda("137 - 109", "28", "27", "24", "25");
         quesito.add(domanda7);
-        Domanda domanda3 = new Domanda("162 + 129", "291", "283", "281", "293");
+        Domanda domanda3 = new Domanda("420 - 129", "291", "283", "281", "293");
         quesito.add(domanda3);
-        Domanda domanda2 = new Domanda("137 + 107", "244", "234", "205", "200");
+        Domanda domanda2 = new Domanda("351 - 107", "244", "234", "205", "200");
         quesito.add(domanda2);
     }
 
@@ -688,22 +674,22 @@ public class AddizioniActivity extends AppCompatActivity {
     public void insertDomandeLV2_3() {
 
         quesito.clear();
-        Domanda domanda1 = new Domanda("275 + 239", "514", "513", "516", "504");
+        Domanda domanda1 = new Domanda("753 - 239", "514", "513", "516", "504");
         quesito.add(domanda1);
-        Domanda domanda2 = new Domanda("235 + 215", "450", "440", "460", "460");
+        Domanda domanda2 = new Domanda("665 - 215", "450", "440", "460", "460");
         quesito.add(domanda2);
 
-        Domanda domanda3 = new Domanda("248 + 149", "397", "387", "386", "396");
+        Domanda domanda3 = new Domanda("546 - 149", "397", "387", "386", "396");
         quesito.add(domanda3);
-        Domanda domanda4 = new Domanda("252 + 139", "391", "383", "381", "393");
+        Domanda domanda4 = new Domanda("530 - 139", "391", "383", "381", "393");
         quesito.add(domanda4);
 
-        Domanda domanda5 = new Domanda("157 + 227", "384", "374", "375", "375");
+        Domanda domanda5 = new Domanda("611 - 227", "384", "374", "375", "375");
         quesito.add(domanda5);
-        Domanda domanda6 = new Domanda("177 + 247", "424", "414", "404", "444");
+        Domanda domanda6 = new Domanda("671 - 247", "424", "414", "404", "444");
         quesito.add(domanda6);
 
-        Domanda domanda7 = new Domanda("288 + 215", "503", "502", "504", "493");
+        Domanda domanda7 = new Domanda("718 - 215", "503", "502", "504", "493");
         quesito.add(domanda7);
 
 
@@ -715,23 +701,29 @@ public class AddizioniActivity extends AppCompatActivity {
     public void insertDomandeLV2_3_2() {
 
         quesito.clear();
-        Domanda domanda5 = new Domanda("157 + 227", "384", "374", "375", "375");
+        Domanda domanda5 = new Domanda("611 - 227", "384", "374", "375", "375");
         quesito.add(domanda5);
-        Domanda domanda1 = new Domanda("275 + 239", "514", "513", "516", "504");
+        Domanda domanda1 = new Domanda("753 - 239", "514", "513", "516", "504");
         quesito.add(domanda1);
-        Domanda domanda6 = new Domanda("177 + 247", "424", "414", "404", "444");
+        Domanda domanda6 = new Domanda("671 - 247", "424", "414", "404", "444");
         quesito.add(domanda6);
-        Domanda domanda4 = new Domanda("252 + 139", "391", "383", "381", "393");
+        Domanda domanda4 = new Domanda("530 - 139", "391", "383", "381", "393");
         quesito.add(domanda4);
-        Domanda domanda2 = new Domanda("235 + 215", "450", "440", "460", "460");
+        Domanda domanda2 = new Domanda("665 - 215", "450", "440", "460", "460");
         quesito.add(domanda2);
-        Domanda domanda7 = new Domanda("288 + 215", "503", "502", "504", "493");
+        Domanda domanda7 = new Domanda("718 - 215", "503", "502", "504", "493");
         quesito.add(domanda7);
-        Domanda domanda3 = new Domanda("248 + 149", "397", "387", "386", "396");
+        Domanda domanda3 = new Domanda("546 - 149", "397", "387", "386", "396");
         quesito.add(domanda3);
 
 
     }
+
+
+
+
+
+
 
     /*-------------------------------------------LV3--esperto--------------------------------------------------------------------------------------------------*/
 
@@ -741,22 +733,22 @@ public class AddizioniActivity extends AppCompatActivity {
     public void insertDomandeLV3_1() {
         quesito.clear();
 
-        Domanda domanda1 = new Domanda("1001 + 1003", "2004", "1004", "2003", "1003");
+        Domanda domanda1 = new Domanda("3007 - 1003", "2004", "1004", "2003", "1003");
         quesito.add(domanda1);
-        Domanda domanda2 = new Domanda("1005 + 1004", "2009", "1009", "1008", "2005");
+        Domanda domanda2 = new Domanda("3013 - 1004", "2009", "1009", "1008", "2005");
         quesito.add(domanda2);
 
-        Domanda domanda3 = new Domanda("1000 + 29", "1029", "1028", "2029", "1019");
+        Domanda domanda3 = new Domanda("1058 - 29", "1029", "1028", "2029", "1019");
         quesito.add(domanda3);
-        Domanda domanda4 = new Domanda("1012 + 1013", "2025", "2035", "2026", "2032");
+        Domanda domanda4 = new Domanda("2050 - 25", "2025", "2035", "2026", "2032");
         quesito.add(domanda4);
 
-        Domanda domanda5 = new Domanda("1018 + 22", "1040", "1030", "1028", "1050");
+        Domanda domanda5 = new Domanda("1062 - 22", "1040", "1030", "1028", "1050");
         quesito.add(domanda5);
-        Domanda domanda6 = new Domanda("1205 + 1202", "1407", "1307", "1406", "1500");
+        Domanda domanda6 = new Domanda("1605 - 198", "1407", "1307", "1406", "1500");
         quesito.add(domanda6);
 
-        Domanda domanda7 = new Domanda("1028 + 34", "1062", "1052", "1063", "1042");
+        Domanda domanda7 = new Domanda("1096 - 34", "1062", "1052", "1063", "1042");
         quesito.add(domanda7);
 
     }
@@ -767,19 +759,19 @@ public class AddizioniActivity extends AppCompatActivity {
     public void insertDomandeLV3_1_2() {
         quesito.clear();
 
-        Domanda domanda5 = new Domanda("1018 + 22", "1040", "1030", "1028", "1050");
+        Domanda domanda5 = new Domanda("1062 - 22", "1040", "1030", "1028", "1050");
         quesito.add(domanda5);
-        Domanda domanda7 = new Domanda("1028 + 34", "1062", "1052", "1063", "1042");
+        Domanda domanda7 = new Domanda("1096 - 34", "1062", "1052", "1063", "1042");
         quesito.add(domanda7);
-        Domanda domanda1 = new Domanda("1001 + 1003", "2004", "1004", "2003", "1003");
+        Domanda domanda1 = new Domanda("3007 - 1003", "2004", "1004", "2003", "1003");
         quesito.add(domanda1);
-        Domanda domanda4 = new Domanda("1012 + 1013", "2025", "2035", "2026", "2032");
+        Domanda domanda4 = new Domanda("2050 - 25", "2025", "2035", "2026", "2032");
         quesito.add(domanda4);
-        Domanda domanda2 = new Domanda("1005 + 1004", "2009", "1009", "1008", "2005");
+        Domanda domanda2 = new Domanda("3013 - 1004", "2009", "1009", "1008", "2005");
         quesito.add(domanda2);
-        Domanda domanda6 = new Domanda("1205 + 1202", "1407", "1307", "1406", "1500");
+        Domanda domanda6 = new Domanda("1605 - 198", "1407", "1307", "1406", "1500");
         quesito.add(domanda6);
-        Domanda domanda3 = new Domanda("1000 + 29", "1029", "1028", "2029", "1019");
+        Domanda domanda3 = new Domanda("1058 - 29", "1029", "1028", "2029", "1019");
         quesito.add(domanda3);
 
 
@@ -791,22 +783,22 @@ public class AddizioniActivity extends AppCompatActivity {
     public void insertDomandeLV3_2() {
 
         quesito.clear();
-        Domanda domanda1 = new Domanda("1025 + 1015", "2040", "2030", "2035", "2010");
+        Domanda domanda1 = new Domanda("3007 - 1003", "2004", "1004", "2003", "1003");
         quesito.add(domanda1);
-        Domanda domanda2 = new Domanda("1307 + 107", "1414", "2414", "1424", "1415");
+        Domanda domanda2 = new Domanda("1521 - 107", "1414", "2414", "1424", "1415");
         quesito.add(domanda2);
 
-        Domanda domanda3 = new Domanda("1062 + 1029", "2091", "2083", "2081", "2093");
+        Domanda domanda3 = new Domanda("3120 - 1029", "2091", "2083", "2081", "2093");
         quesito.add(domanda3);
-        Domanda domanda4 = new Domanda("1148 + 1149", "2297", "2287", "2286", "2296");
+        Domanda domanda4 = new Domanda("3446 - 1149", "2297", "2287", "2286", "2296");
         quesito.add(domanda4);
 
-        Domanda domanda5 = new Domanda("1102 + 1149", "2251", "2241", "2253", "2243");
+        Domanda domanda5 = new Domanda("3400 - 1149", "2251", "2241", "2253", "2243");
         quesito.add(domanda5);
-        Domanda domanda6 = new Domanda("1521 + 491", "2012", "2191", "2202", "2193");
+        Domanda domanda6 = new Domanda("2503 - 491", "2012", "2191", "2202", "2193");
         quesito.add(domanda6);
 
-        Domanda domanda7 = new Domanda("1137+ 1109", "2246", "2236", "2247", "2245");
+        Domanda domanda7 = new Domanda("3355 - 1109", "2246", "2236", "2247", "2245");
         quesito.add(domanda7);
 
 
@@ -818,19 +810,19 @@ public class AddizioniActivity extends AppCompatActivity {
     public void insertDomandeLV3_2_2() {
 
         quesito.clear();
-        Domanda domanda5 = new Domanda("1102 + 1149", "2251", "2241", "2253", "2243");
+        Domanda domanda5 = new Domanda("3400 - 1149", "2251", "2241", "2253", "2243");
         quesito.add(domanda5);
-        Domanda domanda3 = new Domanda("1062 + 1029", "2091", "2083", "2081", "2093");
+        Domanda domanda3 = new Domanda("3120 - 1029", "2091", "2083", "2081", "2093");
         quesito.add(domanda3);
-        Domanda domanda1 = new Domanda("1025 + 1015", "2040", "2030", "2035", "2010");
+        Domanda domanda1 = new Domanda("3007 - 1003", "2004", "1004", "2003", "1003");
         quesito.add(domanda1);
-        Domanda domanda4 = new Domanda("1148 + 1149", "2297", "2287", "2286", "2296");
+        Domanda domanda4 = new Domanda("3446 - 1149", "2297", "2287", "2286", "2296");
         quesito.add(domanda4);
-        Domanda domanda7 = new Domanda("1137 + 1109", "2246", "2236", "2247", "2245");
+        Domanda domanda7 = new Domanda("3355 - 1109", "2246", "2236", "2247", "2245");
         quesito.add(domanda7);
-        Domanda domanda2 = new Domanda("1307 + 107", "1414", "2414", "1424", "1415");
+        Domanda domanda2 = new Domanda("1521 - 107", "1414", "2414", "1424", "1415");
         quesito.add(domanda2);
-        Domanda domanda6 = new Domanda("1521 + 491", "2012", "2191", "2202", "2193");
+        Domanda domanda6 = new Domanda("2503 - 491", "2012", "2191", "2202", "2193");
         quesito.add(domanda6);
 
 
@@ -842,22 +834,22 @@ public class AddizioniActivity extends AppCompatActivity {
     public void insertDomandeLV3_3() {
 
         quesito.clear();
-        Domanda domanda1 = new Domanda("2275 + 2239", "4514", "4513", "4516", "4504");
+        Domanda domanda1 = new Domanda("6753 - 2239", "4514", "4513", "4516", "4504");
         quesito.add(domanda1);
-        Domanda domanda2 = new Domanda("1235 + 3215", "4450", "4440", "4460", "4460");
+        Domanda domanda2 = new Domanda("7665 - 3215", "4450", "4440", "4460", "4460");
         quesito.add(domanda2);
 
-        Domanda domanda3 = new Domanda("3248 + 3149", "6397", "6387", "6386", "6396");
+        Domanda domanda3 = new Domanda("3248 - 3149", "99", "89", "100", "98");
         quesito.add(domanda3);
-        Domanda domanda4 = new Domanda("1252 + 1139", "2391", "2383", "2381", "2393");
+        Domanda domanda4 = new Domanda("1252 - 1139", "113", "123", "114", "124");
         quesito.add(domanda4);
 
-        Domanda domanda5 = new Domanda("2157 + 2227", "4384", "4374", "4375", "4375");
+        Domanda domanda5 = new Domanda("2457 - 2227", "230", "240", "231", "221");
         quesito.add(domanda5);
-        Domanda domanda6 = new Domanda("1177 + 7247", "8424", "8414", "8404", "8444");
+        Domanda domanda6 = new Domanda("7247 - 1845", "5402", "5403", "5413", "5412");
         quesito.add(domanda6);
 
-        Domanda domanda7 = new Domanda("1288 + 4215", "5503", "5502", "5504", "5493");
+        Domanda domanda7 = new Domanda("4215 - 2947", "1268", "1278", "1269", "1270");
         quesito.add(domanda7);
 
 
@@ -869,19 +861,19 @@ public class AddizioniActivity extends AppCompatActivity {
     public void insertDomandeLV3_3_2() {
 
         quesito.clear();
-        Domanda domanda5 = new Domanda("2157 + 2227", "4384", "4374", "4375", "4375");
+        Domanda domanda5 = new Domanda("2457 - 2227", "230", "240", "231", "221");
         quesito.add(domanda5);
-        Domanda domanda4 = new Domanda("1252 + 1139", "2391", "2383", "2381", "2393");
+        Domanda domanda4 = new Domanda("1252 - 1139", "113", "123", "114", "124");
         quesito.add(domanda4);
-        Domanda domanda1 = new Domanda("2275 + 2239", "4514", "4513", "4516", "4504");
+        Domanda domanda1 = new Domanda("6753 - 2239", "4514", "4513", "4516", "4504");
         quesito.add(domanda1);
-        Domanda domanda6 = new Domanda("1177 + 7247", "8424", "8414", "8404", "8444");
+        Domanda domanda6 = new Domanda("7247 - 1845", "5402", "5403", "5413", "5412");
         quesito.add(domanda6);
-        Domanda domanda2 = new Domanda("1235 + 3215", "4450", "4440", "4460", "4460");
+        Domanda domanda2 = new Domanda("7665 - 3215", "4450", "4440", "4460", "4460");
         quesito.add(domanda2);
-        Domanda domanda7 = new Domanda("1288 + 4215", "5503", "5502", "5504", "5493");
+        Domanda domanda7 = new Domanda("4215 - 2947", "1268", "1278", "1269", "1270");
         quesito.add(domanda7);
-        Domanda domanda3 = new Domanda("3248 + 3149", "6397", "6387", "6386", "6396");
+        Domanda domanda3 = new Domanda("3248 - 3149", "99", "89", "100", "98");
         quesito.add(domanda3);
 
     }
@@ -911,7 +903,7 @@ public class AddizioniActivity extends AppCompatActivity {
         log.d("DEBUG", "Numero random con math= " + numRand);
 
         /*-----num random dello score cioè se lo score mod 3da come resto 0-1-2   */
-        if (numRandScoreAddizioni == 0) {
+        if (numRandScoreSottrazioni == 0) {
 
             numRand = 1 + (int) (Math.random() * 7);
 
@@ -994,7 +986,7 @@ public class AddizioniActivity extends AppCompatActivity {
 
         }
         /*-----num random dello score cioè se lo score mod 3da come resto 0-1-2   */
-        else if (numRandScoreAddizioni == 1) {
+        else if (numRandScoreSottrazioni == 1) {
 
             numRand = 1 + (int) (Math.random() * 7);
 
@@ -1076,7 +1068,7 @@ public class AddizioniActivity extends AppCompatActivity {
         } else      /*-----num random dello score cioè se lo score mod 3da come resto 0-1-2   */
 
 
-            if (numRandScoreAddizioni == 2) {
+            if (numRandScoreSottrazioni == 2) {
 
                 numRand = 1 + (int) (Math.random() * 7);
 
@@ -1130,8 +1122,7 @@ public class AddizioniActivity extends AppCompatActivity {
                             insertDomandeLV2_1();
                             break;
                     }
-                }
-                else if (livello == 3) {  /*ESPERTO*/
+                } else if (livello == 3) {  /*ESPERTO*/
                     switch (numRand) {
                         case (1):
                             insertDomandeLV3_3();
@@ -1269,11 +1260,11 @@ public class AddizioniActivity extends AppCompatActivity {
             public void onFinish() {
                 startCampanella();
                 mpTic.stop();
+                Toast.makeText(SottrazioniActivity.this, "Tempo scaduto", Toast.LENGTH_LONG).show();
                 lltimezone = (LinearLayout) findViewById(R.id.timezone);
                 lltimezone.setBackground(getDrawable(R.drawable.count_down_finish));
                 mTimerRunning = false;
                 disabilitaRisposte();
-                Toast.makeText(AddizioniActivity.this, "Tempo scaduto", Toast.LENGTH_LONG).show();
 
             }
 

@@ -116,6 +116,14 @@ public class CountDownActivity extends AppCompatActivity {
                     mpCountDown.release();
                     onBackPressed();
 
+                } else if (categoria.equalsIgnoreCase("Sottrazioni")){
+                    i  = new Intent(getApplicationContext(), SottrazioniActivity.class);
+                    i.putExtra("LIVELLO",livello);
+                    i.putExtra("SCORE",numScoreRandom);
+                    startActivityForResult(i, 0);
+                    mpCountDown.release();
+                    onBackPressed();
+
                 }
 
 
