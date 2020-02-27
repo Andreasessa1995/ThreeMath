@@ -77,10 +77,9 @@
             android:background="@drawable/categoria"
             android:onClick="onClickCategoria"
             android:text="Addizioni"
-            android:textColor="#EEECE8"
-            android:textSize="100px"
 
-            >
+            android:textColor="#EEECE8"
+            android:textSize="100px">
 
         </Button>
 

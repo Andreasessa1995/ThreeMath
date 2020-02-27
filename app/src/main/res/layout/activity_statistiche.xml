@@ -5,38 +5,18 @@
     android:background="#4E4C4C"
 
     >
-    <!--
-        <LinearLayout
-            android:id="@+id/logo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal"
-            android:gravity="center"
-            >
-            <ImageView
-
-                android:layout_width="200px"
-                android:layout_height="200px"
-                android:src="@drawable/logo_senza_sfondo"
-                >
-
-            </ImageView>
-        </LinearLayout>
-    -->
 
     <LinearLayout
         android:id="@+id/logo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
         android:layout_marginLeft="@dimen/left_right_inter"
+        android:layout_marginTop="15dp"
         android:layout_marginRight="@dimen/left_right_inter"
         android:background="@drawable/scores"
-        android:gravity="start">
-
+        android:gravity="start"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
 
         <ImageView
             android:layout_width="200px"
@@ -58,9 +38,452 @@
 
         </TextView>
 
+    </LinearLayout>
+
+
+
+
+
+    <LinearLayout
+        android:id="@+id/llImpostazioni"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logo"
+        android:layout_marginLeft="@dimen/left_right"
+        android:layout_marginTop="50px"
+        android:layout_marginRight="@dimen/left_right"
+        android:background="@drawable/quesiti"
+        android:orientation="vertical"
+        android:paddingBottom="50px"
+
+        >
+
+
+        <LinearLayout
+            android:id="@+id/llQuiz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/logo"
+            android:layout_marginLeft="@dimen/left_right"
+            android:layout_marginTop="50px"
+            android:layout_marginRight="@dimen/left_right"
+            android:orientation="horizontal"
+
+            >
+
+            <ImageView
+                android:layout_width="150px"
+                android:layout_height="150px"
+                android:src="@drawable/statistiche_grafici">
+
+            </ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="35px"
+                android:gravity="center"
+                android:text="QUIZ"
+                android:textColor="#FFEB3B"
+                android:textSize="30dp"
+
+                >
+
+            </TextView>
+        </LinearLayout>
+
+
+
+        <!-- al linearLayout match parent
+        gravity end, cosi sono allineati-
+
+        il trucco è partire dal lato uguale
+        a tutti e due cioè dalla fine
+
+
+         -->
+
+        <LinearLayout
+            android:id="@+id/llPuntiAddizioni"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llQuiz"
+            android:layout_marginLeft="@dimen/left_right"
+            android:layout_marginTop="30px"
+            android:layout_marginRight="@dimen/left_right"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Addizioni"
+                android:textColor="#F5F0F0"
+                android:textSize="30dp"
+                >
+            </TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:orientation="horizontal"
+
+                >
+
+                <TextView
+                    android:id="@+id/textPunteggioAddizioni"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="35px"
+                    android:text="1234"
+                    android:textColor="#F3F6F8"
+                    android:textSize="30dp"
+
+                    >
+
+                </TextView>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <!-- al linearLayout match parent
+        gravity end, cosi sono allineati-
+
+        il trucco è partire dal lato uguale
+        a tutti e due cioè dalla fine
+
+
+         -->
+
+
+        <LinearLayout
+            android:id="@+id/llPuntiSottrazioni"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llPuntiAddizioni"
+            android:layout_marginLeft="@dimen/left_right"
+            android:layout_marginTop="30px"
+            android:layout_marginRight="@dimen/left_right"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Sottrazioni"
+                android:textColor="#F5F5F0"
+                android:textSize="30dp"
+
+                >
+
+            </TextView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/textPunteggioSottrazioni"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="35px"
+                    android:text="1234"
+                    android:textColor="#F5F5F0"
+                    android:textSize="30dp">
+                </TextView>
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/llPuntiMoltiplicazioni"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llPuntiSottrazioni"
+            android:layout_marginLeft="@dimen/left_right"
+            android:layout_marginTop="30px"
+            android:layout_marginRight="@dimen/left_right"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Moltiplicazioni"
+                android:textColor="#F5F5F0"
+                android:textSize="27dp"
+
+                >
+
+            </TextView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/textPunteggioMoltiplicazioni"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="35px"
+                    android:text="1234"
+                    android:textColor="#F5F5F0"
+                    android:textSize="30dp">
+                </TextView>
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:id="@+id/llPuntiDivisioni"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llPuntiMoltiplicazioni"
+            android:layout_marginLeft="@dimen/left_right"
+            android:layout_marginTop="30px"
+            android:layout_marginRight="@dimen/left_right"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Divisioni"
+                android:textColor="#F5F5F0"
+                android:textSize="30dp"
+
+                >
+
+            </TextView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/textPunteggioDivisioni"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="35px"
+                    android:text="1234"
+                    android:textColor="#F5F5F0"
+                    android:textSize="30dp">
+                </TextView>
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+
+
+
+
+        <LinearLayout
+            android:id="@+id/llStatistiche"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llPuntiDivisioni"
+            android:layout_marginLeft="@dimen/left_right"
+            android:layout_marginTop="50px"
+            android:layout_marginRight="@dimen/left_right"
+            android:orientation="horizontal"
+
+            >
+
+            <ImageView
+                android:layout_width="150px"
+                android:layout_height="150px"
+                android:src="@drawable/statistiche_torta">
+
+            </ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="35px"
+                android:gravity="center"
+                android:text="STATISTICHE"
+                android:textColor="#FFEB3B"
+                android:textSize="27dp"
+
+                >
+
+            </TextView>
+        </LinearLayout>
+
+
+
+
+
+        <LinearLayout
+            android:id="@+id/llNumeroRisposteCorrette"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llStatistiche"
+            android:layout_marginLeft="@dimen/left_right"
+            android:layout_marginTop="30px"
+            android:layout_marginRight="@dimen/left_right"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Risposte corrette"
+                android:textColor="#F5F5F0"
+                android:textSize="22dp"
+
+                >
+
+            </TextView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/textRisposteCorrette"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="35px"
+                    android:text="1234"
+                    android:textColor="#F5F5F0"
+                    android:textSize="27dp">
+                </TextView>
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/llNumeroRisposteErrate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llNumeroRisposteCorrette"
+            android:layout_marginLeft="@dimen/left_right"
+            android:layout_marginTop="30px"
+            android:layout_marginRight="@dimen/left_right"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Risposte errate"
+                android:textColor="#F5F5F0"
+                android:textSize="24dp"
+
+                >
+
+            </TextView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/textRisposteErrate"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="35px"
+                    android:text="1234"
+                    android:textColor="#F5F5F0"
+                    android:textSize="27dp">
+                </TextView>
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/llPercentualeNumeroRisposteCorrette"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llNumeroRisposteErrate"
+            android:layout_marginLeft="@dimen/left_right"
+            android:layout_marginTop="30px"
+            android:layout_marginRight="@dimen/left_right"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Rapporto corrette"
+                android:textColor="#F5F5F0"
+                android:textSize="22dp"
+
+                >
+
+            </TextView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/textPercentualeRisposteCorrette"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="35px"
+                    android:text="12%"
+                    android:textColor="#F5F5F0"
+                    android:textSize="27dp">
+                </TextView>
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/llPercentualeNumeroRisposteErrate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llPercentualeNumeroRisposteCorrette"
+            android:layout_marginLeft="@dimen/left_right"
+            android:layout_marginTop="30px"
+            android:layout_marginRight="@dimen/left_right"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Rapporto errate"
+                android:textColor="#F5F5F0"
+                android:textSize="24dp"
+
+                >
+
+            </TextView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/textPercentualeRisposteErrate"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="35px"
+                    android:text="100%"
+                    android:textColor="#F5F5F0"
+                    android:textSize="27dp">
+                </TextView>
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+
+
+
+
+
 
 
     </LinearLayout>
-
 
 </RelativeLayout>

@@ -57,67 +57,83 @@
 
         >
 
+
+
+
+
         <LinearLayout
             android:id="@+id/llSuoni"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
+            android:orientation="horizontal"
+            >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/left_right_inter"
                 android:layout_marginTop="25px"
                 android:layout_marginRight="@dimen/left_right_inter"
-                android:gravity="start"
                 android:text="Suoni"
                 android:textColor="#FFEB3B"
                 android:textSize="70px"
-
                 >
-
             </TextView>
-
-            <RadioGroup
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center">
-
-                <RadioButton
-                    android:id="@+id/radioButtonSuoniSi"
-                    android:layout_width="wrap_content"
+                android:gravity="end"
+                android:layout_marginRight="50px"
+                >
+                <RadioGroup
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="25px"
-                    android:checked="true"
-                    android:onClick="onClickSuono"
-                    android:text="SI"
+                    android:orientation="horizontal"
+                    android:gravity="end">
 
+                    <RadioButton
+                        android:id="@+id/radioButtonSuoniSi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25px"
+                        android:checked="true"
+                        android:onClick="onClickSuono"
+                        android:text="SI"
+                        >
 
-                    >
-
-                </RadioButton>
-
-                <RadioButton
-                    android:id="@+id/radioButtonSuoniNo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="25px"
-                    android:onClick="onClickSuono"
-                    android:text="NO">
-
-                </RadioButton>
-
-
-            </RadioGroup>
-
+                    </RadioButton>
+                    <RadioButton
+                        android:id="@+id/radioButtonSuoniNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25px"
+                        android:onClick="onClickSuono"
+                        android:text="NO">
+                    </RadioButton>
+                </RadioGroup>
+            </LinearLayout>
         </LinearLayout>
+
+
+        <!-- al linearLayout match parent
+        gravity end, cosi sono allineati-
+
+        il trucco è partire dal lato uguale
+        a tutti e due cioè dalla fine
+
+
+         -->
+
+
+
 
         <LinearLayout
             android:id="@+id/llVibrazione"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="end"
+            >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -133,33 +149,44 @@
 
             </TextView>
 
-            <RadioGroup
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="50px"
                 android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="end"
 
-                <RadioButton
-                    android:id="@+id/radioButtonVibSi"
-                    android:layout_width="wrap_content"
+
+                >
+
+                <RadioGroup
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="25px"
-                    android:checked="true"
-                    android:onClick="onClickVibrazione"
-                    android:text="SI">
+                    android:gravity="end"
+                    android:orientation="horizontal">
 
-                </RadioButton>
+                    <RadioButton
+                        android:id="@+id/radioButtonVibSi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25px"
+                        android:checked="true"
+                        android:onClick="onClickVibrazione"
+                        android:text="SI">
 
-                <RadioButton
-                    android:id="@+id/radioButtonVibNo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="25px"
-                    android:onClick="onClickVibrazione"
-                    android:text="NO">
+                    </RadioButton>
 
-                </RadioButton>
-            </RadioGroup>
+                    <RadioButton
+                        android:id="@+id/radioButtonVibNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25px"
+                        android:onClick="onClickVibrazione"
+                        android:text="NO">
+
+                    </RadioButton>
+                </RadioGroup>
+            </LinearLayout>
         </LinearLayout>
 
 
