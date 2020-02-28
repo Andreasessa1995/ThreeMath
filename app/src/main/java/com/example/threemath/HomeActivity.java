@@ -150,7 +150,7 @@ public class HomeActivity extends AppCompatActivity {
         }else if (bCategoria6.isPressed()) {
             bCategoria6.setClickable(false);
 
-            Intent intent = new Intent(getApplicationContext(), StatisticheActivity.class);
+            Intent intent = new Intent(getApplicationContext(), StatisticheActivityConLista.class);
             intent.putExtra("CATEGORIA",categoria);
 
             startActivityForResult(intent, 0);

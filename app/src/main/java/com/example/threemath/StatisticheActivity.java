@@ -2,6 +2,7 @@ package com.example.threemath;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 
@@ -10,13 +11,14 @@ import androidx.appcompat.app.AppCompatActivity;
 public class StatisticheActivity extends AppCompatActivity {
 
 
+    /**
+     * TExt view Punteggi
+     */
 
-    /**TExt view Punteggi*/
-
-    TextView textPunteggioAddizioni ;
-    TextView textPunteggioSottrazioni ;
-    TextView textPunteggioMoltiplicazioni ;
-    TextView textPunteggioDivisioni ;
+    TextView textPunteggioAddizioni;
+    TextView textPunteggioSottrazioni;
+    TextView textPunteggioMoltiplicazioni;
+    TextView textPunteggioDivisioni;
 
     TextView textRisposteCorrette;
     TextView textRisposteErrate;
@@ -25,11 +27,11 @@ public class StatisticheActivity extends AppCompatActivity {
     TextView textPercentualeRisposteErrate;
 
 
-    GestoreFile gf ;
-    int punteggio =0;
-
-
-
+    GestoreFile gf;
+    int punteggio = 0;
+    int numRispCorrette = 0;
+    int numRispErrate = 0;
+    int numTot = 0;
 
 
 
@@ -39,52 +41,101 @@ public class StatisticheActivity extends AppCompatActivity {
         setContentView(R.layout.activity_statistiche);
 
 
-
-
         /**Punteggi*/
-        TextView textPunteggioAddizioni =  findViewById(R.id.textPunteggioAddizioni);
-        TextView textPunteggioSottrazioni =  findViewById(R.id.textPunteggioSottrazioni);
-        TextView textPunteggioMoltiplicazioni = findViewById(R.id.textPunteggioMoltiplicazioni);
-        TextView textPunteggioDivisioni =  findViewById(R.id.textPunteggioDivisioni);
+        textPunteggioAddizioni = findViewById(R.id.textPunteggioAddizioni);
+        textPunteggioSottrazioni = findViewById(R.id.textPunteggioSottrazioni);
+        textPunteggioMoltiplicazioni = findViewById(R.id.textPunteggioMoltiplicazioni);
+        textPunteggioDivisioni = findViewById(R.id.textPunteggioDivisioni);
 
         /**Risposte corrette ed errate*/
-        TextView textRisposteCorrette =  findViewById(R.id.textRisposteCorrette);
-        TextView textRisposteErrate =  findViewById(R.id.textRisposteErrate);
+        textRisposteCorrette = findViewById(R.id.textRisposteCorrette);
+        textRisposteErrate = findViewById(R.id.textRisposteErrate);
 
         /**Risposte percentuale corrette ed errate*/
-        TextView textPercentualeRisposteCorrette =  findViewById(R.id.textPercentualeRisposteCorrette);
-        TextView textPercentualeRisposteErrate =  findViewById(R.id.textPercentualeRisposteErrate);
+        textPercentualeRisposteCorrette = (TextView) findViewById(R.id.textPercentualeRisposteCorrette);
+        textPercentualeRisposteErrate = (TextView) findViewById(R.id.textPercentualeRisposteErrate);
 
 
         gf = new GestoreFile();
 
-        punteggio = loadPunteggi(getApplicationContext(),"Addizioni");
-        textPunteggioAddizioni.setText(""+punteggio);
+        punteggio = loadPunteggi(getApplicationContext(), "Addizioni");
+        textPunteggioAddizioni.setText("" + punteggio);
 
-        punteggio = loadPunteggi(getApplicationContext(),"Sottrazioni");
-        textPunteggioSottrazioni.setText(""+punteggio);
+        punteggio = loadPunteggi(getApplicationContext(), "Sottrazioni");
+        textPunteggioSottrazioni.setText("" + punteggio);
 
-        punteggio = loadPunteggi(getApplicationContext(),"Moltiplicazioni");
-        textPunteggioMoltiplicazioni.setText(""+punteggio);
+        punteggio = loadPunteggi(getApplicationContext(), "Moltiplicazioni");
+        textPunteggioMoltiplicazioni.setText("" + punteggio);
 
-        punteggio = loadPunteggi(getApplicationContext(),"Divisioni");
-        textPunteggioDivisioni.setText(""+punteggio);
-
-
+        punteggio = loadPunteggi(getApplicationContext(), "Divisioni");
+        textPunteggioDivisioni.setText("" + punteggio);
 
 
+        numRispCorrette = gf.caricaNumRisposteCorrette(getApplicationContext());
+        textRisposteCorrette.setText("" + numRispCorrette);
+
+        numRispErrate = gf.caricaNumRisposteErrate(getApplicationContext());
+        textRisposteErrate.setText("" + numRispErrate);
+
+        numTot = numRispCorrette + numRispErrate;
+
+       // Log log = null;
+       // log.d("DEBUG", "Corrette piu errrattteeeeeeee " + numTot);
 
 
 
+        double drapportoCorrette = calcolaDivisione(numRispCorrette,numTot)*100;
+        double drapportoErrate = calcolaDivisione(numRispErrate,numTot)*100;
+
+       // log.d("DEBUG", "Rapporto  " + drapportoCorrette);
+       // log.d("DEBUG", "Rapporto  " + drapportoErrate);
 
 
+
+        //textPercentualeRisposteCorrette.setText("porc");
+
+
+        if (numTot == 0) {
+            textPercentualeRisposteCorrette.setText("" + 0 + "%");
+            textPercentualeRisposteErrate.setText("" + 0 + "%");
+
+        } else {
+
+
+            textPercentualeRisposteCorrette.setText(""+drapportoCorrette+"%");
+            textPercentualeRisposteErrate.setText(""+drapportoErrate+"%");
+
+        }
 
 
     }
 
-    private int  loadPunteggi(Context context, String categoria){
+    /**
+     *
+     * @param context
+     * @param categoria
+     * @return
+     */
+    private int loadPunteggi(Context context, String categoria) {
 
-        return gf.caricaScores(context,categoria);
+        return gf.caricaScores(context, categoria);
+
+    }
+
+
+    /**
+     * calocala divisone tra nueri interi ritornando un double
+     * @param a
+     * @param b
+     * @return
+     */
+    public double calcolaDivisione(int a, int b){
+
+        double da  = (double) 0.0 +a;
+        double db = (double) 0.0 + b;
+
+
+        return da/db;
 
     }
 }

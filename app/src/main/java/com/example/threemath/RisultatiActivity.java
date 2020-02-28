@@ -39,6 +39,8 @@ public class RisultatiActivity extends AppCompatActivity {
 
     String categoria = "" ;
 
+    GestoreFile gf = new GestoreFile();
+
 
     /**
      * suoni
@@ -94,6 +96,10 @@ public class RisultatiActivity extends AppCompatActivity {
         textRisposteErrate.setText(""+numRispErrate);
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", tempoMinutiImpiegati,  tempoSecondiImpiegati);
         textTempo.setText(timeLeftFormatted);
+
+        salvaNumeroRispsote(getApplicationContext(),numRispEsatte,numRispErrate);
+
+
 
 
     }
@@ -169,7 +175,7 @@ public class RisultatiActivity extends AppCompatActivity {
 
 
 
-        GestoreFile gf = new GestoreFile();
+      //  GestoreFile gf = new GestoreFile();
         Log log =null;
         //log.d("DEBUG", "Salvo questo nuovo punteggio il vecchio era= = " + gf.caricaScoresAddizioni(context));
         int punteggioTemp = 0;
@@ -189,6 +195,13 @@ public class RisultatiActivity extends AppCompatActivity {
 
         }
 
+
+    }
+
+    public void salvaNumeroRispsote(Context context,int corrette,int errate){
+
+        gf.salvaRisposteCorrette(context,corrette);
+        gf.salvaRisposteErrate(context,errate);
 
     }
 

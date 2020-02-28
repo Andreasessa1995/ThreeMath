@@ -137,4 +137,188 @@ public class GestoreFile {
     }
 
 
+    /**
+     *
+     * @param context
+     * @param numeroRisoCor
+     */
+    public void salvaRisposteCorrette(Context context, int numeroRisoCor) {
+
+
+        String SCORE = "numeroRisposteCorrette" + ".dat";
+
+
+        //log.d("DEBUG", "M'arrriv  puntegg  = " + punteggio);
+
+        String spunteggio = "" + numeroRisoCor;
+
+        FileOutputStream fos = null;
+
+        try {
+            spunteggio += ",";
+            fos = context.openFileOutput(SCORE, Context.MODE_PRIVATE);
+            fos.flush();
+            fos.write(spunteggio.getBytes());
+
+            // log.d("DEBUG", "Salvo questo sul file = " + spunteggio);
+            fos.close();
+            // log.d("DEBUG", "Leggo questo sul file  appena scritto = " + caricaScoresAddizioni(context));
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    /**
+     *
+     * @param context
+     * @return
+     */
+
+    public int caricaNumRisposteCorrette(Context context) {
+
+        String SCORE = "numeroRisposteCorrette" + ".dat";
+
+        int score = 0;
+        FileInputStream fis = null;
+        InputStreamReader isr = null;
+        String spunteggio = "";
+        String line = "";
+        String data = "";
+        try {
+
+
+
+
+            fis = context.openFileInput(SCORE);
+            isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            while (null != (line = br.readLine())) {
+                data += line;
+            }
+            br.close();
+            fis.close();
+
+            int x = data.indexOf(",");
+            String[] dati = data.split(",");
+            //score=br.read();
+            log.d("DEBUG", "Leggo questo dal file = = " + data);
+
+            spunteggio = dati[0];
+            score = Integer.parseInt(spunteggio);
+
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return score;
+
+    }
+
+
+    /**
+     *
+     * @param context
+     * @param numeroRisoEr
+     */
+    public void salvaRisposteErrate(Context context, int numeroRisoEr) {
+
+
+        String SCORE = "numeroRisposteErrate" + ".dat";
+
+
+        //log.d("DEBUG", "M'arrriv  puntegg  = " + punteggio);
+
+        String spunteggio = "" + numeroRisoEr;
+
+        FileOutputStream fos = null;
+
+        try {
+            spunteggio += ",";
+            fos = context.openFileOutput(SCORE, Context.MODE_PRIVATE);
+            fos.flush();
+            fos.write(spunteggio.getBytes());
+
+            // log.d("DEBUG", "Salvo questo sul file = " + spunteggio);
+            fos.close();
+            // log.d("DEBUG", "Leggo questo sul file  appena scritto = " + caricaScoresAddizioni(context));
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+    /**
+     *
+     * @param context
+     * @return
+     */
+
+    public int caricaNumRisposteErrate(Context context) {
+
+        String SCORE = "numeroRisposteErrate" + ".dat";
+
+        int score = 0;
+        FileInputStream fis = null;
+        InputStreamReader isr = null;
+        String spunteggio = "";
+        String line = "";
+        String data = "";
+        try {
+
+
+
+
+            fis = context.openFileInput(SCORE);
+            isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            while (null != (line = br.readLine())) {
+                data += line;
+            }
+            br.close();
+            fis.close();
+
+            int x = data.indexOf(",");
+            String[] dati = data.split(",");
+            //score=br.read();
+            log.d("DEBUG", "Leggo questo dal file = = " + data);
+
+            spunteggio = dati[0];
+            score = Integer.parseInt(spunteggio);
+
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return score;
+
+    }
+
+    public  void azzeraNumRisposte (Context context){
+
+        salvaRisposteErrate(context,0);
+        salvaRisposteCorrette(context,0);
+
+    }
+
+
+
+
 }

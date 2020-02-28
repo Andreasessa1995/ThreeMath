@@ -53,11 +53,14 @@ public class LivelloActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_livelli);
 
-        //   gf.azzeraScoreAddizioni(getApplicationContext());
 
 
         Intent intent = getIntent();
         categoria = intent.getStringExtra("CATEGORIA");
+
+       // gf.azzeraScore(getApplicationContext(),categoria);
+       // gf.azzeraNumRisposte(getApplicationContext());
+
 
 
         bLivello1 = (Button) findViewById(R.id.bottoneLivello1);

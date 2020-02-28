@@ -33,7 +33,7 @@
         <activity android:name=".AddizioniActivity">
         </activity>
         <activity android:name=".SottrazioniActivity"></activity>
-        <activity android:name=".HomeActivity2">
+        <activity android:name=".StatisticheActivityConLista">
 
         </activity>
         <activity android:name=".CountDownActivity"></activity>
