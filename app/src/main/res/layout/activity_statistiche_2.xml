@@ -52,7 +52,7 @@
         android:layout_marginRight="@dimen/left_right"
         android:background="@drawable/quesiti"
         android:orientation="vertical"
-        android:layout_marginBottom="400px"
+        android:layout_marginBottom="80dp"
 
         >
 

@@ -39,7 +39,7 @@ public class RisultatiActivity extends AppCompatActivity {
 
     String categoria = "" ;
 
-    GestoreFile gf = new GestoreFile();
+
 
 
     /**
@@ -51,6 +51,13 @@ public class RisultatiActivity extends AppCompatActivity {
     Vibrator vibrator;
     /*vib 100 millise riposo 1000 millsec, vir*/
     long[] pattern = {0, 100, 1000 };
+
+    /**
+     * IMPOSTAZIONI
+     */
+    GestoreFile gf = new GestoreFile();
+    Boolean suoni = true;
+    Boolean vibrazione = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +78,9 @@ public class RisultatiActivity extends AppCompatActivity {
         tempoRestanteMillis= i.getLongExtra("TIMERESTANTEQUESITO",tempoRestanteMillis);
 
 
+        checkImpostazioni();
+
+
         Log log = null;
 
 
@@ -80,6 +90,7 @@ public class RisultatiActivity extends AppCompatActivity {
         int punteggio = 0;
         punteggio= calcolaPunteggio(numRispEsatte,numRispErrate);
         aggiornaPunteggio(getApplicationContext(),punteggio,categoria);
+
 
 
 
@@ -97,7 +108,15 @@ public class RisultatiActivity extends AppCompatActivity {
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", tempoMinutiImpiegati,  tempoSecondiImpiegati);
         textTempo.setText(timeLeftFormatted);
 
+
+        /*salvataggio num risposte esatte e errate totali*/
+
         salvaNumeroRispsote(getApplicationContext(),numRispEsatte,numRispErrate);
+
+
+        /*salvataggio num risposte esatte per categoria*/
+        gf.salvaRisposteErrateCategoria(getApplicationContext(),numRispErrate,categoria);
+        gf.salvaRisposteCorretteCategoria(getApplicationContext(),numRispErrate,categoria);
 
 
 
@@ -110,19 +129,23 @@ public class RisultatiActivity extends AppCompatActivity {
      */
     public void onClickHome(View v){
 
+
         startBattuta();
-        if (isHaveVibrate( ) ){
-            vibrator.vibrate(pattern, -1); // does not repeat
-            //vibrator.vibrate(pattern,  0); // repeats forever
+
+        if(vibrazione){/*imposazione vibtazione*/
+            if (isHaveVibrate( ) ){
+                vibrator.vibrate(pattern, -1); // does not repeat
+                //vibrator.vibrate(pattern,  0); // repeats forever
+            }
         }
+
         /*new intent*/
         Intent intent = new Intent();
         //Intent intent =getIntent();
 
         intent.setClass(getApplicationContext(), HomeActivity.class);
         startActivityForResult(intent, 0);
-       // releaseResourcesBattuta();
-        mpBat.release();
+        releaseResourcesBattuta();
         onBackPressed();
     }
 
@@ -198,7 +221,16 @@ public class RisultatiActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Salva il numero di risposte corrette ed errate totali
+     * @param context
+     * @param corrette
+     * @param errate
+     */
     public void salvaNumeroRispsote(Context context,int corrette,int errate){
+
+        corrette = corrette + gf.caricaNumRisposteCorrette(context);
+        errate = errate + gf.caricaNumRisposteErrate(context);
 
         gf.salvaRisposteCorrette(context,corrette);
         gf.salvaRisposteErrate(context,errate);
@@ -217,16 +249,23 @@ public class RisultatiActivity extends AppCompatActivity {
 
 
     /**
-     * player campanella e bat
+     * player campanella e bat controlla inoltre s el'impostazione del suono è attiva
      */
 
 
     public void startBattuta() {
-        mpBat= MediaPlayer.create(this, getResources().getIdentifier("bat", "raw", getPackageName()));
-        mpBat = MediaPlayer.create(this, R.raw.bat);
-        mpBat.start();
+        if(suoni){
+            mpBat= MediaPlayer.create(this, getResources().getIdentifier("bat", "raw", getPackageName()));
+            mpBat = MediaPlayer.create(this, R.raw.bat);
+            mpBat.start();
+        }
+
     }
 
+    /**
+     *
+     * @return
+     */
     public  boolean isHaveVibrate(){
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         if (vibrator.hasVibrator()) {
@@ -236,7 +275,32 @@ public class RisultatiActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * rilascia la risorsa se nelle impostzioni è attiva
+     */
     public void releaseResourcesBattuta() {
-        mpBat.release();
+        if(suoni){
+            mpBat.release();
+        }
+
+    }
+
+    /**
+     * conrolla le impostazioni del suono e delle vibrazioni
+     */
+    public void checkImpostazioni() {
+
+        if ("si".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Suoni"))) {
+            suoni = true;
+        } else {
+            suoni = false;
+        }
+
+        if ("si".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Vibrazione"))) {
+            vibrazione = true;
+        } else {
+            vibrazione = false;
+        }
+
     }
 }

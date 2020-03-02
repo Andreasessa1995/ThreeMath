@@ -115,7 +115,7 @@
                 android:text="ADDIZIONI"
                 android:layout_marginRight="50px"
                 android:textAlignment="center"
-                android:textColor="#FFEB3B"
+                android:textColor="#E9E8DD"
                 android:textSize="35dp">
 
             </TextView>
@@ -126,7 +126,7 @@
                 android:text="1/2"
                 android:textAlignment="center"
                 android:textColor="#EDF1F1"
-                android:textSize="25dp">
+                android:textSize="23dp">
 
             </TextView>
         </LinearLayout>
@@ -268,7 +268,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/categoria"
                 android:onClick="onClickRisultati"
-                android:text="Scores"
+                android:text="Score"
                 android:textColor="#F7F4F4"
                 android:visibility="invisible">
 

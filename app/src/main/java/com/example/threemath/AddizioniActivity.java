@@ -91,6 +91,13 @@ public class AddizioniActivity extends AppCompatActivity {
     boolean resumeStartCountDown = false;
     boolean stopCountDownPressedHome = false;
 
+    /**
+     * IMPOSTAZIONI
+     */
+    GestoreFile gf = new GestoreFile();
+    Boolean suoni = true;
+    Boolean vibrazione = true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,6 +165,8 @@ public class AddizioniActivity extends AppCompatActivity {
         setCountDownLevel();
         /*sceglie le domande da inserire **/
         choseDomande();
+
+        checkImpostazioni();
 
 
         sizeq = quesito.size();
@@ -234,14 +243,26 @@ public class AddizioniActivity extends AppCompatActivity {
             // log.d("DEBUG", "wwww333333333  Wwwwwwwwwwwwww= presssedddd = " + risposteQuesito.get(indiceDomanda));
             /** ultima domanda **/
             if (indiceDomanda == sizeq - 1) {
-                // startBattuta();
+
+                /*check suoni e vibrazione*/
+                if (vibrazione) {
+                    if (isHaveVibrate()) {
+                        vibrator.vibrate(pattern, -1); // does not repeat
+                        //vibrator.vibrate(pattern,  0); // repeats forever
+                    }
+                }
+
                 startCampanella();
 
-                /*vibrazione*/
-                if (isHaveVibrate()) {
-                    vibrator.vibrate(pattern, -1); // does not repeat
-                    //vibrator.vibrate(pattern,  0); // repeats forever
+                if (vibrazione) {
+                    /*vibrazione*/
+                    if (isHaveVibrate()) {
+                        vibrator.vibrate(pattern, -1); // does not repeat
+                        //vibrator.vibrate(pattern,  0); // repeats forever
+                    }
                 }
+
+
                 ultimaDomanda = true;
                 indiceDomanda++;
 
@@ -268,13 +289,19 @@ public class AddizioniActivity extends AppCompatActivity {
 
             testoDomanda.setText(quesito.get(indiceDomanda).getDomanda());
             if ((A.isPressed()) || (B.isPressed()) || (C.isPressed()) || (D.isPressed())) {
-                //startBattuta();
+
 
                 /*vibrazione*/
-                if (isHaveVibrate()) {
-                    vibrator.vibrate(pattern, -1); // does not repeat
-                    //vibrator.vibrate(pattern,  0); // repeats forever
+
+                startBattuta();
+
+                if (vibrazione) {
+                    if (isHaveVibrate()) {
+                        vibrator.vibrate(pattern, -1); // does not repeat
+                        //vibrator.vibrate(pattern,  0); // repeats forever
+                    }
                 }
+
 
                 /**disposizione randomica risposte sui vari bottoni varie scelte per aumentare la casualità**/
                 // numRand = 1 + (int) (Math.random() * 3);
@@ -390,16 +417,22 @@ public class AddizioniActivity extends AppCompatActivity {
      */
     public void onClickRisultati(View v) {
 
-        startBattuta();
+
+
 
         mTimerRunning = false;
         mCountDownTimer.cancel();
 
-        /*vibrazione*/
-        if (isHaveVibrate()) {
-            vibrator.vibrate(pattern, -1); // does not repeat
-            //vibrator.vibrate(pattern,  0); // repeats forever
+        startBattuta();
+
+        if (vibrazione) {
+            /*vibrazione*/
+            if (isHaveVibrate()) {
+                vibrator.vibrate(pattern, -1); // does not repeat
+                //vibrator.vibrate(pattern,  0); // repeats forever
+            }
         }
+
 
         bottoneRisultati.setClickable(false);
 
@@ -416,11 +449,12 @@ public class AddizioniActivity extends AppCompatActivity {
         intent.putExtra("CATEGORIA", categoria);
         startActivityForResult(intent, 0);
 
-        /**rilascio risorse player*/
+
         releaseResourcesCampanella();
         releaseResourcesBattuta();
         releaseResourcesTic();
         onBackPressed();
+
 
     }
 
@@ -1130,8 +1164,7 @@ public class AddizioniActivity extends AppCompatActivity {
                             insertDomandeLV2_1();
                             break;
                     }
-                }
-                else if (livello == 3) {  /*ESPERTO*/
+                } else if (livello == 3) {  /*ESPERTO*/
                     switch (numRand) {
                         case (1):
                             insertDomandeLV3_3();
@@ -1182,11 +1215,13 @@ public class AddizioniActivity extends AppCompatActivity {
      * player campanella e bat
      */
     public void startCampanella() {
-        /*Media layer*/
-        mpCampanella = MediaPlayer.create(this, getResources().getIdentifier("campanella", "raw", getPackageName()));
-        mpCampanella = MediaPlayer.create(this, R.raw.campanella);
-        mpCampanella.start();
 
+        if (suoni) {/*impostazioni suoni si **/
+            /*Media layer*/
+            mpCampanella = MediaPlayer.create(this, getResources().getIdentifier("campanella", "raw", getPackageName()));
+            mpCampanella = MediaPlayer.create(this, R.raw.campanella);
+            mpCampanella.start();
+        }
 
     }
 
@@ -1194,7 +1229,10 @@ public class AddizioniActivity extends AppCompatActivity {
      * player campanella rilascio risorsa
      */
     private void releaseResourcesCampanella() {
-//        mpCampanella.release();
+        if (suoni) {
+            mpCampanella.release();
+        }
+
     }
 
     /**
@@ -1203,27 +1241,40 @@ public class AddizioniActivity extends AppCompatActivity {
     public void startBattuta() {
         /**suoni****/
 
-        mpBat = MediaPlayer.create(this, getResources().getIdentifier("bat", "raw", getPackageName()));
+        if (suoni) {
+            mpBat = MediaPlayer.create(this, getResources().getIdentifier("bat", "raw", getPackageName()));
+            mpBat = MediaPlayer.create(this, R.raw.bat);
+            mpBat.start();
+        }
 
-        mpBat = MediaPlayer.create(this, R.raw.bat);
-        mpBat.start();
     }
 
     public void releaseResourcesBattuta() {
-        mpBat.release();
+        if (suoni) {
+            mpBat.release();
+        }
+
     }
 
 
     public void startTic() {
-        mpTic = MediaPlayer.create(this, getResources().getIdentifier("ticchettio", "raw", getPackageName()));
+        if (suoni) {
+            mpTic = MediaPlayer.create(this, getResources().getIdentifier("ticchettio", "raw", getPackageName()));
+            mpTic = MediaPlayer.create(this, R.raw.ticchettio);
+            mpTic.start();
+        }
 
-        mpTic = MediaPlayer.create(this, R.raw.ticchettio);
-        mpTic.start();
+
     }
 
     public void releaseResourcesTic() {
-        mpTic.release();
+
+        if (suoni) {
+            mpTic.release();
+        }
+
     }
+
 
 
 
@@ -1238,7 +1289,10 @@ public class AddizioniActivity extends AppCompatActivity {
      * metodo che gestisce il countdown
      */
     private void startTimer() {
-        startTic();/*suono ticchettio orologio digitale*/
+
+        startTic();
+
+        /*suono ticchettio orologio digitale*/
 
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
             @Override
@@ -1267,8 +1321,13 @@ public class AddizioniActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+
                 startCampanella();
-                mpTic.stop();
+                if (suoni) {
+                    mpTic.stop();
+                }
+
+
                 lltimezone = (LinearLayout) findViewById(R.id.timezone);
                 lltimezone.setBackground(getDrawable(R.drawable.count_down_finish));
                 mTimerRunning = false;
@@ -1288,7 +1347,10 @@ public class AddizioniActivity extends AppCompatActivity {
      * metodi timer
      */
     public void pauseTimer() {
-        mpTic.pause();
+        if (suoni) {
+            mpTic.pause();
+
+        }
         mCountDownTimer.cancel();
         mTimerRunning = false;
 
@@ -1298,7 +1360,10 @@ public class AddizioniActivity extends AppCompatActivity {
      * stoppa il countdown se hai risposto all'ultima domanda
      */
     public void stopTimer() {
-        mpTic.stop();
+        if (suoni) {
+            mpTic.stop();
+        }
+
         mTimerRunning = false;
         mCountDownTimer.cancel();
     }
@@ -1350,6 +1415,25 @@ public class AddizioniActivity extends AppCompatActivity {
             return true;
         } else {
             return false;
+        }
+
+    }
+
+    /**
+     *
+     */
+    public void checkImpostazioni() {
+
+        if ("si".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Suoni"))) {
+            suoni = true;
+        } else {
+            suoni = false;
+        }
+
+        if ("si".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Vibrazione"))) {
+            vibrazione = true;
+        } else {
+            vibrazione = false;
         }
 
     }

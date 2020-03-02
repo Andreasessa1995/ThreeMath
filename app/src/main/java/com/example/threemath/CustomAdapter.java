@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Locale;
 
 public class CustomAdapter extends ArrayAdapter<Categoria> {
 
@@ -41,11 +42,16 @@ public class CustomAdapter extends ArrayAdapter<Categoria> {
 
 
 
-        if(position>=7){
+        if(position>=17){
             dpunteggio = (Double) c.getPunteggioDouble();
+
             TextView testoPunteggio ;
+            String s = String.format(Locale.getDefault(), "%02g", dpunteggio);
+
             testoPunteggio = (TextView) v.findViewById(R.id.textPunteggio);
-            testoPunteggio.setText(""+dpunteggio+"%");
+
+
+            testoPunteggio.setText(""+s+"%");
         }else {
             punteggio = (int) c.getPunteggio();
             TextView testoPunteggio ;

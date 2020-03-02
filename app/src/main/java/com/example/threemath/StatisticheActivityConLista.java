@@ -1,20 +1,14 @@
 package com.example.threemath;
 
-import android.app.AlertDialog;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
+
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
+
 import android.widget.ListView;
-import android.widget.TextView;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -38,6 +32,10 @@ public class StatisticheActivityConLista extends AppCompatActivity {
     int numTot = 0;
 
 
+    Categoria c18 = new Categoria("Perc. corrette",0.0);
+    Categoria c19 = new Categoria("Perc. errate",0.0);
+
+
     /**
      * suoni
      **/
@@ -54,45 +52,79 @@ public class StatisticheActivityConLista extends AppCompatActivity {
 
         punteggio = (int) loadPunteggi(getApplicationContext(), "Addizioni");
         Categoria c = new Categoria ("Addizioni",punteggio);
+        punteggio = loadNumRisposteEsattePerCategoria(getApplicationContext(),"Addizioni");
+        Categoria c2 = new Categoria ("Corrette",punteggio);
+        punteggio = loadNumRisposteErratePerCategoria(getApplicationContext(),"Addizioni");
+        Categoria c3 = new Categoria ("Erratte",punteggio);
+
+
 
         punteggio = loadPunteggi(getApplicationContext(), "Sottrazioni");
-        Categoria c2 = new Categoria ("Sottrazioni",punteggio);
+        Categoria c4 = new Categoria ("Sottrazioni",punteggio);
+        punteggio = loadNumRisposteEsattePerCategoria(getApplicationContext(),"Sottrazioni");
+        Categoria c5 = new Categoria ("Corrette",punteggio);
+        punteggio = loadNumRisposteErratePerCategoria(getApplicationContext(),"Sottrazioni");
+        Categoria c6 = new Categoria ("Erratte",punteggio);
+
 
 
         punteggio = loadPunteggi(getApplicationContext(), "Moltiplicazione");
-        Categoria c3 = new Categoria ("Moltiplicazione",punteggio);
+        Categoria c7 = new Categoria ("Moltiplicazione",punteggio);
+        punteggio = loadNumRisposteEsattePerCategoria(getApplicationContext(),"Moltiplicazioni");
+        Categoria c8 = new Categoria ("Corrette",punteggio);
+        punteggio = loadNumRisposteErratePerCategoria(getApplicationContext(),"Moltiplicazioni");
+        Categoria c9 = new Categoria ("Erratte",punteggio);
 
         punteggio = loadPunteggi(getApplicationContext(), "Divisioni");
-        Categoria c4 = new Categoria ("Divisioni",punteggio);
+        Categoria c10 = new Categoria ("Divisioni",punteggio);
+        punteggio = loadNumRisposteEsattePerCategoria(getApplicationContext(),"Divisioni");
+        Categoria c11 = new Categoria ("Corrette",punteggio);
+        punteggio = loadNumRisposteErratePerCategoria(getApplicationContext(),"Divisioni");
+        Categoria c12 = new Categoria ("Erratte",punteggio);
+
+
 
         punteggio = loadPunteggi(getApplicationContext(), "Indovinelli");
-        Categoria c5 = new Categoria ("Indovinelli",punteggio);
+        Categoria c13 = new Categoria ("Indovinelli",punteggio);
+        punteggio = loadNumRisposteEsattePerCategoria(getApplicationContext(),"Indovinelli");
+        Categoria c14 = new Categoria ("Corrette",punteggio);
+        punteggio = loadNumRisposteErratePerCategoria(getApplicationContext(),"Indovinelli");
+        Categoria c15 = new Categoria ("Erratte",punteggio);
+
+
+
 
 
 
 
 
         numRispCorrette = gf.caricaNumRisposteCorrette(getApplicationContext());
-        Categoria c6 = new Categoria("Corrette",numRispCorrette);
+        Categoria c16 = new Categoria("Tot. Corrette",numRispCorrette);
 
         numRispErrate = gf.caricaNumRisposteErrate(getApplicationContext());
-        Categoria c7 = new Categoria("Errate",numRispErrate);
+        Categoria c17 = new Categoria("Tot. Errate",numRispErrate);
 
         numTot = numRispCorrette + numRispErrate;
 
          Log log = null;
          log.d("DEBUG", "Corrette piu errrattteeeeeeee " + numTot);
 
+        if (numTot != 0) {
+
+            double drapportoCorrette = calcolaDivisione(numRispCorrette,numTot)*100;
+            double drapportoErrate = calcolaDivisione(numRispErrate,numTot)*100;
+            c18 = new Categoria("Perc. corrette",drapportoCorrette);
+            c19 = new Categoria("Perc. errate",drapportoErrate);
+
+        }
 
 
-        double drapportoCorrette = calcolaDivisione(numRispCorrette,numTot)*100;
-        double drapportoErrate = calcolaDivisione(numRispErrate,numTot)*100;
+
 
 
         // double drapportoCorrette = 50.0/10.0;
 
-        Categoria c8 = new Categoria("Perc. corrette",drapportoCorrette);
-        Categoria c9 = new Categoria("Perc. errate",drapportoErrate);
+
 
 
 
@@ -130,6 +162,38 @@ public class StatisticheActivityConLista extends AppCompatActivity {
         listaCategoria.add(c9);
         customAdapter.add(c9);
 
+        listaCategoria.add(c10);
+        customAdapter.add(c10);
+
+        listaCategoria.add(c11);
+        customAdapter.add(c11);
+
+        listaCategoria.add(c12);
+        customAdapter.add(c12);
+
+        listaCategoria.add(c13);
+        customAdapter.add(c13);
+
+        listaCategoria.add(c14);
+        customAdapter.add(c14);
+
+        listaCategoria.add(c15);
+        customAdapter.add(c15);
+
+        listaCategoria.add(c16);
+        customAdapter.add(c16);
+
+        listaCategoria.add(c17);
+        customAdapter.add(c17);
+
+        listaCategoria.add(c18);
+        customAdapter.add(c18);
+
+        listaCategoria.add(c19);
+        customAdapter.add(c19);
+
+
+
 
 
 
@@ -150,6 +214,30 @@ public class StatisticheActivityConLista extends AppCompatActivity {
         return gf.caricaScores(context, categoria);
 
     }
+
+    /**
+     * carica il numero di risposte esatte per categoria
+     * @param context
+     * @param categoria
+     * @return
+     */
+    private  int loadNumRisposteEsattePerCategoria(Context context,String categoria ){
+
+        return gf.caricaNumRisposteCorretteCategoria(context,categoria);
+    }
+
+    /**
+     * carica il numero di risposte errate per categoria
+     * @param context
+     * @param categoria
+     * @return
+     */
+    private  int loadNumRisposteErratePerCategoria(Context context,String categoria ){
+
+        return gf.caricaNumRisposteErrateCategoria(context,categoria);
+    }
+
+
 
     /**
      * calocala divisone tra nueri interi ritornando un double

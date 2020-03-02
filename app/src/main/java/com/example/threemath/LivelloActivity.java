@@ -40,6 +40,12 @@ public class LivelloActivity extends AppCompatActivity {
     MediaPlayer mpBat;
 
     /**
+     * Boolean
+     */
+    Boolean suoni = true;
+    Boolean vibrazione = true;
+
+    /**
      * gestione vibrazione
      */
     Vibrator vibrator;
@@ -54,13 +60,12 @@ public class LivelloActivity extends AppCompatActivity {
         setContentView(R.layout.activity_livelli);
 
 
-
         Intent intent = getIntent();
         categoria = intent.getStringExtra("CATEGORIA");
 
-       // gf.azzeraScore(getApplicationContext(),categoria);
-       // gf.azzeraNumRisposte(getApplicationContext());
-
+        gf.azzeraScore(getApplicationContext(), categoria);
+        gf.azzeraNumRisposte(getApplicationContext());
+        gf.azzeraNumRisposteCategorie(getApplicationContext());
 
 
         bLivello1 = (Button) findViewById(R.id.bottoneLivello1);
@@ -68,12 +73,14 @@ public class LivelloActivity extends AppCompatActivity {
         bLivello3 = (Button) findViewById(R.id.bottoneLivello3);
         textScore = (TextView) findViewById(R.id.scores);
 
+        checkImpostazioni();
+
         if (categoria.equalsIgnoreCase("addizioni")) {
-            score = gf.caricaScores(getApplicationContext(),"Addizioni");
+            score = gf.caricaScores(getApplicationContext(), "Addizioni");
             textScore.setText("" + score);
             checkLV(score);
-        }else if (categoria.equalsIgnoreCase("sottrazioni")) {
-            score = gf.caricaScores(getApplicationContext(),"Sottrazioni");
+        } else if (categoria.equalsIgnoreCase("sottrazioni")) {
+            score = gf.caricaScores(getApplicationContext(), "Sottrazioni");
             textScore.setText("" + score);
             checkLV(score);
         }
@@ -98,9 +105,13 @@ public class LivelloActivity extends AppCompatActivity {
             /*evitare di premere due volte sul bottone*/
             bLivello1.setClickable(false);
 
-            if (isHaveVibrate()) {
-                vibrator.vibrate(pattern, -1); // does not repeat
-                //vibrator.vibrate(pattern,  0); // repeats forever
+            /*VIBRAZONE e SUONI*/
+
+            if (vibrazione) {
+                if (isHaveVibrate()) {
+                    vibrator.vibrate(pattern, -1); // does not repeat
+                    //vibrator.vibrate(pattern,  0); // repeats forever
+                }
             }
 
             startBattuta();
@@ -118,10 +129,16 @@ public class LivelloActivity extends AppCompatActivity {
         } else if (bLivello2.isPressed()) {
             /*evitare di premere due volte sul bottone*/
             bLivello2.setClickable(false);
-            if (isHaveVibrate()) {
-                vibrator.vibrate(pattern, -1); // does not repeat
-                //vibrator.vibrate(pattern,  0); // repeats forever
+            /*VIBRAZONE e SUONI*/
+
+            if (vibrazione) {
+                if (isHaveVibrate()) {
+                    vibrator.vibrate(pattern, -1); // does not repeat
+                    //vibrator.vibrate(pattern,  0); // repeats forever
+                }
             }
+            startBattuta();
+
 
             Intent i = new Intent(getApplicationContext(), CountDownActivity.class);
             i.putExtra("CATEGORIA", categoria);
@@ -133,6 +150,17 @@ public class LivelloActivity extends AppCompatActivity {
         } else if (bLivello3.isPressed()) {
             /*evitare di premere due volte sul bottone*/
             bLivello3.setClickable(false);
+
+            /*VIBRAZONE e SUONI*/
+
+            if (vibrazione) {
+                if (isHaveVibrate()) {
+                    vibrator.vibrate(pattern, -1); // does not repeat
+                    //vibrator.vibrate(pattern,  0); // repeats forever
+                }
+            }
+
+            startBattuta();
 
 
             Intent i = new Intent(getApplicationContext(), CountDownActivity.class);
@@ -153,15 +181,14 @@ public class LivelloActivity extends AppCompatActivity {
     private void checkLV(int scoreCat) {
 
 
-
         if ((scoreCat >= 0) && (scoreCat < 1000)) {
             messageLV2();
             messageLV3();
-        } else if ((scoreCat >= 1000)&&(scoreCat<2500)) {
+        } else if ((scoreCat >= 1000) && (scoreCat < 2500)) {
 
             bLivello2.setBackground(getDrawable(R.drawable.categoria));
             messageLV3();
-        }else if (scoreCat >= 2500) {
+        } else if (scoreCat >= 2500) {
 
             bLivello2.setBackground(getDrawable(R.drawable.categoria));
             bLivello3.setBackground(getDrawable(R.drawable.categoria));
@@ -238,14 +265,21 @@ public class LivelloActivity extends AppCompatActivity {
      * player campanella e bat
      */
     public void startBattuta() {
-        mpBat = MediaPlayer.create(this, getResources().getIdentifier("bat", "raw", getPackageName()));
-        mpBat = MediaPlayer.create(this, R.raw.bat);
-        mpBat.start();
+
+        if (suoni) {
+            mpBat = MediaPlayer.create(this, getResources().getIdentifier("bat", "raw", getPackageName()));
+            mpBat = MediaPlayer.create(this, R.raw.bat);
+            mpBat.start();
+        }
+
     }
 
     public void releaseResourcesBattuta() {
 
-        mpBat.release();
+        if (suoni) {
+            mpBat.release();
+        }
+
     }
 
     /**
@@ -258,6 +292,25 @@ public class LivelloActivity extends AppCompatActivity {
             return true;
         } else {
             return false;
+        }
+
+    }
+
+    /**
+     *
+     */
+    public void checkImpostazioni() {
+
+        if ("si".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Suoni"))) {
+            suoni = true;
+        } else {
+            suoni = false;
+        }
+
+        if ("si".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Vibrazione"))) {
+            vibrazione = true;
+        } else {
+            vibrazione = false;
         }
 
     }

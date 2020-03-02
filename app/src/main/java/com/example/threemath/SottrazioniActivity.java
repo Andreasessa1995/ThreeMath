@@ -92,6 +92,14 @@ public class SottrazioniActivity extends AppCompatActivity {
     boolean stopCountDownPressedHome = false;
 
 
+    /**
+     * IMPOSTAZIONI
+     */
+    GestoreFile gf = new GestoreFile();
+    Boolean suoni = true;
+    Boolean vibrazione = true;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -159,6 +167,8 @@ public class SottrazioniActivity extends AppCompatActivity {
         /*sceglie le domande da inserire **/
         choseDomande();
 
+        checkImpostazioni();
+
 
         sizeq = quesito.size();
 
@@ -224,9 +234,11 @@ public class SottrazioniActivity extends AppCompatActivity {
                 startCampanella();
 
                 /*vibrazione*/
-                if (isHaveVibrate()) {
-                    vibrator.vibrate(pattern, -1); // does not repeat
-                    //vibrator.vibrate(pattern,  0); // repeats forever
+                if (vibrazione) {
+                    if (isHaveVibrate()) {
+                        vibrator.vibrate(pattern, -1); // does not repeat
+                        //vibrator.vibrate(pattern,  0); // repeats forever
+                    }
                 }
                 ultimaDomanda = true;
                 indiceDomanda++;
@@ -254,12 +266,15 @@ public class SottrazioniActivity extends AppCompatActivity {
 
             testoDomanda.setText(quesito.get(indiceDomanda).getDomanda());
             if ((A.isPressed()) || (B.isPressed()) || (C.isPressed()) || (D.isPressed())) {
-                //startBattuta();
+
+                startBattuta();
 
                 /*vibrazione*/
-                if (isHaveVibrate()) {
-                    vibrator.vibrate(pattern, -1); // does not repeat
-                    //vibrator.vibrate(pattern,  0); // repeats forever
+                if (vibrazione) {
+                    if (isHaveVibrate()) {
+                        vibrator.vibrate(pattern, -1); // does not repeat
+                        //vibrator.vibrate(pattern,  0); // repeats forever
+                    }
                 }
 
                 /**disposizione randomica risposte sui vari bottoni varie scelte per aumentare la casualità**/
@@ -382,9 +397,11 @@ public class SottrazioniActivity extends AppCompatActivity {
         mCountDownTimer.cancel();
 
         /*vibrazione*/
-        if (isHaveVibrate()) {
-            vibrator.vibrate(pattern, -1); // does not repeat
-            //vibrator.vibrate(pattern,  0); // repeats forever
+        if (vibrazione) {
+            if (isHaveVibrate()) {
+                vibrator.vibrate(pattern, -1); // does not repeat
+                //vibrator.vibrate(pattern,  0); // repeats forever
+            }
         }
 
         bottoneRisultati.setClickable(false);
@@ -893,9 +910,7 @@ public class SottrazioniActivity extends AppCompatActivity {
      * sceglie randomicamente le domande da caricare
      */
     protected void choseDomande() {
-        //GestoreFile gf = new GestoreFile();
-        //int numPoint = gf.caricaScoresAddizioni(getApplicationContext());
-        //numPoint = numPoint %2;
+
 
         //numRand = 1 + (int) (Math.random() * 3);
 
@@ -1173,11 +1188,13 @@ public class SottrazioniActivity extends AppCompatActivity {
      * player campanella e bat
      */
     public void startCampanella() {
-        /*Media layer*/
-        mpCampanella = MediaPlayer.create(this, getResources().getIdentifier("campanella", "raw", getPackageName()));
-        mpCampanella = MediaPlayer.create(this, R.raw.campanella);
-        mpCampanella.start();
 
+        if (suoni) {/*impostazioni suoni si **/
+            /*Media layer*/
+            mpCampanella = MediaPlayer.create(this, getResources().getIdentifier("campanella", "raw", getPackageName()));
+            mpCampanella = MediaPlayer.create(this, R.raw.campanella);
+            mpCampanella.start();
+        }
 
     }
 
@@ -1185,35 +1202,58 @@ public class SottrazioniActivity extends AppCompatActivity {
      * player campanella rilascio risorsa
      */
     private void releaseResourcesCampanella() {
-//        mpCampanella.release();
+        if (suoni) {
+            mpCampanella.release();
+        }
+
     }
 
     /**
-     * player battuta
+     * player battuta attivato se l'impostazioni suono è attiva
      */
     public void startBattuta() {
-        /**suoni****/
 
-        mpBat = MediaPlayer.create(this, getResources().getIdentifier("bat", "raw", getPackageName()));
+        if (suoni) {
+            mpBat = MediaPlayer.create(this, getResources().getIdentifier("bat", "raw", getPackageName()));
+            mpBat = MediaPlayer.create(this, R.raw.bat);
+            mpBat.start();
+        }
 
-        mpBat = MediaPlayer.create(this, R.raw.bat);
-        mpBat.start();
     }
 
+    /**
+     * rilascia la risorsa se nelle impostzioni è attiva
+     */
     public void releaseResourcesBattuta() {
-        mpBat.release();
+        if (suoni) {
+            mpBat.release();
+        }
+
     }
 
 
+    /**
+     * avvia il ticchettio se l'impostazione suono è attiva
+     */
     public void startTic() {
-        mpTic = MediaPlayer.create(this, getResources().getIdentifier("ticchettio", "raw", getPackageName()));
+        if (suoni) {
+            mpTic = MediaPlayer.create(this, getResources().getIdentifier("ticchettio", "raw", getPackageName()));
+            mpTic = MediaPlayer.create(this, R.raw.ticchettio);
+            mpTic.start();
+        }
 
-        mpTic = MediaPlayer.create(this, R.raw.ticchettio);
-        mpTic.start();
+
     }
 
+    /**
+     * rilascia la risorsa se nelle impostzioni è attiva
+     */
     public void releaseResourcesTic() {
-        mpTic.release();
+
+        if (suoni) {
+            mpTic.release();
+        }
+
     }
 
 
@@ -1259,7 +1299,10 @@ public class SottrazioniActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 startCampanella();
-                mpTic.stop();
+                if (suoni) {
+                    mpTic.stop();
+
+                }
                 Toast.makeText(SottrazioniActivity.this, "Tempo scaduto", Toast.LENGTH_LONG).show();
                 lltimezone = (LinearLayout) findViewById(R.id.timezone);
                 lltimezone.setBackground(getDrawable(R.drawable.count_down_finish));
@@ -1279,7 +1322,10 @@ public class SottrazioniActivity extends AppCompatActivity {
      * metodi timer
      */
     public void pauseTimer() {
-        mpTic.pause();
+        if (suoni) {
+            mpTic.pause();
+
+        }
         mCountDownTimer.cancel();
         mTimerRunning = false;
 
@@ -1289,7 +1335,9 @@ public class SottrazioniActivity extends AppCompatActivity {
      * stoppa il countdown se hai risposto all'ultima domanda
      */
     public void stopTimer() {
-        mpTic.stop();
+        if (suoni) {
+            mpTic.stop();
+        }
         mTimerRunning = false;
         mCountDownTimer.cancel();
     }
@@ -1341,6 +1389,25 @@ public class SottrazioniActivity extends AppCompatActivity {
             return true;
         } else {
             return false;
+        }
+
+    }
+
+    /**
+     * conrolla le impostazioni del suono e delle vibrazioni
+     */
+    public void checkImpostazioni() {
+
+        if ("si".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Suoni"))) {
+            suoni = true;
+        } else {
+            suoni = false;
+        }
+
+        if ("si".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Vibrazione"))) {
+            vibrazione = true;
+        } else {
+            vibrazione = false;
         }
 
     }

@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private Animation anim=null;
+    private Animation anim = null;
 
 
     /*bottone quiz */
@@ -28,18 +28,25 @@ public class HomeActivity extends AppCompatActivity {
     private Button bCategoria6;
     private Button bCategoria7;
 
-    String categoria ="";
-    /**gestione vibrazione*/
+    String categoria = "";
+    /**
+     * gestione vibrazione
+     */
     Vibrator vibrator;
     /*vib 100 millise riposo 1000 millsec, vir*/
-    long[] pattern = {0, 100, 1000 };
-
+    long[] pattern = {0, 100, 1000};
 
 
     /**
      * suoni
      **/
     MediaPlayer mpBat;
+
+
+    GestoreFile gf = new GestoreFile();
+    Boolean suoni = true;
+    Boolean vibrazione = true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,32 +64,33 @@ public class HomeActivity extends AppCompatActivity {
         bCategoria6 = (Button) findViewById(R.id.bottoneCategoria6);
         bCategoria7 = (Button) findViewById(R.id.bottoneCategoria7);
 
+        checkImpostazioni();
 
 
-
-
+        Log log = null;
 
 
     }
 
     /**
-     *
      * @return
      */
-    public  boolean isHaveVibrate(){
+    public boolean isHaveVibrate() {
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         if (vibrator.hasVibrator()) {
 
             return true;
-        }else    { return false;}
+        } else {
+            return false;
+        }
 
     }
 
 
-
-
+    /**
+     * @param v
+     */
     public void onClickCategoria(View v) {
-
 
 
         Log log = null;
@@ -92,21 +100,28 @@ public class HomeActivity extends AppCompatActivity {
 
             categoria = bCategoriaDomanda1.getText().toString();
             //log.d("DEBUG", "CATEGORIA CATEGORIA CATEGORIA CATEGORIA = " +categoria );
-            /*VIBRAZONE*/
 
-            if (isHaveVibrate( ) ){
-                vibrator.vibrate(pattern, -1); // does not repeat
-                //vibrator.vibrate(pattern,  0); // repeats forever
+
+            /*VIBRAZONE e SUONI*/
+
+            if (vibrazione) {
+                if (isHaveVibrate()) {
+                    vibrator.vibrate(pattern, -1); // does not repeat
+                    //vibrator.vibrate(pattern,  0); // repeats forever
+                }
             }
 
-             bCategoriaDomanda1.setClickable(false);
+            startBattuta();
 
-           // startBattuta();
+
+            bCategoriaDomanda1.setClickable(false);
+
+
             /*new intent*/
             // Intent intent = new Intent();
             // intent.setClass(getApplicationContext(), AddizioniActivity.class);
             Intent intent = new Intent(getApplicationContext(), LivelloActivity.class);
-            intent.putExtra("CATEGORIA",categoria);
+            intent.putExtra("CATEGORIA", categoria);
 
             startActivityForResult(intent, 0);
 
@@ -114,54 +129,127 @@ public class HomeActivity extends AppCompatActivity {
             // releaseResourcesBattuta();
 
 
-        }else if (bCategoriaDomanda2.isPressed()) {
+        } else if (bCategoriaDomanda2.isPressed()) {
 
             categoria = bCategoriaDomanda2.getText().toString();
             bCategoriaDomanda2.setClickable(false);
 
+            /*VIBRAZONE e SUONI*/
+
+            if (vibrazione) {
+                if (isHaveVibrate()) {
+                    vibrator.vibrate(pattern, -1); // does not repeat
+                    //vibrator.vibrate(pattern,  0); // repeats forever
+                }
+            }
+
+            startBattuta();
+
+
             Intent intent = new Intent(getApplicationContext(), LivelloActivity.class);
-            intent.putExtra("CATEGORIA",categoria);
+            intent.putExtra("CATEGORIA", categoria);
 
             startActivityForResult(intent, 0);
+
+
 
             /*apri sott*/
 
         } else if (bCategoriaDomanda3.isPressed()) {
             bCategoriaDomanda3.setClickable(false);
 
+            /*VIBRAZONE e SUONI*/
+
+            if (vibrazione) {
+                if (isHaveVibrate()) {
+                    vibrator.vibrate(pattern, -1); // does not repeat
+                    //vibrator.vibrate(pattern,  0); // repeats forever
+                }
+            }
+
+            startBattuta();
+
+
 
             /*apri divis*/
 
-        }else if (bCategoriaDomanda4.isPressed()) {
+        } else if (bCategoriaDomanda4.isPressed()) {
             bCategoriaDomanda4.setClickable(false);
 
+            /*VIBRAZONE e SUONI*/
+
+            if (vibrazione) {
+                if (isHaveVibrate()) {
+                    vibrator.vibrate(pattern, -1); // does not repeat
+                    //vibrator.vibrate(pattern,  0); // repeats forever
+                }
+            }
+
+            startBattuta();
+
             /*apri molti*/
 
-        }else if (bCategoriaDomanda5.isPressed()) {
+        } else if (bCategoriaDomanda5.isPressed()) {
             bCategoriaDomanda5.setClickable(false);
 
+            /*VIBRAZONE e SUONI*/
+
+            if (vibrazione) {
+                if (isHaveVibrate()) {
+                    vibrator.vibrate(pattern, -1); // does not repeat
+                    //vibrator.vibrate(pattern,  0); // repeats forever
+                }
+            }
+
+            startBattuta();
+
+
             Intent intent = new Intent(getApplicationContext(), IndovinelliActivity.class);
-            intent.putExtra("CATEGORIA",categoria);
+            intent.putExtra("CATEGORIA", categoria);
 
             startActivityForResult(intent, 0);
 
             /*apri molti*/
 
-        }else if (bCategoria6.isPressed()) {
+        } else if (bCategoria6.isPressed()) {
             bCategoria6.setClickable(false);
 
+            /*VIBRAZONE e SUONI*/
+
+            if (vibrazione) {
+                if (isHaveVibrate()) {
+                    vibrator.vibrate(pattern, -1); // does not repeat
+                    //vibrator.vibrate(pattern,  0); // repeats forever
+                }
+            }
+
+            startBattuta();
+
+
             Intent intent = new Intent(getApplicationContext(), StatisticheActivityConLista.class);
-            intent.putExtra("CATEGORIA",categoria);
+            intent.putExtra("CATEGORIA", categoria);
 
             startActivityForResult(intent, 0);
 
             /*apri molti*/
 
-        }else if (bCategoria7.isPressed()) {
+        } else if (bCategoria7.isPressed()) {
             bCategoria7.setClickable(false);
 
+            /*VIBRAZONE e SUONI*/
+
+            if (vibrazione) {
+                if (isHaveVibrate()) {
+                    vibrator.vibrate(pattern, -1); // does not repeat
+                    //vibrator.vibrate(pattern,  0); // repeats forever
+                }
+            }
+
+            startBattuta();
+
+
             Intent intent = new Intent(getApplicationContext(), ImpostazioniActivity.class);
-            intent.putExtra("CATEGORIA",categoria);
+            intent.putExtra("CATEGORIA", categoria);
 
             startActivityForResult(intent, 0);
 
@@ -181,21 +269,51 @@ public class HomeActivity extends AppCompatActivity {
         bCategoriaDomanda5.setClickable(true);
         bCategoria6.setClickable(true);
         bCategoria7.setClickable(true);
+        checkImpostazioni();
         super.onResume();
     }
 
     /**
-     * player campanella e bat
+     * player battuta
      */
     public void startBattuta() {
-        mpBat = MediaPlayer.create(this, getResources().getIdentifier("bat", "raw", getPackageName()));
-        mpBat = MediaPlayer.create(this, R.raw.bat);
-        mpBat.start();
+        /**suoni****/
+
+        if (suoni) { /*impostazione del suono*/
+            mpBat = MediaPlayer.create(this, getResources().getIdentifier("bat", "raw", getPackageName()));
+
+            mpBat = MediaPlayer.create(this, R.raw.bat);
+            mpBat.start();
+        }
+
     }
 
     public void releaseResourcesBattuta() {
 
-        mpBat.release();
+        if (suoni) {
+            mpBat.release();
+
+        }
+    }
+
+
+    /**
+     * controlla le impostazioni del suono e delle vibrazioni
+     */
+    public void checkImpostazioni() {
+
+        if ("si".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Suoni"))) {
+            suoni = true;
+        } else {
+            suoni = false;
+        }
+
+        if ("si".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Vibrazione"))) {
+            vibrazione = true;
+        } else {
+            vibrazione = false;
+        }
+
     }
 
 

@@ -8,13 +8,15 @@ import android.widget.RadioButton;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-
 public class ImpostazioniActivity extends AppCompatActivity {
     RadioButton rbSuoniSi;
     RadioButton rbSuoniNo;
 
     RadioButton rbVibSi;
     RadioButton rbVibNo;
+
+
+    GestoreFile gf = new GestoreFile();
 
 
     @Override
@@ -28,57 +30,72 @@ public class ImpostazioniActivity extends AppCompatActivity {
         rbVibNo = (RadioButton) findViewById(R.id.radioButtonVibNo);
 
         Log log = null;
-
-
-       /* if( rbSuoniSi.isActivated()){
-            log.d("DEBUG", "STATO si isActivated----"  );
-        }
-        if (rbSuoniSi.isChecked()){
-            log.d("DEBUG", "STATO si checked--------"  );
-
-        }
-        if( rbSuoniNo.isActivated()){
-            log.d("DEBUG", "STATO no isActivated----"  );
-        }
-        if (rbSuoniNo.isChecked()){
-            log.d("DEBUG", "STATO no checked--------"  );
-
-        }*/
-
-
-
-
+        checkImpostazioni();
 
 
     }
 
-    public void onClickSuono(View v){
+    /**
+     * check delle impostazioni suono e vibrazione
+     */
+    public void checkImpostazioni() {
+
+        if ("si".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Suoni"))) {
+            rbSuoniSi.setChecked(true);
+        } else if ("no".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Suoni"))) {
+            rbSuoniNo.setChecked(true);
+        }
+
+
+        if ("si".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Vibrazione"))) {
+            rbVibSi.setChecked(true);
+        } else if ("no".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Vibrazione"))) {
+            rbVibNo.setChecked(true);
+        }
+
+
+    }
+
+    /**
+     * @param v
+     */
+    public void onClickSuono(View v) {
         Log log = null;
 
-        if (rbSuoniSi.isChecked()){
-            log.d("DEBUG", "STATO si checked--------"  );
-
-
-        }
-        if (rbSuoniNo.isChecked()){
-            log.d("DEBUG", "STATO no checked--------"  );
-
+        if (rbSuoniSi.isChecked()) {
+            log.d("DEBUG", "STATO si checked--------");
+            gf.salvaImpostazioni(getApplicationContext(), "Suoni", "si");
 
         }
+        if (rbSuoniNo.isChecked()) {
+            log.d("DEBUG", "STATO no checked--------");
+            gf.salvaImpostazioni(getApplicationContext(), "Suoni", "no");
 
+        }
 
 
     }
 
-    public void onClickVibrazione(View v){
-        if (rbSuoniSi.isChecked()){
+    /**
+     *
+     * @param v
+     */
+    public void onClickVibrazione(View v) {
+        Log log = null;
 
+        if (rbVibSi.isChecked()) {
+            log.d("DEBUG", "STATO si checked--------vib");
+            gf.salvaImpostazioni(getApplicationContext(), "Vibrazione", "si");
 
 
         }
-        if (rbSuoniNo.isChecked()){
+        if (rbVibNo.isChecked()) {
+            log.d("DEBUG", "STATO no checked--------vib");
+            gf.salvaImpostazioni(getApplicationContext(), "Vibrazione", "no");
 
 
         }
+
+
     }
 }
