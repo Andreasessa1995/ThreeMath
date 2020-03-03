@@ -63,10 +63,11 @@ public class LivelloActivity extends AppCompatActivity {
         Intent intent = getIntent();
         categoria = intent.getStringExtra("CATEGORIA");
 
-        gf.azzeraScore(getApplicationContext(), categoria);
-        gf.azzeraNumRisposte(getApplicationContext());
-        gf.azzeraNumRisposteCategorie(getApplicationContext());
+       // gf.azzeraScore(getApplicationContext(), categoria);
+      //  gf.azzeraNumRisposte(getApplicationContext());
+    //    gf.azzeraNumRisposteCategorie(getApplicationContext());
 
+        /*Bottoni livelli*/
 
         bLivello1 = (Button) findViewById(R.id.bottoneLivello1);
         bLivello2 = (Button) findViewById(R.id.bottoneLivello2);
@@ -75,15 +76,7 @@ public class LivelloActivity extends AppCompatActivity {
 
         checkImpostazioni();
 
-        if (categoria.equalsIgnoreCase("addizioni")) {
-            score = gf.caricaScores(getApplicationContext(), "Addizioni");
-            textScore.setText("" + score);
-            checkLV(score);
-        } else if (categoria.equalsIgnoreCase("sottrazioni")) {
-            score = gf.caricaScores(getApplicationContext(), "Sottrazioni");
-            textScore.setText("" + score);
-            checkLV(score);
-        }
+        caricaScore();
 
 
         // Log log = null;
@@ -95,11 +88,44 @@ public class LivelloActivity extends AppCompatActivity {
 
     }
 
+
+
+
+    /**
+     * carica gli score della categoria scelta
+     */
+    public void caricaScore(){
+
+        /**caricamento score della categoria scelta */
+
+        if (categoria.equalsIgnoreCase("addizioni")) {
+            score = gf.caricaScores(getApplicationContext(), "Addizioni");
+            textScore.setText("" + score);
+            checkLV(score);
+        } else if (categoria.equalsIgnoreCase("sottrazioni")) {
+            score = gf.caricaScores(getApplicationContext(), "Sottrazioni");
+            textScore.setText("" + score);
+            checkLV(score);
+        } else if (categoria.equalsIgnoreCase("moltiplicazioni")) {
+            score = gf.caricaScores(getApplicationContext(), "Moltiplicazioni");
+            textScore.setText("" + score);
+            checkLV(score);
+        } else if (categoria.equalsIgnoreCase("divisioni")) {
+            score = gf.caricaScores(getApplicationContext(), "Divisioni");
+            textScore.setText("" + score);
+            checkLV(score);
+        }
+
+
+    }
+
     /**
      * @param v
      */
     public void onClickLivello(View v) {
 
+
+        /*livello principiante*/
 
         if (bLivello1.isPressed()) {
             /*evitare di premere due volte sul bottone*/
@@ -126,7 +152,8 @@ public class LivelloActivity extends AppCompatActivity {
             // releaseResourcesBattuta();
 
 
-        } else if (bLivello2.isPressed()) {
+        } else if (bLivello2.isPressed()) {          /*livello normale*/
+
             /*evitare di premere due volte sul bottone*/
             bLivello2.setClickable(false);
             /*VIBRAZONE e SUONI*/
@@ -147,7 +174,7 @@ public class LivelloActivity extends AppCompatActivity {
             startActivityForResult(i, 0);
             /*apri sott*/
 
-        } else if (bLivello3.isPressed()) {
+        } else if (bLivello3.isPressed()) {          /*livello esperto/
             /*evitare di premere due volte sul bottone*/
             bLivello3.setClickable(false);
 
@@ -168,7 +195,7 @@ public class LivelloActivity extends AppCompatActivity {
             i.putExtra("LIVELLO", 3);
             i.putExtra("SCORE", score);
             startActivityForResult(i, 0);
-            /*apri divis*/
+
 
         }
 

@@ -179,7 +179,7 @@ public class SottrazioniActivity extends AppCompatActivity {
 
         /*SETTAGGI TEXT VIEW BOTTONI*/
         testoCategoriaDomanda.setText("SOTTRAZIONI");
-        categoriaQuiz.setText("+");
+        categoriaQuiz.setText("-");
         /*bottoni*/
         testoDomanda.setText(quesito.get(indiceDomanda).getDomanda());
         A.setText(quesito.get(indiceDomanda).getRispostaEsatta());

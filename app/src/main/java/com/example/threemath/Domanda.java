@@ -2,6 +2,11 @@ package com.example.threemath;
 
 import java.util.ArrayList;
 
+/**
+ * domanda
+ * oggetto domanda del quiz
+ */
+
 public class Domanda {
 
     private String domanda = "";

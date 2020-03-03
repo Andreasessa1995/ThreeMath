@@ -111,12 +111,11 @@ public class RisultatiActivity extends AppCompatActivity {
 
         /*salvataggio num risposte esatte e errate totali*/
 
-        salvaNumeroRispsote(getApplicationContext(),numRispEsatte,numRispErrate);
+        aggiornaNumeroRispsote(getApplicationContext(),numRispEsatte,numRispErrate);
+
+        aggiornaNumeroRisposteCategoria(getApplicationContext(),numRispEsatte,numRispErrate,categoria);
 
 
-        /*salvataggio num risposte esatte per categoria*/
-        gf.salvaRisposteErrateCategoria(getApplicationContext(),numRispErrate,categoria);
-        gf.salvaRisposteCorretteCategoria(getApplicationContext(),numRispErrate,categoria);
 
 
 
@@ -174,9 +173,9 @@ public class RisultatiActivity extends AppCompatActivity {
 
         int punti = 0;
         Log log = null;
-        log.d("DEBUG", "tempo che mi arriva restante  = " + tempoRestanteMillis);
+        //log.d("DEBUG", "tempo che mi arriva restante  = " + tempoRestanteMillis);
 
-        if(tempoRestanteMillis>=1000){
+        if(tempoRestanteMillis>=1000){/*necessario quando il tempo finisce e si è risposto non tutte le domande*/
             punti = (int) (numRispEsatte*(tempoRestanteMillis/1000));
 
         }else {
@@ -187,6 +186,7 @@ public class RisultatiActivity extends AppCompatActivity {
         return punti;
 
     }
+
 
     /**
      * salva il punteggio dello score aggiornandolo, sommandolo
@@ -221,19 +221,62 @@ public class RisultatiActivity extends AppCompatActivity {
 
     }
 
+
+
     /**
      * Salva il numero di risposte corrette ed errate totali
      * @param context
      * @param corrette
      * @param errate
      */
-    public void salvaNumeroRispsote(Context context,int corrette,int errate){
+    public void aggiornaNumeroRispsote(Context context,int corrette,int errate){
 
         corrette = corrette + gf.caricaNumRisposteCorrette(context);
         errate = errate + gf.caricaNumRisposteErrate(context);
 
-        gf.salvaRisposteCorrette(context,corrette);
-        gf.salvaRisposteErrate(context,errate);
+        if((corrette<=5000)&&(errate<=5000)){
+            gf.salvaRisposteCorrette(context,corrette);
+            gf.salvaRisposteErrate(context,errate);
+        }else {
+
+            Toast.makeText(RisultatiActivity.this, "Attenzione hai rggiunto il numero massimo di domande corrette/errate ( 5000 )"+ "ne hai totalizzato = "+
+                    corrette +"Errate " + errate , Toast.LENGTH_LONG).show();
+
+
+        }
+
+
+
+    }
+
+
+    /**
+     * salva il numero di rispose corrette ed errate per categoria
+     * @param context
+     * @param corrette
+     * @param errate
+     * @param categoria
+     */
+    public void aggiornaNumeroRisposteCategoria(Context context,int corrette,int errate,String categoria){
+
+
+        corrette = corrette + gf.caricaNumRisposteCorretteCategoria(context,categoria);
+        errate = errate + gf.caricaNumRisposteErrateCategoria(context,categoria);
+
+
+        if((corrette<=5000)&&(errate<=5000)){
+            /*salvataggio num risposte esatte per categoria*/
+            gf.salvaRisposteErrateCategoria(getApplicationContext(),errate,categoria);
+            gf.salvaRisposteCorretteCategoria(getApplicationContext(),corrette,categoria);
+
+        }else {
+
+            Toast.makeText(RisultatiActivity.this, "Attenzione hai rggiunto il numero massimo di domande corrette/errate ( 5000 )"+ "ne hai totalizzato = "+
+                    corrette +"Errate " + errate , Toast.LENGTH_LONG).show();
+
+
+        }
+
 
     }
 
