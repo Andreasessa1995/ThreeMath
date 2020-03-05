@@ -121,6 +121,14 @@ public class CountDownActivity extends AppCompatActivity {
                     countDownRelease();
                     onBackPressed();
 
+                }else if (categoria.equalsIgnoreCase("Moltiplicazioni")) {
+                    i = new Intent(getApplicationContext(), MoltiplicazioniActivity.class);
+                    i.putExtra("LIVELLO", livello);
+                    i.putExtra("SCORE", numScoreRandom);
+                    startActivityForResult(i, 0);
+                    countDownRelease();
+                    onBackPressed();
+
                 }
 
 

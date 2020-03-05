@@ -87,7 +87,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-    /**
+    /** in base alla categoria scelta apre l'activity livello
+     * la categoria la prende dal testp del bottone
      * @param v
      */
     public void onClickCategoria(View v) {
@@ -95,8 +96,9 @@ public class HomeActivity extends AppCompatActivity {
 
         Log log = null;
 
+        /*categoria addizione*/
 
-        if (bCategoriaDomanda1.isPressed()) {
+        if (bCategoriaDomanda1.isPressed()) { /**categoria addizioni*/
 
             categoria = bCategoriaDomanda1.getText().toString();
             //log.d("DEBUG", "CATEGORIA CATEGORIA CATEGORIA CATEGORIA = " +categoria );
@@ -129,7 +131,8 @@ public class HomeActivity extends AppCompatActivity {
             // releaseResourcesBattuta();
 
 
-        } else if (bCategoriaDomanda2.isPressed()) {
+        } else if (bCategoriaDomanda2.isPressed()) {            /**categoria sottrazione*/
+
 
             categoria = bCategoriaDomanda2.getText().toString();
             bCategoriaDomanda2.setClickable(false);
@@ -155,7 +158,9 @@ public class HomeActivity extends AppCompatActivity {
 
             /*apri sott*/
 
-        } else if (bCategoriaDomanda3.isPressed()) {
+        } else if (bCategoriaDomanda3.isPressed()) {           /**categoria moltiplicazione*/
+
+            categoria = bCategoriaDomanda3.getText().toString();
             bCategoriaDomanda3.setClickable(false);
 
             /*VIBRAZONE e SUONI*/
@@ -169,11 +174,16 @@ public class HomeActivity extends AppCompatActivity {
 
             startBattuta();
 
+            Intent intent = new Intent(getApplicationContext(), LivelloActivity.class);
+            intent.putExtra("CATEGORIA", categoria);
+
+            startActivityForResult(intent, 0);
 
 
             /*apri divis*/
 
-        } else if (bCategoriaDomanda4.isPressed()) {
+        } else if (bCategoriaDomanda4.isPressed()) {   /**categoria divisioni*/
+            categoria = bCategoriaDomanda4.getText().toString();
             bCategoriaDomanda4.setClickable(false);
 
             /*VIBRAZONE e SUONI*/
@@ -189,7 +199,9 @@ public class HomeActivity extends AppCompatActivity {
 
             /*apri molti*/
 
-        } else if (bCategoriaDomanda5.isPressed()) {
+        } else if (bCategoriaDomanda5.isPressed()) {   /**categoria indovinelli*/
+            categoria = bCategoriaDomanda4.getText().toString();
+
             bCategoriaDomanda5.setClickable(false);
 
             /*VIBRAZONE e SUONI*/
@@ -204,14 +216,17 @@ public class HomeActivity extends AppCompatActivity {
             startBattuta();
 
 
-            Intent intent = new Intent(getApplicationContext(), IndovinelliActivity.class);
+            Intent intent = new Intent(getApplicationContext(), LivelloActivity.class);
             intent.putExtra("CATEGORIA", categoria);
 
             startActivityForResult(intent, 0);
 
             /*apri molti*/
 
-        } else if (bCategoria6.isPressed()) {
+        }
+
+        /**--------------------statistiche ed impostazioni-------*/
+        else if (bCategoria6.isPressed()) {
             bCategoria6.setClickable(false);
 
             /*VIBRAZONE e SUONI*/

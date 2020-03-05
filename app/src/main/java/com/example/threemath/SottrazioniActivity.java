@@ -444,6 +444,8 @@ public class SottrazioniActivity extends AppCompatActivity {
     }
 
     /**
+     * * Ogni categoria ha un livello LV1_ un numero progressivo _1 e un identificativo che indica
+     *   se è mischiata o meno_2
      * inserisce le domande della categoria scelta ogni verione ha qualcosa di differente
      * quelle con _2_2 significa che sono sempre le stesse domande ma ruotate per aumentare ancora di
      * più la casualità...
