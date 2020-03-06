@@ -1,6 +1,7 @@
 package com.example.threemath;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,53 +16,91 @@ import java.util.Locale;
 public class CustomAdapter extends ArrayAdapter<Categoria> {
 
     private LayoutInflater inflater;
-    private int resource=0;
+    private int resource = 0;
     int punteggio = 0;
     Double dpunteggio = 0.0;
 
 
-    public CustomAdapter (Context context, int resourceId, List<Categoria> object){
-        super(context,resourceId,object);
+    public CustomAdapter(Context context, int resourceId, List<Categoria> object) {
+        super(context, resourceId, object);
         resource = resourceId;
         inflater = LayoutInflater.from(context);
 
     }
+
     @Override
-    public View getView( int position,View v, ViewGroup parent) {
+    public View getView(int position, View v, ViewGroup parent) {
         if (null == v) {
             Log.d("DEBUG", "Inflating view");
             v = inflater.inflate(R.layout.elemento_categoria, null);
         }
         Categoria c = getItem(position);
 
-        TextView testoCategoria ;
+        TextView testoCategoria;
         testoCategoria = (TextView) v.findViewById(R.id.textCategoria);
-        testoCategoria.setText(""+c.getcategoria());
+        testoCategoria.setText("" + c.getcategoria());
 
+        TextView testoPunteggio;
 
-
-
-
-        if(position>=17){
-            dpunteggio = (Double) c.getPunteggioDouble();
-
-            TextView testoPunteggio ;
-            String s = String.format(Locale.getDefault(), "%02g", dpunteggio);
-
-            testoPunteggio = (TextView) v.findViewById(R.id.textPunteggio);
-
-
-            testoPunteggio.setText(""+s+"%");
-        }else {
+        if (testoCategoria.getText().toString().equalsIgnoreCase("Addizioni")) {
+            testoCategoria.setTextColor(Color.YELLOW);
             punteggio = (int) c.getPunteggio();
-            TextView testoPunteggio ;
+
             testoPunteggio = (TextView) v.findViewById(R.id.textPunteggio);
-            testoPunteggio.setText(""+punteggio);
+            testoPunteggio.setText("" + punteggio);
+            testoPunteggio.setTextColor(Color.YELLOW);
+
+        } else if (testoCategoria.getText().toString().equalsIgnoreCase("Sottrazioni")) {
+            testoCategoria.setTextColor(Color.YELLOW);
+            punteggio = (int) c.getPunteggio();
+
+            testoPunteggio = (TextView) v.findViewById(R.id.textPunteggio);
+            testoPunteggio.setText("" + punteggio);
+            testoPunteggio.setTextColor(Color.YELLOW);
+
+        } else if (testoCategoria.getText().toString().equalsIgnoreCase("Moltiplicazioni")) {
+            testoCategoria.setTextColor(Color.YELLOW);
+            punteggio = (int) c.getPunteggio();
+
+            testoPunteggio = (TextView) v.findViewById(R.id.textPunteggio);
+            testoPunteggio.setText("" + punteggio);
+            testoPunteggio.setTextColor(Color.YELLOW);
+
+        } else if (testoCategoria.getText().toString().equalsIgnoreCase("Divisioni")) {
+            testoCategoria.setTextColor(Color.YELLOW);
+            punteggio = (int) c.getPunteggio();
+
+            testoPunteggio = (TextView) v.findViewById(R.id.textPunteggio);
+            testoPunteggio.setText("" + punteggio);
+            testoPunteggio.setTextColor(Color.YELLOW);
+
+        }else if (testoCategoria.getText().toString().equalsIgnoreCase("Indovinelli")) {
+            testoCategoria.setTextColor(Color.YELLOW);
+            punteggio = (int) c.getPunteggio();
+
+            testoPunteggio = (TextView) v.findViewById(R.id.textPunteggio);
+            testoPunteggio.setText("" + punteggio);
+            testoPunteggio.setTextColor(Color.YELLOW);
+
+        }else   {
+            testoCategoria.setTextColor(Color.WHITE);
+            punteggio = (int) c.getPunteggio();
+
+            testoPunteggio = (TextView) v.findViewById(R.id.textPunteggio);
+            testoPunteggio.setText("" + punteggio);
+            testoPunteggio.setTextColor(Color.WHITE);
         }
 
 
 
+        if (position >= 17) {
 
+            dpunteggio = (Double) c.getPunteggioDouble();
+            String s = String.format(Locale.getDefault(), "%.2f", dpunteggio);
+            testoPunteggio = (TextView) v.findViewById(R.id.textPunteggio);
+            testoPunteggio.setText("" + s + "%");
+
+        }
 
 
         return v;

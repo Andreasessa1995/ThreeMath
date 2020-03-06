@@ -48,7 +48,7 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
     boolean ultimaDomanda = false;
     int livello = 1;
     int numRandScoreMoltiplicazioni = 0;
-    String categoria = "Addizioni";
+    String categoria = "Moltiplicazioni";
 
     /**
      * elementi suoni

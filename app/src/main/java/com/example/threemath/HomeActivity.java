@@ -200,7 +200,7 @@ public class HomeActivity extends AppCompatActivity {
             /*apri molti*/
 
         } else if (bCategoriaDomanda5.isPressed()) {   /**categoria indovinelli*/
-            categoria = bCategoriaDomanda4.getText().toString();
+            categoria = bCategoriaDomanda5.getText().toString();
 
             bCategoriaDomanda5.setClickable(false);
 

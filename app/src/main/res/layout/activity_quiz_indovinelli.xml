@@ -4,8 +4,6 @@
     android:layout_height="match_parent"
     android:background="#4E4C4C">
 
-
-
     <LinearLayout
         android:id="@+id/logo"
         android:layout_width="match_parent"
@@ -33,7 +31,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
             android:gravity="center"
-            android:text="Quiz time"
+            android:text="Indovinelli"
             android:textColor="#F5F5F0"
             android:textSize="30dp">
 
@@ -43,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30px"
-            android:text="+"
+            android:text="?"
             android:textColor="#FF9800"
             android:textSize="50dp"
             >
@@ -114,10 +112,10 @@
                 android:id="@+id/categoriaDomanda"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ADDIZIONI"
+                android:text="INDOVINELLI"
                 android:layout_marginRight="50px"
                 android:textAlignment="center"
-                android:textColor="#FFEB3B"
+                android:textColor="#E9E8DD"
                 android:textSize="35dp">
 
             </TextView>
@@ -127,8 +125,8 @@
                 android:layout_height="wrap_content"
                 android:text="1/2"
                 android:textAlignment="center"
-                android:textColor="#F3F5F2"
-                android:textSize="25dp">
+                android:textColor="#EDF1F1"
+                android:textSize="21dp">
 
             </TextView>
         </LinearLayout>
@@ -152,10 +150,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
-                android:text="50 + 4 "
+                android:text="Se mi nomini scompaio "
                 android:textAlignment="center"
                 android:textColor="#141414"
-                android:textSize="35dp">
+                android:textSize="25dp">
 
             </TextView>
 
@@ -183,12 +181,16 @@
                 android:id="@+id/A"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minWidth="120dp"
+                android:maxWidth="120dp"
+
                 android:layout_marginRight="15px"
-                android:background="@drawable/botton"
+                android:background="@drawable/botton_indovinelli"
                 android:onClick="onClickRisposta"
-                android:text="150"
+                android:text="anatema"
                 android:textColor="#020202"
-                android:textSize="54px">
+                android:textSize="12dp"
+                >
 
             </Button>
 
@@ -196,11 +198,15 @@
                 android:id="@+id/B"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minWidth="120dp"
+                android:maxWidth="120dp"
+
                 android:layout_marginLeft="15px"
-                android:background="@drawable/botton"
+                android:background="@drawable/botton_indovinelli"
                 android:onClick="onClickRisposta"
-                android:text="160"
-                android:textSize="54px">
+                android:text="imprenditore"
+                android:textSize="12dp"
+                >
 
             </Button>
 
@@ -222,27 +228,34 @@
                 android:id="@+id/C"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minWidth="120dp"
+                android:maxWidth="120dp"
                 android:layout_marginTop="15px"
                 android:layout_marginRight="15px"
                 android:layout_marginBottom="15px"
-                android:background="@drawable/botton"
+                android:background="@drawable/botton_indovinelli"
                 android:onClick="onClickRisposta"
-                android:text="150"
-                android:textSize="54px">
+                android:text="Silenzio"
+                android:textSize="12dp"
+                >
 
             </Button>
             <!-- 5% di 1080 pixel come dimensione scritta -->
             <Button
                 android:id="@+id/D"
                 android:layout_width="wrap_content"
+                android:minWidth="120dp"
+                android:maxWidth="120dp"
+
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15px"
                 android:layout_marginTop="15px"
                 android:layout_marginBottom="15px"
-                android:background="@drawable/botton"
+                android:background="@drawable/botton_indovinelli"
                 android:onClick="onClickRisposta"
-                android:text="160"
-                android:textSize="54px">
+                android:text="Silenzio"
+                android:textSize="12dp"
+                >
 
             </Button>
 
@@ -268,9 +281,12 @@
                 android:id="@+id/bottoneRisultati"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minWidth="120dp"
+                android:maxWidth="120dp"
                 android:background="@drawable/categoria"
                 android:onClick="onClickRisultati"
-                android:text="Scores"
+                android:text="Score"
+                android:textSize="12dp"
                 android:textColor="#F7F4F4"
                 android:visibility="invisible">
 
@@ -279,5 +295,4 @@
         </LinearLayout>
 
     </RelativeLayout>
-
 </RelativeLayout>

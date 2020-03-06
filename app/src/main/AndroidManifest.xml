@@ -28,7 +28,6 @@
         <activity android:name=".RisultatiActivity">
 
         </activity>
-        <activity android:name=".MainActivity"></activity>
 
         <activity android:name=".AddizioniActivity">
         </activity>
@@ -41,7 +40,6 @@
         <activity android:name=".LivelloActivity"></activity>
         <activity android:name=".IndovinelliActivity"></activity>
         <activity android:name=".ImpostazioniActivity"></activity>
-        <activity android:name=".StatisticheActivity"></activity>
 
         <meta-data
             android:name="preloaded_fonts"

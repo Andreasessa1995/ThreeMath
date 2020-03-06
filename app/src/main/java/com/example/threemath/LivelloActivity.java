@@ -16,6 +16,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class LivelloActivity extends AppCompatActivity {
 
+
+    static final int LIVELLOPRINCIPIANTE = 1000;
+    static final int LIVELLONORMALE = 2500;
+    static final int LIVELLOESPERTO= 2500;
+
+
     private Animation anim = null;
 
 
@@ -114,12 +120,19 @@ public class LivelloActivity extends AppCompatActivity {
             score = gf.caricaScores(getApplicationContext(), "Divisioni");
             textScore.setText("" + score);
             checkLV(score);
+        }else if (categoria.equalsIgnoreCase("indovinelli")) {
+            score = gf.caricaScores(getApplicationContext(), "Indovinelli");
+            textScore.setText("" + score);
+            checkLV(score);
         }
 
 
     }
 
     /**
+     * qunado si clicca sul livello si apre l'activity coutdown che aprirà
+     * l'activiti addizione - sottrazione ecc. a seconda della categoria che
+     * viene passsata all'activity livello
      * @param v
      */
     public void onClickLivello(View v) {
@@ -208,14 +221,14 @@ public class LivelloActivity extends AppCompatActivity {
     private void checkLV(int scoreCat) {
 
 
-        if ((scoreCat >= 0) && (scoreCat < 1000)) {
+        if ((scoreCat >= 0) && (scoreCat < LIVELLOPRINCIPIANTE)) {
             messageLV2();
             messageLV3();
-        } else if ((scoreCat >= 1000) && (scoreCat < 2500)) {
+        } else if ((scoreCat >= LIVELLOPRINCIPIANTE) && (scoreCat <= LIVELLONORMALE)) {
 
             bLivello2.setBackground(getDrawable(R.drawable.categoria));
             messageLV3();
-        } else if (scoreCat >= 2500) {
+        } else if ((scoreCat >= LIVELLONORMALE) ){
 
             bLivello2.setBackground(getDrawable(R.drawable.categoria));
             bLivello3.setBackground(getDrawable(R.drawable.categoria));

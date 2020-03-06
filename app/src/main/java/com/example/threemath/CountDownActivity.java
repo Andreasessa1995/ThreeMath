@@ -129,7 +129,25 @@ public class CountDownActivity extends AppCompatActivity {
                     countDownRelease();
                     onBackPressed();
 
+                }else if (categoria.equalsIgnoreCase("Divisioni")) {
+                    i = new Intent(getApplicationContext(), MoltiplicazioniActivity.class);
+                    i.putExtra("LIVELLO", livello);
+                    i.putExtra("SCORE", numScoreRandom);
+                    startActivityForResult(i, 0);
+                    countDownRelease();
+                    onBackPressed();
+
+                }else if (categoria.equalsIgnoreCase("Indovinelli")) {
+                    i = new Intent(getApplicationContext(), IndovinelliActivity.class);
+                    i.putExtra("LIVELLO", livello);
+                    i.putExtra("SCORE", numScoreRandom);
+                    startActivityForResult(i, 0);
+                    countDownRelease();
+                    onBackPressed();
+
                 }
+
+
 
 
                 onBackPressed();

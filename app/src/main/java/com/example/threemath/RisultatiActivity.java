@@ -17,6 +17,15 @@ import java.util.Locale;
 
 public class RisultatiActivity extends AppCompatActivity {
 
+    static final int PUNTEGGIOMAX = 5000;
+
+    static final int NUMRISPMAX = 2000;
+
+    static final int NUMRISTOTPMAX = 5000;
+
+
+
+
 
     /*---------variabili risposte ------*/
     int numRispEsatte =0;
@@ -63,7 +72,7 @@ public class RisultatiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.risultati_activity);
+        setContentView(R.layout.activity_risultati);
 
         /**valori passati dall'activity precedente quiz **/
         Intent i = getIntent();
@@ -206,13 +215,13 @@ public class RisultatiActivity extends AppCompatActivity {
 
         //punteggioTemp = 515; test
 
-        if(punteggioTemp<=500){
+        if(punteggioTemp<=PUNTEGGIOMAX){
             // log.d("DEBUG", "Salvo questo nuovo punteggio= = " + punteggioTemp);
 
             gf.salvaScores(context,punteggioTemp,categoria);
         }else {
 
-            Toast.makeText(RisultatiActivity.this, "Attenzione hai rggiunto il punteggio massimo di score ( 5000 )"+ "ne hai totalizzato = "+
+            Toast.makeText(RisultatiActivity.this, "Attenzione hai rggiunto il punteggio massimo di score ( " + PUNTEGGIOMAX + " )"+ "ne hai totalizzato = "+
                     punteggioTemp , Toast.LENGTH_LONG).show();
 
 
@@ -234,12 +243,12 @@ public class RisultatiActivity extends AppCompatActivity {
         corrette = corrette + gf.caricaNumRisposteCorrette(context);
         errate = errate + gf.caricaNumRisposteErrate(context);
 
-        if((corrette<=5000)&&(errate<=5000)){
+        if((corrette<=NUMRISTOTPMAX)&&(errate<=NUMRISTOTPMAX)){
             gf.salvaRisposteCorrette(context,corrette);
             gf.salvaRisposteErrate(context,errate);
         }else {
 
-            Toast.makeText(RisultatiActivity.this, "Attenzione hai rggiunto il numero massimo di domande corrette/errate ( 5000 )"+ "ne hai totalizzato = "+
+            Toast.makeText(RisultatiActivity.this, "Attenzione hai rggiunto il numero massimo di domande corrette/errate ( "+NUMRISTOTPMAX+" )"+ "ne hai totalizzato = "+
                     corrette +"Errate " + errate , Toast.LENGTH_LONG).show();
 
 
@@ -264,14 +273,14 @@ public class RisultatiActivity extends AppCompatActivity {
         errate = errate + gf.caricaNumRisposteErrateCategoria(context,categoria);
 
 
-        if((corrette<=5000)&&(errate<=5000)){
+        if((corrette<=NUMRISPMAX)&&(errate<=NUMRISPMAX)){
             /*salvataggio num risposte esatte per categoria*/
             gf.salvaRisposteErrateCategoria(getApplicationContext(),errate,categoria);
             gf.salvaRisposteCorretteCategoria(getApplicationContext(),corrette,categoria);
 
         }else {
 
-            Toast.makeText(RisultatiActivity.this, "Attenzione hai rggiunto il numero massimo di domande corrette/errate ( 5000 )"+ "ne hai totalizzato = "+
+            Toast.makeText(RisultatiActivity.this, "Attenzione hai rggiunto il numero massimo di domande corrette/errate ( "+ NUMRISPMAX+" )"+ "ne hai totalizzato = "+
                     corrette +"Errate " + errate , Toast.LENGTH_LONG).show();
 
 

@@ -68,8 +68,8 @@ public class StatisticheActivityConLista extends AppCompatActivity {
 
 
 
-        punteggio = loadPunteggi(getApplicationContext(), "Moltiplicazione");
-        Categoria c7 = new Categoria ("Moltiplicazione",punteggio);
+        punteggio = loadPunteggi(getApplicationContext(), "Moltiplicazioni");
+        Categoria c7 = new Categoria ("Moltiplicazioni",punteggio);
         punteggio = loadNumRisposteEsattePerCategoria(getApplicationContext(),"Moltiplicazioni");
         Categoria c8 = new Categoria ("Corrette",punteggio);
         punteggio = loadNumRisposteErratePerCategoria(getApplicationContext(),"Moltiplicazioni");
@@ -107,7 +107,7 @@ public class StatisticheActivityConLista extends AppCompatActivity {
         numTot = numRispCorrette + numRispErrate;
 
          Log log = null;
-         log.d("DEBUG", "Corrette piu errrattteeeeeeee " + numTot);
+        // log.d("DEBUG", "Corrette piu errrattteeeeeeee " + numTot);
 
         if (numTot != 0) {
 
