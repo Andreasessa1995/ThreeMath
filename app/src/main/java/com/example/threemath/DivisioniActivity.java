@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 
-public class MoltiplicazioniActivity extends AppCompatActivity {
+public class DivisioniActivity extends AppCompatActivity {
 
     /**
      * elementi della view
@@ -47,8 +47,8 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
     int numRispErrate = 0;
     boolean ultimaDomanda = false;
     int livello = 1;
-    int numRandScoreMoltiplicazioni = 0;
-    String categoria = "Moltiplicazioni";
+    int numRandScoreDivisioni = 0;
+    String categoria = "Divisioni";
 
     /**
      * elementi suoni
@@ -156,7 +156,7 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
         Intent intent = getIntent();
         intent = getIntent();
         livello = intent.getIntExtra("LIVELLO", livello);
-        numRandScoreMoltiplicazioni = intent.getIntExtra("SCORE", numRandScoreMoltiplicazioni);
+        numRandScoreDivisioni = intent.getIntExtra("SCORE", numRandScoreDivisioni);
 
 
         //log.d("DEBUG", "LIVELLO LIVELLO LIVELLO LIVELLO = " + livello);
@@ -177,9 +177,9 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
         //log.d("DEBUG", "dimensioni altezza =  " + deviceHeight + " dimensioni base" + deviceWidth);
 
         /*SETTAGGI TEXT VIEW BOTTONI*/
-        testoCategoriaDomanda.setText("MOLTIPLICAZIONI");
+        testoCategoriaDomanda.setText("DIVISIONI");
         testoCategoriaDomanda.setTextSize(25);
-        categoriaQuiz.setText("*");
+        categoriaQuiz.setText("÷");
         /*bottoni*/
         testoDomanda.setText(quesito.get(indiceDomanda).getDomanda());
         A.setText(quesito.get(indiceDomanda).getRispostaEsatta());
@@ -314,7 +314,7 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
 
                 /*-----num random dello score cioè se lo score mod 3da come resto 0-1-2   */
 
-                if (numRandScoreMoltiplicazioni == 0) {
+                if (numRandScoreDivisioni == 0) {
 
                     numRand = 1 + (int) (Math.random() * 4);
                     /*-------1-----------*/
@@ -346,7 +346,7 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
                             break;
                     }
 
-                } else if (numRandScoreMoltiplicazioni == 1) {
+                } else if (numRandScoreDivisioni == 1) {
                     /*-------2-----------*/
 
                     numRand = 1 + (int) (Math.random() * 4);
@@ -376,7 +376,7 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
                             C.setText(quesito.get(indiceDomanda).getRispostaErrata3());
                             break;
                     }
-                } else if (numRandScoreMoltiplicazioni == 2) {          /*-----num random dello score cioè se lo score mod 3da come resto 0-1-2   */
+                } else if (numRandScoreDivisioni == 2) {          /*-----num random dello score cioè se lo score mod 3da come resto 0-1-2   */
                     /*-------3-----------*/
                     numRand = 1 + (int) (Math.random() * 4);
                     switch (numRand) {
@@ -484,15 +484,15 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
      */
     public void insertDomandeLV1_1() {
         quesito.clear();
-        Domanda domanda1 = new Domanda("2 * 3", "6", "7", "8", "5");
+        Domanda domanda1 = new Domanda("6 ÷ 3", "2", "3", "1", "4");
         quesito.add(domanda1);
-        Domanda domanda2 = new Domanda("3 * 4", "12", "8", "10", "7");
+        Domanda domanda2 = new Domanda("12 ÷ 3", "4", "8", "6", "2");
         quesito.add(domanda2);
-        Domanda domanda3 = new Domanda("5 * 4", "20", "18", "22", "15");
+        Domanda domanda3 = new Domanda("20 ÷ 4", "5", "6", "3", "2");
         quesito.add(domanda3);
-        Domanda domanda4 = new Domanda("3 * 6", "18", "24", "26", "9");
+        Domanda domanda4 = new Domanda("18 ÷ 6", "3", "2", "6", "4");
         quesito.add(domanda4);
-        Domanda domanda5 = new Domanda("7 * 8", "56", "49", "54", "50");
+        Domanda domanda5 = new Domanda("56 ÷ 8", "7", "6", "8", "5");
         quesito.add(domanda5);
 
     }
@@ -504,15 +504,15 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
      */
     public void insertDomandeLV1_1_2() {
         quesito.clear();
-        Domanda domanda5 = new Domanda("7 * 8", "56", "49", "54", "50");
+        Domanda domanda5 = new Domanda("56 ÷ 8", "7", "6", "8", "5");
         quesito.add(domanda5);
-        Domanda domanda3 = new Domanda("5 * 4", "20", "18", "22", "15");
+        Domanda domanda3 = new Domanda("20 ÷ 4", "5", "6", "3", "2");
         quesito.add(domanda3);
-        Domanda domanda1 = new Domanda("2 * 3", "6", "7", "8", "5");
+        Domanda domanda1 = new Domanda("6 ÷ 3", "2", "3", "1", "4");
         quesito.add(domanda1);
-        Domanda domanda4 = new Domanda("3 * 6", "18", "24", "26", "9");
+        Domanda domanda4 = new Domanda("18 ÷ 6", "3", "2", "6", "4");
         quesito.add(domanda4);
-        Domanda domanda2 = new Domanda("3 * 4", "12", "8", "10", "7");
+        Domanda domanda2 = new Domanda("12 ÷ 3", "4", "8", "6", "2");
         quesito.add(domanda2);
 
 
@@ -524,15 +524,15 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
     public void insertDomandeLV1_2_1() {
 
         quesito.clear();
-        Domanda domanda1 = new Domanda("2 * 7", "14", "21", "7", "35");
+        Domanda domanda1 = new Domanda("14 ÷ 7", "2", "1", "3", "7");
         quesito.add(domanda1);
-        Domanda domanda2 = new Domanda("3 * 7", "21", "28", "14", "26");
+        Domanda domanda2 = new Domanda("21 ÷ 3", "7", "8", "4", "6");
         quesito.add(domanda2);
-        Domanda domanda3 = new Domanda("5 * 8", "40", "45", "35", "30");
+        Domanda domanda3 = new Domanda("40 ÷ 8", "5", "4", "3", "7");
         quesito.add(domanda3);
-        Domanda domanda4 = new Domanda("6 * 5", "30", "25", "35", "40");
+        Domanda domanda4 = new Domanda("10 ÷ 5", "6", "5", "7", "2");
         quesito.add(domanda4);
-        Domanda domanda5 = new Domanda("8 * 3", "24", "32", "20", "28");
+        Domanda domanda5 = new Domanda("24 ÷ 3", "8", "2", "6", "9");
         quesito.add(domanda5);
 
 
@@ -544,15 +544,15 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
     public void insertDomandeLV1_2_2() {
 
         quesito.clear();
-        Domanda domanda5 = new Domanda("8 * 3", "24", "32", "20", "28");
+        Domanda domanda5 = new Domanda("24 ÷ 3", "8", "2", "6", "9");
         quesito.add(domanda5);
-        Domanda domanda3 = new Domanda("5 * 8", "40", "45", "35", "30");
+        Domanda domanda3 = new Domanda("40 ÷ 8", "5", "4", "3", "7");
         quesito.add(domanda3);
-        Domanda domanda2 = new Domanda("3 * 7", "21", "28", "14", "26");
+        Domanda domanda2 = new Domanda("21 ÷ 3", "7", "8", "4", "6");
         quesito.add(domanda2);
-        Domanda domanda4 = new Domanda("6 * 5", "30", "25", "35", "40");
+        Domanda domanda4 = new Domanda("10 ÷ 5", "6", "5", "7", "2");
         quesito.add(domanda4);
-        Domanda domanda1 = new Domanda("2 * 7", "14", "21", "7", "35");
+        Domanda domanda1 = new Domanda("14 ÷ 7", "2", "1", "3", "7");
         quesito.add(domanda1);
 
 
@@ -564,15 +564,15 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
     public void insertDomandeLV1_3() {
 
         quesito.clear();
-        Domanda domanda1 = new Domanda("9 * 3", "27", "32", "21", "23");
+        Domanda domanda1 = new Domanda("27 ÷ 9", "3", "2", "1", "5");
         quesito.add(domanda1);
-        Domanda domanda5 = new Domanda("6 * 8", "48", "54", "56", "46");
+        Domanda domanda5 = new Domanda("48 ÷ 6", "8", "4", "6", "12");
         quesito.add(domanda5);
-        Domanda domanda2 = new Domanda("6 * 6", "36", "54", "42", "56");
+        Domanda domanda2 = new Domanda("36 ÷ 6", "6", "4", "2", "3");
         quesito.add(domanda2);
-        Domanda domanda3 = new Domanda("7 * 9", "63", "61", "56", "68");
+        Domanda domanda3 = new Domanda("63 ÷ 9", "7", "6", "7", "8");
         quesito.add(domanda3);
-        Domanda domanda4 = new Domanda("9 * 9", "81", "72", "80", "63");
+        Domanda domanda4 = new Domanda("81 ÷ 9", "9", "7", "8", "6");
         quesito.add(domanda4);
 
 
@@ -585,15 +585,15 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
 
         quesito.clear();
 
-        Domanda domanda1 = new Domanda("5 * 5", "25", "30", "35", "10");
+        Domanda domanda1 = new Domanda("25 ÷ 5", "5", "3", "4", "2");
         quesito.add(domanda1);
-        Domanda domanda2 = new Domanda("8 * 8", "64", "72", "60", "70");
+        Domanda domanda2 = new Domanda("64 ÷ 8", "8", "7", "6", "9");
         quesito.add(domanda2);
-        Domanda domanda3 = new Domanda("3 * 3", "9", "6", "12", "10");
+        Domanda domanda3 = new Domanda("9 ÷ 3", "3", "2", "1", "4");
         quesito.add(domanda3);
-        Domanda domanda4 = new Domanda("4 * 4", "16", "12", "8", "18");
+        Domanda domanda4 = new Domanda("16 ÷ 4", "4", "2", "6", "3");
         quesito.add(domanda4);
-        Domanda domanda5 = new Domanda("7 * 7", "49", "53", "35", "50");
+        Domanda domanda5 = new Domanda("49 ÷ 7", "7", "3", "5", "6");
         quesito.add(domanda5);
     }
 
@@ -603,15 +603,15 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
     public void insertDomandeLV1_4_2() {
 
         quesito.clear();
-        Domanda domanda4 = new Domanda("4 * 4", "16", "12", "8", "18");
+        Domanda domanda4 = new Domanda("16 ÷ 4", "4", "2", "6", "3");
         quesito.add(domanda4);
-        Domanda domanda3 = new Domanda("3 * 3", "9", "6", "12", "10");
+        Domanda domanda3 = new Domanda("9 ÷ 3", "3", "2", "1", "4");
         quesito.add(domanda3);
-        Domanda domanda1 = new Domanda("5 * 5", "25", "30", "35", "10");
+        Domanda domanda1 = new Domanda("25 ÷ 5", "5", "3", "4", "2");
         quesito.add(domanda1);
-        Domanda domanda5 = new Domanda("7 * 7", "49", "53", "35", "50");
+        Domanda domanda5 = new Domanda("49 ÷ 7", "7", "3", "5", "6");
         quesito.add(domanda5);
-        Domanda domanda2 = new Domanda("8 * 8", "64", "72", "60", "70");
+        Domanda domanda2 = new Domanda("64 ÷ 8", "8", "7", "6", "9");
         quesito.add(domanda2);
 
 
@@ -629,22 +629,22 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
     public void insertDomandeLV2_1() {
         quesito.clear();
 
-        Domanda domanda1 = new Domanda("10 * 12", "120", "140", "210", "102");
+        Domanda domanda1 = new Domanda("120 ÷ 12", "10", "14", "20", "12");
         quesito.add(domanda1);
-        Domanda domanda2 = new Domanda("8 * 13", "104", "108", "112", "100");
+        Domanda domanda2 = new Domanda("104 ÷ 13", "8", "10", "13", "12");
         quesito.add(domanda2);
 
-        Domanda domanda3 = new Domanda("7 * 11", "77", "70", "11", "17");
+        Domanda domanda3 = new Domanda("77 ÷ 11", "7", "6", "11", "17");
         quesito.add(domanda3);
-        Domanda domanda4 = new Domanda("15 * 15", "225", "235", "226", "232");
+        Domanda domanda4 = new Domanda("225 ÷ 15", "15", "10", "25", "5");
         quesito.add(domanda4);
 
-        Domanda domanda5 = new Domanda("14 * 9", "126", "136", "120", "150");
+        Domanda domanda5 = new Domanda("126 ÷ 9", "14", "13", "12", "15");
         quesito.add(domanda5);
-        Domanda domanda6 = new Domanda("5 * 12", "60", "50", "127", "150");
+        Domanda domanda6 = new Domanda("60 ÷ 5", "12", "10", "9", "15");
         quesito.add(domanda6);
 
-        Domanda domanda7 = new Domanda("3 * 18", "54", "52", "63", "42");
+        Domanda domanda7 = new Domanda("54 ÷ 18", "3", "2", "6", "4");
         quesito.add(domanda7);
 
     }
@@ -654,19 +654,19 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
      */
     public void insertDomandeLV2_1_2() {
         quesito.clear();
-        Domanda domanda5 = new Domanda("14 * 9", "126", "136", "120", "150");
+        Domanda domanda5 = new Domanda("126 ÷ 9", "14", "13", "12", "15");
         quesito.add(domanda5);
-        Domanda domanda1 = new Domanda("10 * 12", "120", "140", "210", "102");
+        Domanda domanda1 = new Domanda("120 ÷ 12", "10", "14", "20", "12");
         quesito.add(domanda1);
-        Domanda domanda6 = new Domanda("5 * 12", "60", "50", "127", "150");
+        Domanda domanda6 = new Domanda("60 ÷ 5", "12", "10", "9", "15");
         quesito.add(domanda6);
-        Domanda domanda4 = new Domanda("15 * 15", "225", "235", "226", "232");
+        Domanda domanda4 = new Domanda("225 ÷ 15", "15", "10", "25", "5");
         quesito.add(domanda4);
-        Domanda domanda7 = new Domanda("3 * 18", "54", "52", "63", "42");
+        Domanda domanda7 = new Domanda("54 ÷ 18", "3", "2", "6", "4");
         quesito.add(domanda7);
-        Domanda domanda3 = new Domanda("7 * 11", "77", "70", "11", "17");
+        Domanda domanda3 = new Domanda("77 ÷ 11", "7", "6", "11", "17");
         quesito.add(domanda3);
-        Domanda domanda2 = new Domanda("8 * 13", "104", "108", "112", "100");
+        Domanda domanda2 = new Domanda("104 ÷ 13", "8", "10", "13", "12");
         quesito.add(domanda2);
     }
 
@@ -676,22 +676,22 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
     public void insertDomandeLV2_2() {
 
         quesito.clear();
-        Domanda domanda1 = new Domanda("9 * 12", "108", "212", "106", "96");
+        Domanda domanda1 = new Domanda("108 ÷ 12", "9", "12", "10", "6");
         quesito.add(domanda1);
-        Domanda domanda2 = new Domanda("8 * 14", "112", "120", "88", "140");
+        Domanda domanda2 = new Domanda("112 ÷ 8", "14", "12", "8", "10");
         quesito.add(domanda2);
 
-        Domanda domanda3 = new Domanda("3 * 15", "45", "43", "41", "30");
+        Domanda domanda3 = new Domanda("45 ÷ 15", "3", "4", "3", "6");
         quesito.add(domanda3);
-        Domanda domanda4 = new Domanda("5 * 20", "100", "105", "200", "205");
+        Domanda domanda4 = new Domanda("100 ÷ 5", "20", "10", "25", "5");
         quesito.add(domanda4);
 
-        Domanda domanda5 = new Domanda("7 * 17", "119", "141", "153", "143");
+        Domanda domanda5 = new Domanda("119 ÷ 7", "17", "14", "15", "13");
         quesito.add(domanda5);
-        Domanda domanda6 = new Domanda("5 * 18", "90", "91", "86", "104");
+        Domanda domanda6 = new Domanda("90 ÷ 18", "5", "6", "8", "4");
         quesito.add(domanda6);
 
-        Domanda domanda7 = new Domanda("8 * 19", "152", "170", "162", "172");
+        Domanda domanda7 = new Domanda("152 ÷ 8", "19", "17", "16", "18");
         quesito.add(domanda7);
 
 
@@ -703,19 +703,19 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
     public void insertDomandeLV2_2_2() {
 
         quesito.clear();
-        Domanda domanda5 = new Domanda("7 * 17", "119", "141", "153", "143");
+        Domanda domanda5 = new Domanda("119 ÷ 7", "17", "14", "15", "13");
         quesito.add(domanda5);
-        Domanda domanda1 = new Domanda("9 * 12", "108", "212", "106", "96");
+        Domanda domanda1 = new Domanda("108 ÷ 12", "9", "12", "10", "6");
         quesito.add(domanda1);
-        Domanda domanda6 = new Domanda("5 * 18", "90", "91", "86", "104");
+        Domanda domanda6 = new Domanda("90 ÷ 18", "5", "6", "8", "4");
         quesito.add(domanda6);
-        Domanda domanda4 = new Domanda("5 * 20", "100", "105", "200", "205");
+        Domanda domanda4 = new Domanda("100 ÷ 5", "20", "10", "25", "5");
         quesito.add(domanda4);
-        Domanda domanda7 = new Domanda("8 * 19", "152", "170", "162", "172");
+        Domanda domanda7 = new Domanda("152 ÷ 8", "19", "17", "16", "18");
         quesito.add(domanda7);
-        Domanda domanda3 = new Domanda("3 * 15", "45", "43", "41", "30");
+        Domanda domanda3 = new Domanda("45 ÷ 15", "3", "4", "3", "6");
         quesito.add(domanda3);
-        Domanda domanda2 = new Domanda("8 * 14", "112", "120", "88", "140");
+        Domanda domanda2 = new Domanda("112 ÷ 8", "14", "12", "8", "10");
         quesito.add(domanda2);
     }
 
@@ -725,22 +725,22 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
     public void insertDomandeLV2_3() {
 
         quesito.clear();
-        Domanda domanda1 = new Domanda("16 * 18", "288", "280", "240", "300");
+        Domanda domanda1 = new Domanda("288 ÷ 18", "16", "14", "15", "18");
         quesito.add(domanda1);
-        Domanda domanda2 = new Domanda("13 * 14", "182", "180", "172", "160");
+        Domanda domanda2 = new Domanda("182 ÷ 14", "13", "12", "16", "14");
         quesito.add(domanda2);
 
-        Domanda domanda3 = new Domanda("19 * 12", "228", "230", "240", "200");
+        Domanda domanda3 = new Domanda("228 ÷ 19", "12", "14", "18", "16");
         quesito.add(domanda3);
-        Domanda domanda4 = new Domanda("12 * 14", "168", "180", "160", "188");
+        Domanda domanda4 = new Domanda("168 ÷ 12", "14", "18", "16", "12");
         quesito.add(domanda4);
 
-        Domanda domanda5 = new Domanda("16 * 15", "240", "274", "246", "250");
+        Domanda domanda5 = new Domanda("240 ÷ 15", "16", "12", "14", "15");
         quesito.add(domanda5);
-        Domanda domanda6 = new Domanda("19 * 20", "380", "400", "390", "360");
+        Domanda domanda6 = new Domanda("380 ÷ 20", "19", "20", "18", "21");
         quesito.add(domanda6);
 
-        Domanda domanda7 = new Domanda("21 * 18", "378", "380", "300", "320");
+        Domanda domanda7 = new Domanda("378 ÷ 18", "21", "28", "20", "18");
         quesito.add(domanda7);
 
 
@@ -752,19 +752,19 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
     public void insertDomandeLV2_3_2() {
 
         quesito.clear();
-        Domanda domanda5 = new Domanda("16 * 15", "240", "274", "246", "250");
+        Domanda domanda5 = new Domanda("240 ÷ 15", "16", "12", "14", "15");
         quesito.add(domanda5);
-        Domanda domanda1 = new Domanda("16 * 18", "288", "280", "240", "300");
+        Domanda domanda1 = new Domanda("288 ÷ 18", "16", "14", "15", "18");
         quesito.add(domanda1);
-        Domanda domanda6 = new Domanda("19 * 20", "380", "400", "390", "360");
+        Domanda domanda6 = new Domanda("380 ÷ 20", "19", "20", "18", "21");
         quesito.add(domanda6);
-        Domanda domanda4 = new Domanda("12 * 14", "168", "180", "160", "188");
+        Domanda domanda4 = new Domanda("168 ÷ 12", "14", "18", "16", "12");
         quesito.add(domanda4);
-        Domanda domanda2 = new Domanda("13 * 14", "182", "180", "172", "160");
+        Domanda domanda2 = new Domanda("182 ÷ 14", "13", "12", "16", "14");
         quesito.add(domanda2);
-        Domanda domanda7 = new Domanda("21 * 18", "378", "380", "300", "320");
+        Domanda domanda7 = new Domanda("378 ÷ 18", "21", "28", "20", "18");
         quesito.add(domanda7);
-        Domanda domanda3 = new Domanda("19 * 12", "228", "230", "240", "200");
+        Domanda domanda3 = new Domanda("228 ÷ 19", "12", "14", "18", "16");
         quesito.add(domanda3);
 
 
@@ -778,22 +778,22 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
     public void insertDomandeLV3_1() {
         quesito.clear();
 
-        Domanda domanda1 = new Domanda("100 * 12", "1200", "1000", "1400", "1200");
+        Domanda domanda1 = new Domanda("1200 ÷ 12", "100", "112", "12", "20");
         quesito.add(domanda1);
-        Domanda domanda2 = new Domanda("105 * 14", "1470", "1535", "1460", "1400");
+        Domanda domanda2 = new Domanda("1470 ÷ 14", "105", "104", "15", "25");
         quesito.add(domanda2);
 
-        Domanda domanda3 = new Domanda("106 * 22", "2332", "1028", "2028", "2400");
+        Domanda domanda3 = new Domanda("2232 ÷ 22", "106", "108", "104", "112");
         quesito.add(domanda3);
-        Domanda domanda4 = new Domanda("112 * 20", "2240", "2235", "2020", "2260");
+        Domanda domanda4 = new Domanda("2240 ÷ 20", "112", "120", "100", "104");
         quesito.add(domanda4);
 
-        Domanda domanda5 = new Domanda("118 * 22", "2596", "2560", "2600", "2590");
+        Domanda domanda5 = new Domanda("2596 ÷ 22", "118", "116", "114", "120");
         quesito.add(domanda5);
-        Domanda domanda6 = new Domanda("125 * 20", "2500", "2560", "2540", "2800");
+        Domanda domanda6 = new Domanda("2500 ÷ 20", "125", "150", "115", "120");
         quesito.add(domanda6);
 
-        Domanda domanda7 = new Domanda("120 * 30", "3600", "2400", "3400", "3680");
+        Domanda domanda7 = new Domanda("3600 ÷ 30", "30", "24", "34", "38");
         quesito.add(domanda7);
 
     }
@@ -804,19 +804,19 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
     public void insertDomandeLV3_1_2() {
         quesito.clear();
 
-        Domanda domanda5 = new Domanda("118 * 22", "2596", "2560", "2600", "2590");
+        Domanda domanda5 = new Domanda("2596 ÷ 22", "118", "116", "114", "120");
         quesito.add(domanda5);
-        Domanda domanda7 = new Domanda("120 * 30", "3600", "2400", "3400", "3680");
+        Domanda domanda7 = new Domanda("3600 ÷ 30", "30", "24", "34", "38");
         quesito.add(domanda7);
-        Domanda domanda1 = new Domanda("100 * 12", "1200", "1000", "1400", "1200");
+        Domanda domanda1 = new Domanda("1200 ÷ 12", "100", "112", "12", "20");
         quesito.add(domanda1);
-        Domanda domanda4 = new Domanda("112 * 20", "2240", "2235", "2020", "2260");
+        Domanda domanda4 = new Domanda("2240 ÷ 20", "112", "120", "100", "104");
         quesito.add(domanda4);
-        Domanda domanda2 = new Domanda("105 * 14", "1470", "1535", "1460", "1400");
+        Domanda domanda2 = new Domanda("1470 ÷ 14", "105", "104", "15", "25");
         quesito.add(domanda2);
-        Domanda domanda6 = new Domanda("125 * 20", "2500", "2560", "2540", "2800");
+        Domanda domanda6 = new Domanda("2500 ÷ 20", "125", "150", "115", "120");
         quesito.add(domanda6);
-        Domanda domanda3 = new Domanda("106 * 22", "2332", "1028", "2028", "2400");
+        Domanda domanda3 = new Domanda("2232 ÷ 22", "106", "108", "104", "112");
         quesito.add(domanda3);
 
 
@@ -828,22 +828,22 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
     public void insertDomandeLV3_2() {
 
         quesito.clear();
-        Domanda domanda1 = new Domanda("125 * 15", "1875", "1890", "1900", "2010");
+        Domanda domanda1 = new Domanda("1875 ÷ 15", "125", "130", "115", "20");
         quesito.add(domanda1);
-        Domanda domanda2 = new Domanda("17 * 107", "1819", "1414", "1824", "1815");
+        Domanda domanda2 = new Domanda("1819 ÷ 17", "107", "100", "104", "115");
         quesito.add(domanda2);
 
-        Domanda domanda3 = new Domanda("160 * 18", "2880", "2080", "2280", "2840");
+        Domanda domanda3 = new Domanda("2880 ÷ 18", "160", "180", "22", "28");
         quesito.add(domanda3);
-        Domanda domanda4 = new Domanda("114 * 14", "1596", "1600", "1680", "1560");
+        Domanda domanda4 = new Domanda("1596 ÷ 14", "114", "116", "120", "150");
         quesito.add(domanda4);
 
-        Domanda domanda5 = new Domanda("110 * 25", "2750", "2741", "2753", "2690");
+        Domanda domanda5 = new Domanda("2750 ÷ 110", "25", "27", "23", "26");
         quesito.add(domanda5);
-        Domanda domanda6 = new Domanda("150 * 40", "6000", "5800", "5400", "6200");
+        Domanda domanda6 = new Domanda("6000 ÷ 150", "40", "50", "54", "62");
         quesito.add(domanda6);
 
-        Domanda domanda7 = new Domanda("18 * 110", "1980", "1850", "1800", "1811");
+        Domanda domanda7 = new Domanda("1980 ÷ 18", "110", "100", "180", "11");
         quesito.add(domanda7);
 
 
@@ -855,19 +855,19 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
     public void insertDomandeLV3_2_2() {
 
         quesito.clear();
-        Domanda domanda5 = new Domanda("110 * 25", "2750", "2741", "2753", "2690");
+        Domanda domanda5 = new Domanda("2750 ÷ 110", "25", "27", "23", "26");
         quesito.add(domanda5);
-        Domanda domanda3 = new Domanda("160 * 18", "2880", "2080", "2280", "2840");
+        Domanda domanda3 = new Domanda("2880 ÷ 18", "160", "180", "22", "28");
         quesito.add(domanda3);
-        Domanda domanda1 = new Domanda("125 * 15", "1875", "1890", "1900", "2010");
+        Domanda domanda1 = new Domanda("1875 ÷ 15", "125", "130", "115", "20");
         quesito.add(domanda1);
-        Domanda domanda4 = new Domanda("114 * 14", "1596", "1600", "1680", "1560");
+        Domanda domanda4 = new Domanda("1596 ÷ 14", "114", "116", "120", "150");
         quesito.add(domanda4);
-        Domanda domanda7 = new Domanda("18 * 110", "1980", "1850", "1800", "1811");
+        Domanda domanda7 = new Domanda("1980 ÷ 18", "110", "100", "180", "11");
         quesito.add(domanda7);
-        Domanda domanda2 = new Domanda("17 * 107", "1819", "1414", "1824", "1815");
+        Domanda domanda2 = new Domanda("1819 ÷ 17", "107", "100", "104", "115");
         quesito.add(domanda2);
-        Domanda domanda6 = new Domanda("150 * 40", "6000", "5800", "5400", "6200");
+        Domanda domanda6 = new Domanda("6000 ÷ 150", "40", "50", "54", "62");
         quesito.add(domanda6);
 
 
@@ -879,22 +879,22 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
     public void insertDomandeLV3_3() {
 
         quesito.clear();
-        Domanda domanda1 = new Domanda("135 * 25", "3375", "3390", "2950", "2090");
+        Domanda domanda1 = new Domanda("3375 ÷ 25", "135", "133", "129", "150");
         quesito.add(domanda1);
-        Domanda domanda2 = new Domanda("27 * 118", "3186", "3114", "3124", "3115");
+        Domanda domanda2 = new Domanda("3186 ÷ 118", "27", "31", "24", "15");
         quesito.add(domanda2);
 
-        Domanda domanda3 = new Domanda("120 * 22", "2640", "2680", "2660", "2620");
+        Domanda domanda3 = new Domanda("2640 ÷ 120", "22", "26", "20", "24");
         quesito.add(domanda3);
-        Domanda domanda4 = new Domanda("116 * 12", "1392", "1300", "1380", "1360");
+        Domanda domanda4 = new Domanda("1392 ÷ 116", "12", "13", "18", "16");
         quesito.add(domanda4);
 
-        Domanda domanda5 = new Domanda("150 * 35", "5250", "5741", "5053", "5090");
+        Domanda domanda5 = new Domanda("5250 ÷ 150", "35", "45", "50", "60");
         quesito.add(domanda5);
-        Domanda domanda6 = new Domanda("180 * 30", "5400", "5600", "5450", "5420");
+        Domanda domanda6 = new Domanda("5400 ÷ 30", "180", "160", "140", "220");
         quesito.add(domanda6);
 
-        Domanda domanda7 = new Domanda("28 * 110", "3080", "3850", "3800", "3820");
+        Domanda domanda7 = new Domanda("3080 ÷ 110", "28", "24", "26", "20");
         quesito.add(domanda7);
 
 
@@ -906,19 +906,19 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
     public void insertDomandeLV3_3_2() {
 
         quesito.clear();
-        Domanda domanda5 = new Domanda("150 * 35", "5250", "5741", "5053", "5090");
+        Domanda domanda5 = new Domanda("5250 ÷ 150", "35", "45", "50", "60");
         quesito.add(domanda5);
-        Domanda domanda4 = new Domanda("116 * 12", "1392", "1300", "1380", "1360");
+        Domanda domanda4 = new Domanda("1392 ÷ 116", "12", "13", "18", "16");
         quesito.add(domanda4);
-        Domanda domanda1 = new Domanda("135 * 25", "3375", "3390", "2950", "2090");
+        Domanda domanda1 = new Domanda("3375 ÷ 25", "135", "133", "129", "150");
         quesito.add(domanda1);
-        Domanda domanda6 = new Domanda("180 * 30", "5400", "5600", "5450", "5420");
+        Domanda domanda6 = new Domanda("5400 ÷ 30", "180", "160", "140", "220");
         quesito.add(domanda6);
-        Domanda domanda2 = new Domanda("27 * 118", "3186", "3114", "3124", "3115");
+        Domanda domanda2 = new Domanda("3186 ÷ 118", "27", "31", "24", "15");
         quesito.add(domanda2);
-        Domanda domanda7 = new Domanda("28 * 110", "3080", "3850", "3800", "3820");
+        Domanda domanda7 = new Domanda("3080 ÷ 110", "28", "24", "26", "20");
         quesito.add(domanda7);
-        Domanda domanda3 = new Domanda("120 * 22", "2640", "2680", "2660", "2620");
+        Domanda domanda3 = new Domanda("2640 ÷ 120", "22", "26", "20", "24");
         quesito.add(domanda3);
 
     }
@@ -948,7 +948,7 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
         log.d("DEBUG", "Numero random con math= " + numRand);
 
         /*-----num random dello score cioè se lo score mod 3da come resto 0-1-2   */
-        if (numRandScoreMoltiplicazioni == 0) {
+        if (numRandScoreDivisioni == 0) {
 
             numRand = 1 + (int) (Math.random() * 7);
 
@@ -1031,7 +1031,7 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
 
         }
         /*-----num random dello score cioè se lo score mod 3da come resto 0-1-2   */
-        else if (numRandScoreMoltiplicazioni == 1) {
+        else if (numRandScoreDivisioni== 1) {
 
             numRand = 1 + (int) (Math.random() * 7);
 
@@ -1113,7 +1113,7 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
         } else      /*-----num random dello score cioè se lo score mod 3da come resto 0-1-2   */
 
 
-            if (numRandScoreMoltiplicazioni == 2) {
+            if (numRandScoreDivisioni == 2) {
 
                 numRand = 1 + (int) (Math.random() * 7);
 
@@ -1306,7 +1306,7 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
                 if (ultimaDomanda) {
                     stopTimer();
                     lltimezone.setBackground(getDrawable(R.drawable.count_down_stop));
-                    Toast.makeText(MoltiplicazioniActivity.this, "Domande finite", Toast.LENGTH_LONG).show();
+                    Toast.makeText(DivisioniActivity.this, "Domande finite", Toast.LENGTH_LONG).show();
 
                 }
                 /**funziona*/
@@ -1337,7 +1337,7 @@ public class MoltiplicazioniActivity extends AppCompatActivity {
                 lltimezone.setBackground(getDrawable(R.drawable.count_down_finish));
                 mTimerRunning = false;
                 disabilitaRisposte();
-                Toast.makeText(MoltiplicazioniActivity.this, "Tempo scaduto", Toast.LENGTH_LONG).show();
+                Toast.makeText(DivisioniActivity.this, "Tempo scaduto", Toast.LENGTH_LONG).show();
 
             }
 

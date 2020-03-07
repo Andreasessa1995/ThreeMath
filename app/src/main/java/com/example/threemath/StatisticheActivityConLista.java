@@ -75,6 +75,8 @@ public class StatisticheActivityConLista extends AppCompatActivity {
         punteggio = loadNumRisposteErratePerCategoria(getApplicationContext(),"Moltiplicazioni");
         Categoria c9 = new Categoria ("Erratte",punteggio);
 
+
+
         punteggio = loadPunteggi(getApplicationContext(), "Divisioni");
         Categoria c10 = new Categoria ("Divisioni",punteggio);
         punteggio = loadNumRisposteEsattePerCategoria(getApplicationContext(),"Divisioni");
@@ -84,12 +86,12 @@ public class StatisticheActivityConLista extends AppCompatActivity {
 
 
 
-        punteggio = loadPunteggi(getApplicationContext(), "Indovinelli");
-        Categoria c13 = new Categoria ("Indovinelli",punteggio);
+       /** punteggio = loadPunteggi(getApplicationContext(), "Indovinelli");
+       Categoria c13 = new Categoria ("Indovinelli",punteggio);
         punteggio = loadNumRisposteEsattePerCategoria(getApplicationContext(),"Indovinelli");
         Categoria c14 = new Categoria ("Corrette",punteggio);
         punteggio = loadNumRisposteErratePerCategoria(getApplicationContext(),"Indovinelli");
-        Categoria c15 = new Categoria ("Erratte",punteggio);
+        Categoria c15 = new Categoria ("Erratte",punteggio);*/
 
 
 
@@ -171,6 +173,7 @@ public class StatisticheActivityConLista extends AppCompatActivity {
         listaCategoria.add(c12);
         customAdapter.add(c12);
 
+        /**
         listaCategoria.add(c13);
         customAdapter.add(c13);
 
@@ -178,7 +181,7 @@ public class StatisticheActivityConLista extends AppCompatActivity {
         customAdapter.add(c14);
 
         listaCategoria.add(c15);
-        customAdapter.add(c15);
+        customAdapter.add(c15);*/
 
         listaCategoria.add(c16);
         customAdapter.add(c16);

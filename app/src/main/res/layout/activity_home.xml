@@ -130,20 +130,7 @@
 
         </Button>
 
-        <Button
-            android:id="@+id/bottoneCategoriaDomanda5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40px"
-            android:background="@drawable/categoria"
-            android:onClick="onClickCategoria"
-            android:text="Indovinelli"
-            android:textColor="#F3F0EC"
-            android:textSize="100px"
-            android:clickable="false"
-            >
 
-        </Button>
 
         <Button
             android:id="@+id/bottoneCategoria6"
@@ -168,6 +155,22 @@
             android:background="@drawable/categoria"
             android:onClick="onClickCategoria"
             android:text="Impostazioni"
+            android:textColor="#F3F0EC"
+            android:textSize="100px"
+            android:clickable="false"
+            >
+
+        </Button>
+
+        <Button
+            android:visibility="invisible"
+            android:id="@+id/bottoneCategoriaDomanda5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40px"
+            android:background="@drawable/categoria"
+            android:onClick="onClickCategoria"
+            android:text="Indovinelli"
             android:textColor="#F3F0EC"
             android:textSize="100px"
             android:clickable="false"

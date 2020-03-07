@@ -74,6 +74,8 @@ public class RisultatiActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_risultati);
 
+        checkImpostazioni();
+
         /**valori passati dall'activity precedente quiz **/
         Intent i = getIntent();
         numRispEsatte=i.getIntExtra("CORRETTE",numRispEsatte);
@@ -87,7 +89,6 @@ public class RisultatiActivity extends AppCompatActivity {
         tempoRestanteMillis= i.getLongExtra("TIMERESTANTEQUESITO",tempoRestanteMillis);
 
 
-        checkImpostazioni();
 
 
         Log log = null;
@@ -153,7 +154,7 @@ public class RisultatiActivity extends AppCompatActivity {
 
         intent.setClass(getApplicationContext(), HomeActivity.class);
         startActivityForResult(intent, 0);
-        releaseResourcesBattuta();
+
         onBackPressed();
     }
 

@@ -74,7 +74,7 @@ public class CustomAdapter extends ArrayAdapter<Categoria> {
             testoPunteggio.setText("" + punteggio);
             testoPunteggio.setTextColor(Color.YELLOW);
 
-        }else if (testoCategoria.getText().toString().equalsIgnoreCase("Indovinelli")) {
+        }else if (testoCategoria.getText().toString().equalsIgnoreCase("Indovinelli")) {/*per adesso non ce ne sono*/
             testoCategoria.setTextColor(Color.YELLOW);
             punteggio = (int) c.getPunteggio();
 
@@ -93,7 +93,7 @@ public class CustomAdapter extends ArrayAdapter<Categoria> {
 
 
 
-        if (position >= 17) {
+        if (position >= 14) {/*ultime due*/
 
             dpunteggio = (Double) c.getPunteggioDouble();
             String s = String.format(Locale.getDefault(), "%.2f", dpunteggio);

@@ -87,7 +87,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-    /** in base alla categoria scelta apre l'activity livello
+    /** in base alla categoria scelta apre l'activity "livello" passandogli la categoria, che successivamente "livello" aprirà il countdown che a seconda della categoria passsata
+     * da home a livello e livello a countdown, quest'ultima aprirà l'activity del quiz in base alla categoria ( addizione sottrazione moltipliczione e divisione)
      * la categoria la prende dal testp del bottone
      * @param v
      */
@@ -196,6 +197,11 @@ public class HomeActivity extends AppCompatActivity {
             }
 
             startBattuta();
+
+            Intent intent = new Intent(getApplicationContext(), LivelloActivity.class);
+            intent.putExtra("CATEGORIA", categoria);
+
+            startActivityForResult(intent, 0);
 
             /*apri molti*/
 

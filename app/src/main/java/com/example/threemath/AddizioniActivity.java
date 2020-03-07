@@ -91,6 +91,8 @@ public class AddizioniActivity extends AppCompatActivity {
     boolean resumeStartCountDown = false;
     boolean stopCountDownPressedHome = false;
 
+
+
     /**
      * IMPOSTAZIONI
      */
@@ -253,6 +255,8 @@ public class AddizioniActivity extends AppCompatActivity {
                 }
 
                 startCampanella();
+
+
 
                 if (vibrazione) {
                     /*vibrazione*/
@@ -451,7 +455,6 @@ public class AddizioniActivity extends AppCompatActivity {
 
 
         releaseResourcesCampanella();
-        releaseResourcesBattuta();
         releaseResourcesTic();
         onBackPressed();
 
@@ -944,7 +947,7 @@ public class AddizioniActivity extends AppCompatActivity {
         //numRand = 1 + (int) (Math.random() * 3);
 
         Log log = null;
-        log.d("DEBUG", "Numero random con math= " + numRand);
+        //log.d("DEBUG", "Numero random con math= " + numRand);
 
         /*-----num random dello score cioè se lo score mod 3da come resto 0-1-2   */
         if (numRandScoreAddizioni == 0) {
@@ -1305,6 +1308,8 @@ public class AddizioniActivity extends AppCompatActivity {
                 if (ultimaDomanda) {
                     stopTimer();
                     lltimezone.setBackground(getDrawable(R.drawable.count_down_stop));
+                    Toast.makeText(AddizioniActivity.this, "Domande finite", Toast.LENGTH_LONG).show();
+
                 }
                 /**funziona*/
                 if (stopCountDownPressedHome) {
@@ -1313,12 +1318,7 @@ public class AddizioniActivity extends AppCompatActivity {
                     stopCountDownPressedHome = false;
                 }
 
-                /** if(pausePressed){
-                 pauseTimer();
-                 }
-                 if(resumePressed){
-                 startTimer();
-                 }*/
+
             }
 
             @Override

@@ -130,7 +130,7 @@ public class CountDownActivity extends AppCompatActivity {
                     onBackPressed();
 
                 }else if (categoria.equalsIgnoreCase("Divisioni")) {
-                    i = new Intent(getApplicationContext(), MoltiplicazioniActivity.class);
+                    i = new Intent(getApplicationContext(), DivisioniActivity.class);
                     i.putExtra("LIVELLO", livello);
                     i.putExtra("SCORE", numScoreRandom);
                     startActivityForResult(i, 0);

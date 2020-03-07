@@ -87,7 +87,7 @@ public class GestoreFile {
             int x = data.indexOf(",");
             String[] dati = data.split(",");
             //score=br.read();
-            log.d("DEBUG", "Leggo questo dal file = = " + data);
+            //log.d("DEBUG", "Leggo questo dal file = = " + data);
 
             valore = dati[0];
 
@@ -178,15 +178,14 @@ public class GestoreFile {
                 int x = data.indexOf(",");
                 String[] dati = data.split(",");
                 //score=br.read();
-                log.d("DEBUG", "Leggo questo dal file = = " + data);
+               // log.d("DEBUG", "Leggo questo dal file = = " + data);
 
                 spunteggio = dati[0];
                 score = Integer.parseInt(spunteggio);
 
         } catch (FileNotFoundException e) {
             Log log =null;
-            log.d("DEBUG", "oooooooooooooo e nullllll il fileeeeeeee " );
-            azzeraScore(context, categoria);
+           // log.d("DEBUG", "oooooooooooooo e nullllll il fileeeeeeee " );
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
@@ -287,7 +286,7 @@ public class GestoreFile {
             int x = data.indexOf(",");
             String[] dati = data.split(",");
             //score=br.read();
-            log.d("DEBUG", "Leggo questo dal file = = " + data);
+           // log.d("DEBUG", "Leggo questo dal file = = " + data);
 
             spunteggio = dati[0];
             score = Integer.parseInt(spunteggio);
@@ -375,7 +374,7 @@ public class GestoreFile {
             int x = data.indexOf(",");
             String[] dati = data.split(",");
             //score=br.read();
-            log.d("DEBUG", "Leggo questo dal file = = " + data);
+           // log.d("DEBUG", "Leggo questo dal file = = " + data);
 
             spunteggio = dati[0];
             score = Integer.parseInt(spunteggio);
@@ -512,7 +511,7 @@ public class GestoreFile {
             int x = data.indexOf(",");
             String[] dati = data.split(",");
             //score=br.read();
-            log.d("DEBUG", "Leggo questo dal file = = " + data);
+            //log.d("DEBUG", "Leggo questo dal file = = " + data);
 
             spunteggio = dati[0];
             score = Integer.parseInt(spunteggio);
@@ -563,7 +562,7 @@ public class GestoreFile {
             int x = data.indexOf(",");
             String[] dati = data.split(",");
             //score=br.read();
-            log.d("DEBUG", "Leggo questo dal file = = " + data);
+           // log.d("DEBUG", "Leggo questo dal file = = " + data);
 
             spunteggio = dati[0];
             score = Integer.parseInt(spunteggio);

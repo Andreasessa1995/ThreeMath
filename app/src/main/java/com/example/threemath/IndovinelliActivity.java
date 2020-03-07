@@ -177,8 +177,8 @@ public class IndovinelliActivity extends AppCompatActivity {
         //log.d("DEBUG", "dimensioni altezza =  " + deviceHeight + " dimensioni base" + deviceWidth);
 
         /*SETTAGGI TEXT VIEW BOTTONI*/
-        testoCategoriaDomanda.setText("ADDIZIONI");
-        categoriaQuiz.setText("+");
+        testoCategoriaDomanda.setText("INDOVINELLI");
+        categoriaQuiz.setText("?");
         /*bottoni*/
         testoDomanda.setText(quesito.get(indiceDomanda).getDomanda());
         A.setText(quesito.get(indiceDomanda).getRispostaEsatta());
@@ -633,7 +633,7 @@ public class IndovinelliActivity extends AppCompatActivity {
         Domanda domanda2 = new Domanda("Un mattone pesa 1 kg + mezzo mattone. Quanto pesa il mattone ?", "2 kg", "1 kg", "1,5 kg", "3 kg");
         quesito.add(domanda2);
 
-        Domanda domanda3 = new Domanda("Tre numeri che moltiplicati o sommati danno lo stesso risultato", "1-2-3", "", "229", "119");
+        Domanda domanda3 = new Domanda("Tre numeri che moltiplicati o sommati danno lo stesso risultato", "1-2-3", "3-4-5", "1-1-1", "3-3-3");
         quesito.add(domanda3);
         Domanda domanda4 = new Domanda("112 + 113", "225", "235", "226", "232");
         quesito.add(domanda4);

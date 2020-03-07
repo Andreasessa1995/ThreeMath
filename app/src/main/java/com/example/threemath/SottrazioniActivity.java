@@ -179,6 +179,7 @@ public class SottrazioniActivity extends AppCompatActivity {
 
         /*SETTAGGI TEXT VIEW BOTTONI*/
         testoCategoriaDomanda.setText("SOTTRAZIONI");
+        testoCategoriaDomanda.setTextSize(25);
         categoriaQuiz.setText("-");
         /*bottoni*/
         testoDomanda.setText(quesito.get(indiceDomanda).getDomanda());
@@ -1282,6 +1283,8 @@ public class SottrazioniActivity extends AppCompatActivity {
                 if (ultimaDomanda) {
                     stopTimer();
                     lltimezone.setBackground(getDrawable(R.drawable.count_down_stop));
+                    Toast.makeText(SottrazioniActivity.this, "Domande finite", Toast.LENGTH_LONG).show();
+
                 }
                 /**funziona*/
                 if (stopCountDownPressedHome) {

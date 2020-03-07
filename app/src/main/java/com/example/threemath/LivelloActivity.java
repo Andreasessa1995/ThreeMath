@@ -69,9 +69,9 @@ public class LivelloActivity extends AppCompatActivity {
         Intent intent = getIntent();
         categoria = intent.getStringExtra("CATEGORIA");
 
-       // gf.azzeraScore(getApplicationContext(), categoria);
+     //  gf.azzeraScore(getApplicationContext(), categoria);
       //  gf.azzeraNumRisposte(getApplicationContext());
-    //    gf.azzeraNumRisposteCategorie(getApplicationContext());
+    //   gf.azzeraNumRisposteCategorie(getApplicationContext());
 
         /*Bottoni livelli*/
 
