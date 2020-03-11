@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Locale;
@@ -24,13 +23,9 @@ public class RisultatiActivity extends AppCompatActivity {
     static final int NUMRISTOTPMAX = 5000;
 
 
-
-
-
     /*---------variabili risposte ------*/
-    int numRispEsatte =0;
+    int numRispEsatte = 0;
     int numRispErrate = 0;
-
 
 
     int tempoSecondiImpiegati = 0;
@@ -41,14 +36,14 @@ public class RisultatiActivity extends AppCompatActivity {
     long tempoRestanteMillis = 0;
     long tempoImpiegatoQuesitoMillis = 0;
 
-    TextView textRisposteErrate ;
-    TextView textRisposteCorrette ;
-    TextView textTempo ;
+    TextView textRisposteErrate;
+    TextView textRisposteCorrette;
+    TextView textTempo;
     TextView textScores;
 
-    String categoria = "" ;
+    String categoria = "";
 
-
+    int livello = 1;
 
 
     /**
@@ -56,10 +51,12 @@ public class RisultatiActivity extends AppCompatActivity {
      **/
     MediaPlayer mpBat;
 
-    /**gestione vibrazione*/
+    /**
+     * gestione vibrazione
+     */
     Vibrator vibrator;
     /*vib 100 millise riposo 1000 millsec, vir*/
-    long[] pattern = {0, 100, 1000 };
+    long[] pattern = {0, 100, 1000};
 
     /**
      * IMPOSTAZIONI
@@ -78,17 +75,16 @@ public class RisultatiActivity extends AppCompatActivity {
 
         /**valori passati dall'activity precedente quiz **/
         Intent i = getIntent();
-        numRispEsatte=i.getIntExtra("CORRETTE",numRispEsatte);
-        numRispErrate=i.getIntExtra("ERRATE",numRispErrate);
+        numRispEsatte = i.getIntExtra("CORRETTE", numRispEsatte);
+        numRispErrate = i.getIntExtra("ERRATE", numRispErrate);
         categoria = i.getStringExtra("CATEGORIA");
+        livello = i.getIntExtra("LIVELLO", livello);
 
 
         /**valori passati dall'activity precedente time **/
 
-        tempoQuesitoMillis =i.getLongExtra("TIMEQUESITO",tempoQuesitoMillis);
-        tempoRestanteMillis= i.getLongExtra("TIMERESTANTEQUESITO",tempoRestanteMillis);
-
-
+        tempoQuesitoMillis = i.getLongExtra("TIMEQUESITO", tempoQuesitoMillis);
+        tempoRestanteMillis = i.getLongExtra("TIMERESTANTEQUESITO", tempoRestanteMillis);
 
 
         Log log = null;
@@ -98,11 +94,8 @@ public class RisultatiActivity extends AppCompatActivity {
         calcolaTempoImpiegatoV2();
         /*calcola punteggio e salvatggio del punteggio*/
         int punteggio = 0;
-        punteggio= calcolaPunteggio(numRispEsatte,numRispErrate);
-        aggiornaPunteggio(getApplicationContext(),punteggio,categoria);
-
-
-
+        punteggio = calcolaPunteggio(numRispEsatte, numRispErrate);
+        aggiornaPunteggio(getApplicationContext(), punteggio, categoria);
 
 
         textScores = (TextView) findViewById(R.id.scores);
@@ -112,37 +105,34 @@ public class RisultatiActivity extends AppCompatActivity {
 
 
         /*visualizzazione delle statistiche*/
-        textScores.setText(""+punteggio);
-        textRisposteCorrette.setText(""+numRispEsatte);
-        textRisposteErrate.setText(""+numRispErrate);
-        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", tempoMinutiImpiegati,  tempoSecondiImpiegati);
+        textScores.setText("" + punteggio);
+        textRisposteCorrette.setText("" + numRispEsatte);
+        textRisposteErrate.setText("" + numRispErrate);
+        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", tempoMinutiImpiegati, tempoSecondiImpiegati);
         textTempo.setText(timeLeftFormatted);
 
 
         /*salvataggio num risposte esatte e errate totali*/
 
-        aggiornaNumeroRispsote(getApplicationContext(),numRispEsatte,numRispErrate);
+        aggiornaNumeroRispsote(getApplicationContext(), numRispEsatte, numRispErrate);
 
-        aggiornaNumeroRisposteCategoria(getApplicationContext(),numRispEsatte,numRispErrate,categoria);
-
-
-
-
+        aggiornaNumeroRisposteCategoria(getApplicationContext(), numRispEsatte, numRispErrate, categoria);
 
 
     }
 
     /**
      * ritorna alla home
+     *
      * @param v
      */
-    public void onClickHome(View v){
+    public void onClickHome(View v) {
 
 
         startBattuta();
 
-        if(vibrazione){/*imposazione vibtazione*/
-            if (isHaveVibrate( ) ){
+        if (vibrazione) {/*imposazione vibtazione*/
+            if (isHaveVibrate()) {
                 vibrator.vibrate(pattern, -1); // does not repeat
                 //vibrator.vibrate(pattern,  0); // repeats forever
             }
@@ -161,11 +151,11 @@ public class RisultatiActivity extends AppCompatActivity {
     /**
      * calcola il tempo impiegato per il quiz o quesito r
      */
-    private  void calcolaTempoImpiegatoV2(){
+    private void calcolaTempoImpiegatoV2() {
 
-        tempoImpiegatoQuesitoMillis = tempoQuesitoMillis-tempoRestanteMillis;
-        tempoSecondiImpiegati = (int ) ((tempoImpiegatoQuesitoMillis/1000)%60);
-        tempoMinutiImpiegati = (int)(( tempoImpiegatoQuesitoMillis/ 1000) / 60);
+        tempoImpiegatoQuesitoMillis = tempoQuesitoMillis - tempoRestanteMillis;
+        tempoSecondiImpiegati = (int) ((tempoImpiegatoQuesitoMillis / 1000) % 60);
+        tempoMinutiImpiegati = (int) ((tempoImpiegatoQuesitoMillis / 1000) / 60);
 
     }
 
@@ -173,11 +163,12 @@ public class RisultatiActivity extends AppCompatActivity {
      * calcola il punteggio in base alle risposte corrette
      * e in base al tempo impiegato e il restante.
      * più il tempo restante è alto più il punteggio è alto (  più veloce nelle risposte )
+     *
      * @param numRispEsatte
      * @param numRispErrate
      * @return
      */
-    private int calcolaPunteggio(int numRispEsatte,int numRispErrate){
+    private int calcolaPunteggio(int numRispEsatte, int numRispErrate) {
 
         //int numeroRisposte = numRispErrate+numRispEsatte;
 
@@ -185,11 +176,21 @@ public class RisultatiActivity extends AppCompatActivity {
         Log log = null;
         //log.d("DEBUG", "tempo che mi arriva restante  = " + tempoRestanteMillis);
 
-        if(tempoRestanteMillis>=1000){/*necessario quando il tempo finisce e si è risposto non tutte le domande*/
-            punti = (int) (numRispEsatte*(tempoRestanteMillis/1000));
+        if (tempoRestanteMillis >= 1000) {/*necessario quando il tempo finisce e si è risposto non tutte le domande*/
+            if (livello == 1) {
+                punti = (int) (numRispEsatte * (tempoRestanteMillis / 1000));
 
-        }else {
-            punti=numRispEsatte*1;/*evita di avere un punteggio 0 se finisce il tempo*/
+            } else if (livello == 2) {
+                punti = (int) (  (numRispEsatte * (tempoRestanteMillis / 1000) )  * 1.7f);
+
+
+            } else if (livello == 3) {
+                punti = (int) (  (numRispEsatte * (tempoRestanteMillis / 1000) )  * 2.3f);
+
+            }
+
+        } else {
+            punti = numRispEsatte * 1;/*evita di avere un punteggio 0 se finisce il tempo*/
         }
 
 
@@ -201,29 +202,29 @@ public class RisultatiActivity extends AppCompatActivity {
     /**
      * salva il punteggio dello score aggiornandolo, sommandolo
      * al precedente score
+     *
      * @param context
      * @param punteggio
      */
-    public void aggiornaPunteggio(Context context, int punteggio,String categoria){
+    public void aggiornaPunteggio(Context context, int punteggio, String categoria) {
 
 
-
-      //  GestoreFile gf = new GestoreFile();
-        Log log =null;
+        //  GestoreFile gf = new GestoreFile();
+        Log log = null;
         //log.d("DEBUG", "Salvo questo nuovo punteggio il vecchio era= = " + gf.caricaScoresAddizioni(context));
         int punteggioTemp = 0;
-        punteggioTemp = punteggio + gf.caricaScores(context,categoria);
+        punteggioTemp = punteggio + gf.caricaScores(context, categoria);
 
         //punteggioTemp = 515; test
 
-        if(punteggioTemp<=PUNTEGGIOMAX){
+        if (punteggioTemp <= PUNTEGGIOMAX) {
             // log.d("DEBUG", "Salvo questo nuovo punteggio= = " + punteggioTemp);
 
-            gf.salvaScores(context,punteggioTemp,categoria);
-        }else {
+            gf.salvaScores(context, punteggioTemp, categoria);
+        } else {
 
-            Toast.makeText(RisultatiActivity.this, "Attenzione hai rggiunto il punteggio massimo di score ( " + PUNTEGGIOMAX + " )"+ "ne hai totalizzato = "+
-                    punteggioTemp , Toast.LENGTH_LONG).show();
+            Toast.makeText(RisultatiActivity.this, "Attenzione hai rggiunto il punteggio massimo di score ( " + PUNTEGGIOMAX + " )" + "ne hai totalizzato = " +
+                    punteggioTemp, Toast.LENGTH_LONG).show();
 
 
         }
@@ -232,29 +233,28 @@ public class RisultatiActivity extends AppCompatActivity {
     }
 
 
-
     /**
      * Salva il numero di risposte corrette ed errate totali
+     *
      * @param context
      * @param corrette
      * @param errate
      */
-    public void aggiornaNumeroRispsote(Context context,int corrette,int errate){
+    public void aggiornaNumeroRispsote(Context context, int corrette, int errate) {
 
         corrette = corrette + gf.caricaNumRisposteCorrette(context);
         errate = errate + gf.caricaNumRisposteErrate(context);
 
-        if((corrette<=NUMRISTOTPMAX)&&(errate<=NUMRISTOTPMAX)){
-            gf.salvaRisposteCorrette(context,corrette);
-            gf.salvaRisposteErrate(context,errate);
-        }else {
+        if ((corrette <= NUMRISTOTPMAX) && (errate <= NUMRISTOTPMAX)) {
+            gf.salvaRisposteCorrette(context, corrette);
+            gf.salvaRisposteErrate(context, errate);
+        } else {
 
-            Toast.makeText(RisultatiActivity.this, "Attenzione hai rggiunto il numero massimo di domande corrette/errate ( "+NUMRISTOTPMAX+" )"+ "ne hai totalizzato = "+
-                    corrette +"Errate " + errate , Toast.LENGTH_LONG).show();
+            Toast.makeText(RisultatiActivity.this, "Attenzione hai rggiunto il numero massimo di domande corrette/errate ( " + NUMRISTOTPMAX + " )" + "ne hai totalizzato = " +
+                    corrette + "Errate " + errate, Toast.LENGTH_LONG).show();
 
 
         }
-
 
 
     }
@@ -262,43 +262,34 @@ public class RisultatiActivity extends AppCompatActivity {
 
     /**
      * salva il numero di rispose corrette ed errate per categoria
+     *
      * @param context
      * @param corrette
      * @param errate
      * @param categoria
      */
-    public void aggiornaNumeroRisposteCategoria(Context context,int corrette,int errate,String categoria){
+    public void aggiornaNumeroRisposteCategoria(Context context, int corrette, int errate, String categoria) {
 
 
-        corrette = corrette + gf.caricaNumRisposteCorretteCategoria(context,categoria);
-        errate = errate + gf.caricaNumRisposteErrateCategoria(context,categoria);
+        corrette = corrette + gf.caricaNumRisposteCorretteCategoria(context, categoria);
+        errate = errate + gf.caricaNumRisposteErrateCategoria(context, categoria);
 
 
-        if((corrette<=NUMRISPMAX)&&(errate<=NUMRISPMAX)){
+        if ((corrette <= NUMRISPMAX) && (errate <= NUMRISPMAX)) {
             /*salvataggio num risposte esatte per categoria*/
-            gf.salvaRisposteErrateCategoria(getApplicationContext(),errate,categoria);
-            gf.salvaRisposteCorretteCategoria(getApplicationContext(),corrette,categoria);
+            gf.salvaRisposteErrateCategoria(getApplicationContext(), errate, categoria);
+            gf.salvaRisposteCorretteCategoria(getApplicationContext(), corrette, categoria);
 
-        }else {
+        } else {
 
-            Toast.makeText(RisultatiActivity.this, "Attenzione hai rggiunto il numero massimo di domande corrette/errate ( "+ NUMRISPMAX+" )"+ "ne hai totalizzato = "+
-                    corrette +"Errate " + errate , Toast.LENGTH_LONG).show();
+            Toast.makeText(RisultatiActivity.this, "Attenzione hai rggiunto il numero massimo di domande corrette/errate ( " + NUMRISPMAX + " )" + "ne hai totalizzato = " +
+                    corrette + "Errate " + errate, Toast.LENGTH_LONG).show();
 
 
         }
 
 
     }
-
-
-
-
-
-
-
-
-
-
 
 
     /**
@@ -307,8 +298,8 @@ public class RisultatiActivity extends AppCompatActivity {
 
 
     public void startBattuta() {
-        if(suoni){
-            mpBat= MediaPlayer.create(this, getResources().getIdentifier("bat", "raw", getPackageName()));
+        if (suoni) {
+            mpBat = MediaPlayer.create(this, getResources().getIdentifier("bat", "raw", getPackageName()));
             mpBat = MediaPlayer.create(this, R.raw.bat);
             mpBat.start();
         }
@@ -316,15 +307,16 @@ public class RisultatiActivity extends AppCompatActivity {
     }
 
     /**
-     *
      * @return
      */
-    public  boolean isHaveVibrate(){
+    public boolean isHaveVibrate() {
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         if (vibrator.hasVibrator()) {
 
             return true;
-        }else    { return false;}
+        } else {
+            return false;
+        }
 
     }
 
@@ -332,7 +324,7 @@ public class RisultatiActivity extends AppCompatActivity {
      * rilascia la risorsa se nelle impostzioni è attiva
      */
     public void releaseResourcesBattuta() {
-        if(suoni){
+        if (suoni) {
             mpBat.release();
         }
 
@@ -345,13 +337,14 @@ public class RisultatiActivity extends AppCompatActivity {
 
         if ("si".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Suoni"))) {
             suoni = true;
-        } else {
+        } else if ("no".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Suoni"))) {
+
             suoni = false;
         }
 
         if ("si".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Vibrazione"))) {
             vibrazione = true;
-        } else {
+        } else if ("no".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Suoni"))) {
             vibrazione = false;
         }
 

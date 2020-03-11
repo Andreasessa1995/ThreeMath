@@ -451,6 +451,7 @@ public class AddizioniActivity extends AppCompatActivity {
         intent.putExtra("TIMEQUESITO", tempoQuesito);
         intent.putExtra("TIMERESTANTEQUESITO", mTimeLeftInMillis);
         intent.putExtra("CATEGORIA", categoria);
+        intent.putExtra("LIVELLO", livello);
         startActivityForResult(intent, 0);
 
 
@@ -1428,13 +1429,14 @@ public class AddizioniActivity extends AppCompatActivity {
 
         if ("si".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Suoni"))) {
             suoni = true;
-        } else {
+        } else if ("no".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Suoni"))) {
+
             suoni = false;
         }
 
         if ("si".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Vibrazione"))) {
             vibrazione = true;
-        } else {
+        } else       if ("no".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Suoni"))) {
             vibrazione = false;
         }
 

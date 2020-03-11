@@ -14,12 +14,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 public class LivelloActivity extends AppCompatActivity {
 
 
-    static final int LIVELLOPRINCIPIANTE = 1000;
-    static final int LIVELLONORMALE = 2500;
-    static final int LIVELLOESPERTO= 2500;
+    static final int LIVELLOPRINCIPIANTE = 1000; /*da zero a LVPRINC*/
+    static final int LIVELLONORMALE = 3500;
+    static final int LIVELLOESPERTO = 3500;
 
 
     private Animation anim = null;
@@ -60,18 +61,22 @@ public class LivelloActivity extends AppCompatActivity {
     long[] pattern2 = {0, 100, 100, 100, 100};
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_livelli);
 
 
+
+
+
         Intent intent = getIntent();
         categoria = intent.getStringExtra("CATEGORIA");
 
-     //  gf.azzeraScore(getApplicationContext(), categoria);
-      //  gf.azzeraNumRisposte(getApplicationContext());
-    //   gf.azzeraNumRisposteCategorie(getApplicationContext());
+        //  gf.azzeraScore(getApplicationContext(), categoria);
+        //  gf.azzeraNumRisposte(getApplicationContext());
+        //   gf.azzeraNumRisposteCategorie(getApplicationContext());
 
         /*Bottoni livelli*/
 
@@ -95,12 +100,10 @@ public class LivelloActivity extends AppCompatActivity {
     }
 
 
-
-
     /**
      * carica gli score della categoria scelta
      */
-    public void caricaScore(){
+    public void caricaScore() {
 
         /**caricamento score della categoria scelta */
 
@@ -120,7 +123,7 @@ public class LivelloActivity extends AppCompatActivity {
             score = gf.caricaScores(getApplicationContext(), "Divisioni");
             textScore.setText("" + score);
             checkLV(score);
-        }else if (categoria.equalsIgnoreCase("indovinelli")) {
+        } else if (categoria.equalsIgnoreCase("indovinelli")) {
             score = gf.caricaScores(getApplicationContext(), "Indovinelli");
             textScore.setText("" + score);
             checkLV(score);
@@ -133,6 +136,7 @@ public class LivelloActivity extends AppCompatActivity {
      * qunado si clicca sul livello si apre l'activity coutdown che aprirà
      * l'activiti addizione - sottrazione ecc. a seconda della categoria che
      * viene passsata all'activity livello
+     *
      * @param v
      */
     public void onClickLivello(View v) {
@@ -228,7 +232,7 @@ public class LivelloActivity extends AppCompatActivity {
 
             bLivello2.setBackground(getDrawable(R.drawable.categoria));
             messageLV3();
-        } else if ((scoreCat >= LIVELLONORMALE) ){
+        } else if ((scoreCat >= LIVELLONORMALE)) {
 
             bLivello2.setBackground(getDrawable(R.drawable.categoria));
             bLivello3.setBackground(getDrawable(R.drawable.categoria));
@@ -247,7 +251,7 @@ public class LivelloActivity extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder b = new AlertDialog.Builder(LivelloActivity.this);
                 b.setTitle("Categoria NORMALE bloccata");
-                b.setMessage("Non puoi scegliere questa categoria, per sbloccarla ti servono almeno 1000 punti");
+                b.setMessage("Non puoi scegliere questa categoria, per sbloccarla ti servono almeno "+ LIVELLOPRINCIPIANTE + " punti");
                 b.setIcon(getDrawable(R.drawable.lucchetto_chiuso));
                 b.setPositiveButton("Ho capito", null);
                 //b.setNegativeButton("", null);
@@ -271,7 +275,7 @@ public class LivelloActivity extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder b = new AlertDialog.Builder(LivelloActivity.this);
                 b.setTitle("Categoria  ESPERTO bloccata");
-                b.setMessage("Non puoi scegliere questa categoria, per sbloccarla ti servono almeno 2500 punti");
+                b.setMessage("Non puoi scegliere questa categoria, per sbloccarla ti servono almeno "+ LIVELLOESPERTO + " punti");
                 b.setIcon(getDrawable(R.drawable.lucchetto_chiuso));
                 b.setPositiveButton("Ho capito", null);
                 //b.setNegativeButton("", null);
@@ -343,15 +347,17 @@ public class LivelloActivity extends AppCompatActivity {
 
         if ("si".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Suoni"))) {
             suoni = true;
-        } else {
+        } else if ("no".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Suoni"))) {
+
             suoni = false;
         }
 
         if ("si".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Vibrazione"))) {
             vibrazione = true;
-        } else {
+        } else       if ("no".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Suoni"))) {
             vibrazione = false;
         }
+
 
     }
 

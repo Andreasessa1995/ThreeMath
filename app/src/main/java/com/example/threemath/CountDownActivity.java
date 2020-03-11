@@ -256,15 +256,17 @@ public class CountDownActivity extends AppCompatActivity {
 
         if ("si".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Suoni"))) {
             suoni = true;
-        } else {
+        } else if ("no".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Suoni"))) {
+
             suoni = false;
         }
 
         if ("si".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Vibrazione"))) {
             vibrazione = true;
-        } else {
+        } else       if ("no".equalsIgnoreCase(gf.caricaImpostazioni(getApplicationContext(), "Suoni"))) {
             vibrazione = false;
         }
+
 
     }
 
